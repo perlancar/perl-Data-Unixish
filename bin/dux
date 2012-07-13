@@ -9,15 +9,13 @@ use Moo;
 extends 'Perinci::CmdLine';
 
 sub run_subcommand {
+    require Tie::Diamond;
+
     my $self = shift;
 
-    # supply in and out first from STDIN & STDOUT. XXX currently doesn't stream
-    # at all. we need to create a tied array which backends to filehandle.
-
-    my $in  = [<>];
-    my $out = [];
-    $self->{_args}{in}  = $in;
-    $self->{_args}{out} = $out;
+    tie my(@diamond), 'Tie::Diamond' or die;
+    $self->{_args}{in}  = \@diamond;
+    $self->{_args}{out} = [];
 
     $self->SUPER::run_subcommand(@_);
 }
