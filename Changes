@@ -1,5 +1,26 @@
 Revision history for Data-Unixish-Implementation
 
+0.02    2012-07-16 (SHARYANTO)
+
+        [ENHANCEMENTS]
+
+        - use Tie::Diamond so that STDIN is really processed as stream.
+
+        - Add Data::Unixish::Apply to apply one or more functions to Perl data.
+
+        - New dux functions: sort (currently supporting -n, -i, -c)
+
+        - By default setting env LOG=0 to speedup startup. Run with LOG=1 to
+          enable logging.
+
+        [BUG FIXES]
+
+        - dzil: Add missing dep [CT]
+
+        - 'dux FUNC --help' didn't work.
+
+
+
 0.01    2012-07-13 (SHARYANTO)
 
         First version.
