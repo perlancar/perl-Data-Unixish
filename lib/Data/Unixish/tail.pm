@@ -40,7 +40,7 @@ sub tail {
     # push buffer to out
     push @$out, $_ for @buf;
 
-    [200, "OK", $out];
+    [200, "OK"];
 }
 
 1;

@@ -68,7 +68,7 @@ sub sort {
 
     push @$out, $_->[0] for @buf;
 
-    [200, "OK", $out];
+    [200, "OK"];
 }
 
 1;
