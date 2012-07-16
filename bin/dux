@@ -15,16 +15,21 @@ use Perinci::CmdLine::dux;
 my %opts = (
     library => [],
     subcommands => [],
+    version => 0,
 );
 Getopt::Long::Configure('pass_through', 'no_permute');
 GetOptions(
     'library|I=s' => $opts{library},
     'help|h|?' => \$opts{help},
+    'version|v' => \$opts{version},
 );
 
 my $me = $0; $me =~ s!.+/!!;
 
-if ($opts{help} || !@ARGV) {
+if ($opts{version}) {
+    print "$me version $main::VERSION\n";
+    exit 0;
+} elsif ($opts{help} || !@ARGV) {
     print <<USAGE;
 $me - Run dux function on the command-line
 
