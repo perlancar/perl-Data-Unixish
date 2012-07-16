@@ -22,7 +22,10 @@ $SPEC{apply} = {
         },
         functions => {
             summary => 'Function(s) to apply',
-            schema => ['array*', {of => ['str*', 'array*']}],
+            schema => ['any*' => {of=>[
+                'str*',
+                ['array*', {of => ['str*', 'array*']}],
+            ]}],
             req => 1,
             description => <<'_',
 
@@ -47,6 +50,7 @@ sub apply {
     my %args = @_;
     my $in0 = $args{in}        or return [400, "Please specify in"];
     my $ff0 = $args{functions} or return [400, "Please specify functions"];
+    $ff0 = [$ff0] unless ref($ff0) eq 'ARRAY';
     @$ff0 or return [400, "Please specify at least one function to apply"];
 
     my @ff;
