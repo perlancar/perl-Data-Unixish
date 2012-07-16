@@ -5,6 +5,8 @@ use strict;
 use warnings;
 use Log::Any '$log';
 
+BEGIN { $ENV{LOG} //= 0 } # speedup startup
+
 use Getopt::Long;
 use Perinci::CmdLine::dux;
 
