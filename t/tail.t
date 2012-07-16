@@ -3,10 +3,8 @@
 use 5.010;
 use strict;
 use warnings;
-
-use FindBin '$Bin';
-use lib $Bin, "$Bin/t";
-require "testlib.pl";
+use Test::Data::Unixish;
+use Test::More 0.96;
 
 test_dux_func(
     func => 'tail',
@@ -18,4 +16,4 @@ test_dux_func(
     ],
 );
 
-done_testing();
+done_testing;

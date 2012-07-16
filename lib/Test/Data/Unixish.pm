@@ -1,3 +1,5 @@
+package Test::Data::Unixish;
+
 use 5.010;
 use strict;
 use warnings;
@@ -5,7 +7,11 @@ use warnings;
 use Test::More 0.96;
 use Module::Load;
 
-# XXX extract to Test::Data::Unixish
+# VERSION
+
+require Exporter;
+our @ISA = qw(Exporter);
+our @EXPORT = qw(test_dux_func);
 
 sub test_dux_func {
     my %args = @_;
@@ -32,3 +38,4 @@ sub test_dux_func {
 }
 
 1;
+# ABSTRACT: Routines to test Data::Unixish
