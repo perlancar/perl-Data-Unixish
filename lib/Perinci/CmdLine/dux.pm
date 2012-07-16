@@ -2,6 +2,8 @@ package Perinci::CmdLine::dux;
 use Moo;
 extends 'Perinci::CmdLine';
 
+# VERSION
+
 sub run_subcommand {
     require Tie::Diamond;
 
