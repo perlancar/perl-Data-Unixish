@@ -36,6 +36,11 @@ _
             schema=>[bool => {default=>0}],
             cmdline_aliases => { i=>{} },
         },
+        random => {
+            summary => 'Whether to sort by random',
+            schema=>[bool => {default=>0}],
+            cmdline_aliases => { R=>{} },
+        },
     },
     tags => [qw/sorting/],
 };
@@ -45,9 +50,21 @@ sub sort {
     my $numeric = $args{numeric};
     my $reverse = $args{reverse} ? -1 : 1;
     my $ci      = $args{ci};
+    my $random  = $args{random};
 
     no warnings;
     my @buf;
+
+    # special case
+    if ($random) {
+        require List::Util;
+        while (my ($index, $item) = each @$in) {
+            push @buf, $item;
+        }
+        push @$out, $_ for (List::Util::shuffle @buf);
+        return [200, "OK"];
+    }
+
     while (my ($index, $item) = each @$in) {
         my $rec = [$item];
         push @$rec, $ci ? lc($item) : undef; # cache lowcased item
