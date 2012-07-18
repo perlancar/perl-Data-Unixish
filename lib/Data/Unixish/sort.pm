@@ -61,7 +61,7 @@ sub sort {
         while (my ($index, $item) = each @$in) {
             push @buf, $item;
         }
-        push @$out, $_ for (List::Util::shuffle @buf);
+        push @$out, $_ for (List::Util::shuffle(@buf));
         return [200, "OK"];
     }
 
