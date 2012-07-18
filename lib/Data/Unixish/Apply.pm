@@ -99,3 +99,15 @@ sub apply {
 
 1;
 # ABSTRACT: Apply one or more dux functions to data
+
+=head1 SYNOPSIS
+
+ use Data::Unixish::Apply;
+ Data::Unixish::Apply::apply(
+     in => [1, 4, 2, 6, 7, 10],
+     functions => ['sort', ['printf', {fmt=>'%04d'}]],
+);
+
+
+=head1 DESCRIPTION
+
