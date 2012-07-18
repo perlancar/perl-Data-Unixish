@@ -1,5 +1,17 @@
 Revision history for Data-Unixish-Implementation
 
+0.03    2012-07-18 (SHARYANTO)
+
+        [ENHANCEMENTS]
+
+        - Add 'dux --version'
+
+        - Add dux functions: sum, cat (for testing), date (preliminary, naive
+          version)
+
+        - Add tests
+
+
 0.02    2012-07-16 (SHARYANTO)
 
         [ENHANCEMENTS]
