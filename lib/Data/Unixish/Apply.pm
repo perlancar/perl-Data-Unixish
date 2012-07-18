@@ -51,7 +51,11 @@ sub apply {
     my $in0 = $args{in}        or return [400, "Please specify in"];
     my $ff0 = $args{functions} or return [400, "Please specify functions"];
     $ff0 = [$ff0] unless ref($ff0) eq 'ARRAY';
-    @$ff0 or return [400, "Please specify at least one function to apply"];
+
+    # special case
+    unless (@$ff0) {
+        return [200, "No processing done", $in];
+    }
 
     my @ff;
     my ($in, $out);
