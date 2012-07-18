@@ -54,7 +54,7 @@ sub apply {
 
     # special case
     unless (@$ff0) {
-        return [200, "No processing done", $in];
+        return [200, "No processing done", $in0];
     }
 
     my @ff;
