@@ -1,5 +1,13 @@
 Revision history for Data-Unixish-Implementation
 
+1.20    2012-07-21 (SHARYANTO)
+
+        No functional changes. Rename distribution from
+        Data-Unixish-Implementation to Data-Unixish, since the specification is
+        now renamed to Unixish. Bump version number to work around PAUSE
+        restriction.
+
+
 0.03    2012-07-18 (SHARYANTO)
 
         [ENHANCEMENTS]
