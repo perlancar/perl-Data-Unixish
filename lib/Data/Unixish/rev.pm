@@ -21,7 +21,6 @@ $SPEC{rev} = {
 sub rev {
     my %args = @_;
     my ($in, $out) = ($args{in}, $args{out});
-    my $n = $args{items} // 10;
 
     my @tmp;
     while (my ($index, $item) = each @$in) {
