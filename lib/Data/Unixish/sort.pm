@@ -42,7 +42,7 @@ _
             cmdline_aliases => { R=>{} },
         },
     },
-    tags => [qw/sorting/],
+    tags => [qw/ordering/],
 };
 sub sort {
     my %args = @_;
