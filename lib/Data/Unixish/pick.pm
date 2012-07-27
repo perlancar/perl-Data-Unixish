@@ -1,6 +1,7 @@
 package Data::Unixish::pick;
 
 use 5.010;
+use feature::each_on_array; # for Perl < 5.12
 use strict;
 use warnings;
 use Log::Any '$log';
