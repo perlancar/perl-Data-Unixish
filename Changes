@@ -1,4 +1,11 @@
-Revision history for Data-Unixish-Implementation
+Revision history for Data-Unixish
+
+1.21.0  2012-07-27 (SHARYANTO)
+
+        - Add dux functions: pick, rev, shuf.
+
+        - Use feature::each_on_array to make the modules work in Perl < 5.12.
+
 
 1.20    2012-07-21 (SHARYANTO)
 
