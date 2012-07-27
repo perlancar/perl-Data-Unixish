@@ -1,5 +1,11 @@
 Revision history for Data-Unixish
 
+1.21.1  2012-07-27 (SHARYANTO)
+
+        No functional changes. Replace dep feature::each_on_array with
+        Syntax::Feature::EachOnArray (module renamed).
+
+
 1.21.0  2012-07-27 (SHARYANTO)
 
         - Add dux functions: pick, rev, shuf.
