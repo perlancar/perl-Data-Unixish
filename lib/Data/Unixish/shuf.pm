@@ -1,8 +1,8 @@
 package Data::Unixish::shuf;
 
 use 5.010;
-use feature::each_on_array; # for Perl < 5.12
 use strict;
+use syntax 'each_on_array'; # to support perl < 5.12
 use warnings;
 use Log::Any '$log';
 
