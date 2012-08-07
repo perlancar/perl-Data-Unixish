@@ -1,5 +1,12 @@
 Revision history for Data-Unixish
 
+1.23    2012-08-07 (SHARYANTO)
+
+        No functional changes. Split bin/dux to its own dist App-dux to avoid
+        circular dependency problem (dfpc -> du -> pericmd -> dfpc), reported by
+        Dagfinn Ilmari Mannsåker.
+
+
 1.22    2012-07-27 (SHARYANTO)
 
         No functional changes. Bump version number. 1.21.1 = 1.021000 < 1.20.
