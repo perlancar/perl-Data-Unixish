@@ -110,7 +110,7 @@ sub apply {
  Data::Unixish::Apply::apply(
      in => [1, 4, 2, 6, 7, 10],
      functions => ['sort', ['printf', {fmt=>'%04d'}]],
-);
+ ); # will result in [qw/0001 0002 0004 0006 0007 0010/],
 
 
 =head1 DESCRIPTION
