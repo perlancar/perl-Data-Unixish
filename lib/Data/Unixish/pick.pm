@@ -33,10 +33,12 @@ sub pick {
     my @picked;
     while (my ($index, $item) = each @$in) {
         if (@picked < $n) {
-            push @picked, $item;
-            my ($r1, $r2) = (rand(@picked), rand(@picked));
-            ($picked[$r1], $picked[$r2]) = ($picked[$r2], $picked[$r1]);
+            # we haven't reached n items, put item to picked list, in a random
+            # position
+            splice @picked, rand(@picked), 0, $item;
         } else {
+            # we have reached n items, just replace an item randomly, using
+            # algorithm from Learning Perl, slightly modified.
             rand($.) <= $n and $picked[rand(@picked)] = $item;
         }
     }
