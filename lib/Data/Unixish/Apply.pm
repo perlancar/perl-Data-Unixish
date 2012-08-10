@@ -38,7 +38,7 @@ Example:
     [
         'sort', # no arguments (all default)
         'date', # no arguments (all default)
-        ['head', {lines=>5}], # specify arguments
+        ['head', {items=>5}], # specify arguments
     ]
 
 _
