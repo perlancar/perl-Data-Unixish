@@ -40,3 +40,23 @@ sub head {
 
 1;
 # ABSTRACT: Output the first items of data
+
+=head1 SYNOPSIS
+
+In Perl:
+
+ use Data::Unixish::head;
+ my $in  = [1..100];
+ my $out = [];
+ Data::Unixish::head::head(in=>$in, out=>$out); # $out = [1..10]
+
+In command line:
+
+ % seq 1 100 | dux head -n 20 | dux tail --format=text-simple -n 5
+ 16
+ 17
+ 18
+ 19
+ 20
+
+=cut

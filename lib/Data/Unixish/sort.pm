@@ -91,3 +91,22 @@ sub sort {
 
 1;
 # ABSTRACT: Sort items
+
+=head1 SYNOPSIS
+
+In Perl:
+
+ use Data::Unixish::sort;
+ my $in  = [4, 7, 2, 5];
+ my $out = [];
+ Data::Unixish::sort::sort(in=>$in, out=>$out); # $out = [2, 4, 5, 7]
+
+In command line:
+
+ % echo -e "b\na\nc" | dux sort --format=text-simple
+ a
+ b
+ c
+
+=cut
+

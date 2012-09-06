@@ -46,3 +46,23 @@ sub tail {
 
 1;
 # ABSTRACT: Output the last items of data
+
+=head1 SYNOPSIS
+
+In Perl:
+
+ use Data::Unixish::tail;
+ my $in  = [1..100];
+ my $out = [];
+ Data::Unixish::tail::tail(in=>$in, out=>$out); # $out = [91..100]
+
+In command line:
+
+ % seq 1 100 | dux tail --format=text-simple -n 5
+ 96
+ 97
+ 98
+ 99
+ 100
+
+=cut

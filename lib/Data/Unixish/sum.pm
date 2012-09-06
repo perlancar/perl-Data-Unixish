@@ -35,3 +35,21 @@ sub sum {
 
 1;
 # ABSTRACT: Sum numbers
+
+=head1 SYNOPSIS
+
+In Perl:
+
+ use Data::Unixish::sum;
+ my $in  = [1, 2, 3];
+ my $out = [];
+ Data::Unixish::sum::sum(in=>$in, out=>$out); # $out = [6]
+
+In command line:
+
+ % seq 1 100 | dux sum
+ .------.
+ | 5050 |
+ '------'
+
+=cut

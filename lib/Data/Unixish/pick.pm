@@ -49,3 +49,21 @@ sub pick {
 
 1;
 # ABSTRACT: Pick one or more random items
+
+=head1 SYNOPSIS
+
+In Perl:
+
+ use Data::Unixish::pick;
+ my $in  = [1..100];
+ my $out = [];
+ Data::Unixish::pick::pick(in=>$in, out=>$out); # $out = [73]
+
+In command line:
+
+ % seq 1 100 | dux pick -n 3
+ .-------------------.
+ | 18 | 22 |  2 | 24 |
+ '----+----+----+----'
+
+=cut

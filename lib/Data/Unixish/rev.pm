@@ -34,3 +34,22 @@ sub rev {
 
 1;
 # ABSTRACT: Reverse items
+
+=head1 SYNOPSIS
+
+In Perl:
+
+ use Data::Unixish::rev;
+ my $in  = [1, 2, 3];
+ my $out = [];
+ Data::Unixish::rev::rev(in=>$in, out=>$out); # $out = [3, 2, 1]
+
+In command line:
+
+ % echo -e "1\n2\n3" | dux rev --format=text-simple
+ 3
+ 2
+ 1
+
+=cut
+
