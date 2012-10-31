@@ -65,10 +65,10 @@ sub date {
 
 In Perl:
 
- use Data::Unixish::cat;
+ use Data::Unixish::date;
  my $in  = [DateTime->new(year=>2012, month=>9, day=>6), 1290380232, "foo"];
  my $out = [];
- Data::Unixish::cat::cat(in=>$in, out=>$out, format=>"%Y-%m-%d");
+ Data::Unixish::date::date(in=>$in, out=>$out, format=>"%Y-%m-%d");
  # $out = ["2012-09-06","2010-11-22","foo"]
 
 In command line:
