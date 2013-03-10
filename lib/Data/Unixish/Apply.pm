@@ -17,15 +17,15 @@ $SPEC{apply} = {
     summary => 'Apply one or more dux functions',
     args => {
         in => {
-            schema => 'any', # XXX stream
+            schema => ['any'], # XXX stream
             req => 1,
         },
         functions => {
             summary => 'Function(s) to apply',
-            schema => ['any*' => {of=>[
+            schema => ['any*', of => [
                 'str*',
-                ['array*', {of => ['str*', 'array*']}],
-            ]}],
+                ['array*', of => ['any' => of => [['str*'], ['array*']]]],
+            ]],
             req => 1,
             description => <<'_',
 

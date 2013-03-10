@@ -39,3 +39,7 @@ sub test_dux_func {
 
 1;
 # ABSTRACT: Routines to test Data::Unixish
+
+=for Pod::Coverage .+
+
+=cut
