@@ -35,8 +35,6 @@ sub date {
     my ($in, $out) = ($args{in}, $args{out});
     my $format  = $args{format} // '%Y-%m-%d %H:%M:%S';
 
-    my $required;
-
     while (my ($index, $item) = each @$in) {
         my @lt;
         if (looks_like_number($item) &&
