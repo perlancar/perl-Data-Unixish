@@ -12,11 +12,6 @@ test_dux_func(
         {in =>[" x", "a \n", "b  \nc \n", ["d "]],
          args=>{},
          out=>[" x", "a\n", "b\nc\n", ["d "]]},
-    ],
-);
-test_dux_func(
-    func => 'rtrim',
-    tests => [
         {in =>[" x", "a\n", "b  \nc \n", ["d "]],
          args=>{nl=>1},
          out=>[" x", "a", "b\nc", ["d "]]},
