@@ -30,7 +30,8 @@ sub test_dux_func {
                 my $out = [];
                 my $res = $f->(in=>$in, out=>$out, %{$t->{args}});
                 is($res->[0], 200, "status");
-                is_deeply($out, $t->{out}, "out");
+                is_deeply($out, $t->{out}, "out")
+                    or diag explain $out;
             };
             $i++;
         }
