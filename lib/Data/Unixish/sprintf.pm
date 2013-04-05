@@ -81,7 +81,7 @@ In Perl:
  use Data::Unixish::sprintf;
  my $in  = [0, 1, [2], {}, "", undef];
  my $out = [];
- Data::Unixish::sprintf(in=>$in, out=>$out, format=>"%.1f");
+ Data::Unixish::sprintf::sprintf(in=>$in, out=>$out, format=>"%.1f");
  # $out = ["0.0", "1.0", "2.0", {}, "", undef];
 
 In command line:

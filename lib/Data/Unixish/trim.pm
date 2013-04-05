@@ -58,7 +58,7 @@ In Perl:
  use Data::Unixish::trim;
  my $in  = ["x", "   a   ", "  b  \n   c  \n", undef, [" d "]];
  my $out = [];
- Data::Unixish::ltrim::ltrim(in=>$in, out=>$out);
+ Data::Unixish::trim::trim(in=>$in, out=>$out);
  # $out = ["x", "a", "b\nc\n", undef, [" d "]]
 
 In command line:

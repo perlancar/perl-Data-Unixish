@@ -114,7 +114,7 @@ In Perl:
  use Data::Unixish::bool;
  my $in  = [0, "one", 2, ""];
  my $out = [];
- Data::Unixish::bool(in=>$in, out=>$out, style=>"check_cross");
+ Data::Unixish::bool::bool(in=>$in, out=>$out, style=>"check_cross");
  # $out = ["✕","✓","✓","✕"]
 
 In command line:

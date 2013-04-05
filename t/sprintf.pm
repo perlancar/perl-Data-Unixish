@@ -11,7 +11,7 @@ test_dux_func(
     func => 'sprintf',
     tests => [
         {
-            name => 'scalar, skip_non_number',
+            name => 'scalar, skip_non_number, skip_array',
             args => {format=>'%04.1f', skip_non_number=>1, skip_array=>1},
             in   => [1, "2x", [3.1], undef],
             out  => ["01.0", "2x", [3.1], undef],
