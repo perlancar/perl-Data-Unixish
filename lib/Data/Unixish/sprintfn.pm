@@ -1,4 +1,4 @@
-package Data::Unixish::sprintf;
+package Data::Unixish::sprintfn;
 
 use 5.010;
 use strict;
@@ -7,22 +7,18 @@ use warnings;
 use Log::Any '$log';
 
 use Scalar::Util 'looks_like_number';
+use Text::sprintfn ();
 
 # VERSION
 
 our %SPEC;
 
-$SPEC{sprintf} = {
+$SPEC{sprintfn} = {
     v => 1.1,
-    summary => 'Apply sprintf() on input',
+    summary => 'Like sprintf, but use sprintfn() from Text::sprintfn',
     description => <<'_',
 
-Array will also be processed (all the elements are fed to sprintf(), the result
-is a single string), unless `skip_array` is set to true.
-
-Non-numbers can be skipped if you use `skip_non_number`.
-
-Undef, hashes, and other non-scalars are ignored.
+Unlike in *sprintf*, with this function, hash will also be processed.
 
 _
     args => {
@@ -40,10 +36,13 @@ _
         skip_array => {
             schema=>[bool => default=>0],
         },
+        skip_hash => {
+            schema=>[bool => default=>0],
+        },
     },
     tags => [qw/format/],
 };
-sub sprintf {
+sub sprintfn {
     my %args = @_;
     my ($in, $out) = ($args{in}, $args{out});
     my $format = $args{format};
@@ -54,7 +53,12 @@ sub sprintf {
             my $r = ref($item);
             if ($r eq 'ARRAY' && !$args{skip_array}) {
                 no warnings;
-                $item = CORE::sprintf($format, @$item);
+                $item = Text::sprintfn::sprintfn($format, @$item);
+                last;
+            }
+            if ($r eq 'HASH' && !$args{skip_hash}) {
+                no warnings;
+                $item = Text::sprintfn::sprintfn($format, $item);
                 last;
             }
             last if $r;
@@ -62,7 +66,7 @@ sub sprintf {
             last if !looks_like_number($item) && $args{skip_non_number};
             {
                 no warnings;
-                $item = CORE::sprintf($format, $item);
+                $item = Text::sprintfn::sprintfn($format, $item);
             }
         }
         push @$out, $item;
@@ -72,25 +76,17 @@ sub sprintf {
 }
 
 1;
-# ABSTRACT: Apply sprintf() on input
+# ABSTRACT: Like sprintf, but use sprintfn() from Text::sprintfn
 
 =head1 SYNOPSIS
 
 In Perl:
 
- use Data::Unixish::sprintf;
- my $in  = [0, 1, [2], {}, "", undef];
+ use Data::Unixish::sprintfn;
+ my $in  = [{n=>1}, {n=>2}, "", undef];
  my $out = [];
- Data::Unixish::sprintf(in=>$in, out=>$out, format=>"%.1f");
- # $out = ["0.0", "1.0", "2.0", {}, "", undef];
-
-In command line:
-
- % echo -e "0\n1\n\nx\n" | dux sprintf -f "%.1f" --skip-non-number --format=text-simple
- 0.0
- 1.0
-
- x
+ Data::Unixish::sprintfn::sprintfn(in=>$in, out=>$out, format=>"%(n).1f");
+ # $out = ["1.0", "2.0", "", undef];
 
 =cut
 
