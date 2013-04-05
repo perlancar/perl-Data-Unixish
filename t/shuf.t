@@ -8,4 +8,5 @@ use Test::More 0.96;
 
 # TODO
 
+ok 1;
 done_testing;
