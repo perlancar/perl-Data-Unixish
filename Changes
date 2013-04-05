@@ -1,5 +1,10 @@
 Revision history for Data-Unixish
 
+1.26    2013-04-05 (SHARYANTO)
+
+        - Add dux functions: uc, lc, ucfirst, lcfirst, bool, sprintf, sprintfn.
+
+
 1.25    2013-03-10 (SHARYANTO)
 
         - Add dux functions: wrap, ltrim, rtrim, trim.

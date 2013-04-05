@@ -11,7 +11,7 @@ use Log::Any '$log';
 
 our %SPEC;
 
-sub is_true {
+sub _is_true {
     my ($val, $notion) = @_;
 
     if ($notion eq 'n1') {
@@ -96,7 +96,7 @@ sub bool {
     my $fc = $args{false_char} // $styles{$style}[1];
 
     while (my ($index, $item) = each @$in) {
-        my $t = is_true($item, $notion);
+        my $t = _is_true($item, $notion);
         $item = $t ? $tc : defined($t) ? $fc : undef;
         push @$out, $item;
     }
