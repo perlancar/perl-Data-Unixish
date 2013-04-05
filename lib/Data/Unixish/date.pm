@@ -28,7 +28,7 @@ _
         },
         # tz?
     },
-    tags => [qw/sorting/],
+    tags => [qw/format/],
 };
 sub date {
     my %args = @_;
