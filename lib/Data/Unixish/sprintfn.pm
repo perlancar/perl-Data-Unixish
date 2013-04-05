@@ -1,11 +1,13 @@
 package Data::Unixish::sprintfn;
 
 use 5.010;
+use locale;
 use strict;
 use syntax 'each_on_array'; # to support perl < 5.12
 use warnings;
 use Log::Any '$log';
 
+use POSIX qw(locale_h);
 use Scalar::Util 'looks_like_number';
 use Text::sprintfn ();
 
@@ -47,6 +49,15 @@ sub sprintfn {
     my ($in, $out) = ($args{in}, $args{out});
     my $format = $args{format};
 
+    my $orig_locale = setlocale(LC_ALL);
+    if ($ENV{LC_NUMERIC}) {
+        setlocale(LC_NUMERIC, $ENV{LC_NUMERIC});
+    } elsif ($ENV{LC_ALL}) {
+        setlocale(LC_ALL, $ENV{LC_ALL});
+    } elsif ($ENV{LANG}) {
+        setlocale(LC_ALL, $ENV{LANG});
+    }
+
     while (my ($index, $item) = each @$in) {
         {
             last unless defined($item);
@@ -71,6 +82,8 @@ sub sprintfn {
         }
         push @$out, $item;
     }
+
+    setlocale(LC_ALL, $orig_locale);
 
     [200, "OK"];
 }
