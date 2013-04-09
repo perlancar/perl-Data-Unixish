@@ -24,6 +24,9 @@ test_dux_func(
             in   => ['123'  , '12345', '123456', ['123456'], {}, undef],
             out  => ['123  ', '12345', '12345' , ['123456'], {}, undef],
         },
+        # TODO: test --ansi
+        # TODO: test --mb
+        # TODO: test --char
     ],
 );
 
