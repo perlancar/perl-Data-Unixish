@@ -1,4 +1,4 @@
-package Data::Unixish::rpad;
+package Data::Unixish::centerpad;
 
 use 5.010;
 use locale;
@@ -13,14 +13,14 @@ use Data::Unixish::_pad;
 
 our %SPEC;
 
-$SPEC{rpad} = {
+$SPEC{centerpad} = {
     v => 1.1,
-    summary => 'Pad text to the right until a certain column width',
+    summary => 'Center text to a certain column width',
     description => <<'_',
 
 This function can handle text containing wide characters and ANSI escape codes.
 
-Note: to pad to a certain character length instead of column width (note that
+Note: to center to a certain character length instead of column width (note that
 wide characters like Chinese can have width of more than 1 column in terminal),
 you can turn of `mb` option even when your text contains wide characters.
 
@@ -58,28 +58,28 @@ _
     },
     tags => [qw/format/],
 };
-sub rpad {
+sub centerpad {
     my %args = @_;
-    Data::Unixish::_pad::_pad("r", %args);
+    Data::Unixish::_pad::_pad("c", %args);
 }
 
 1;
-# ABSTRACT: Pad text to the right until a certain column width
+# ABSTRACT: Center text to a certain column width
 
 =head1 SYNOPSIS
 
 In Perl:
 
- use Data::Unixish::rpad;
+ use Data::Unixish::centerpad;
  my $in  = ["123", "1234"];
  my $out = [];
- Data::Unixish::rpad::rpad(in=>$in, out=>$out, width=>6);
- # $out = ["123   ", "1234  "]
+ Data::Unixish::centerpad::centerpad(in=>$in, out=>$out, width=>10);
+ # $out = ["   123    ", "   1234   "]
 
 In command line:
 
- % echo -e "123\n1234" | dux rpad -w 6 -c x --format=text-simple
- 123xxx
- 1234xx
+ % echo -e "123\n1234" | dux centerpad -w 10 -c x --format=text-simple
+ xxx123xxxx
+ xxx1234xxx
 
 =cut

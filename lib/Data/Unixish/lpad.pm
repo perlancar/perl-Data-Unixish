@@ -1,4 +1,4 @@
-package Data::Unixish::rpad;
+package Data::Unixish::lpad;
 
 use 5.010;
 use locale;
@@ -13,9 +13,9 @@ use Data::Unixish::_pad;
 
 our %SPEC;
 
-$SPEC{rpad} = {
+$SPEC{lpad} = {
     v => 1.1,
-    summary => 'Pad text to the right until a certain column width',
+    summary => 'Pad text to the left until a certain column width',
     description => <<'_',
 
 This function can handle text containing wide characters and ANSI escape codes.
@@ -58,28 +58,28 @@ _
     },
     tags => [qw/format/],
 };
-sub rpad {
+sub lpad {
     my %args = @_;
-    Data::Unixish::_pad::_pad("r", %args);
+    Data::Unixish::_pad::_pad("l", %args);
 }
 
 1;
-# ABSTRACT: Pad text to the right until a certain column width
+# ABSTRACT: Pad text to the left until a certain column width
 
 =head1 SYNOPSIS
 
 In Perl:
 
- use Data::Unixish::rpad;
+ use Data::Unixish::lpad;
  my $in  = ["123", "1234"];
  my $out = [];
- Data::Unixish::rpad::rpad(in=>$in, out=>$out, width=>6);
- # $out = ["123   ", "1234  "]
+ Data::Unixish::lpad::lpad(in=>$in, out=>$out, width=>6);
+ # $out = ["   123", "  1234"]
 
 In command line:
 
- % echo -e "123\n1234" | dux rpad -w 6 -c x --format=text-simple
- 123xxx
- 1234xx
+ % echo -e "123\n1234" | dux lpad -w 6 -c x --format=text-simple
+ xxx123
+ xx1234
 
 =cut
