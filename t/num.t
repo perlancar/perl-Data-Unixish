@@ -1,0 +1,48 @@
+#!/perl
+
+use 5.010;
+use strict;
+use utf8;
+use warnings;
+use Test::Data::Unixish;
+use Test::More 0.96;
+
+local $ENV{LANG} = "C";
+
+test_dux_func(
+    func => 'num',
+    tests => [
+        {
+            name => 'style=fixed',
+            args => {style=>'fixed', decimal_digits=>4},
+            in   => [1, -2.3, 45678, "a", [], {}, undef],
+            out  => ["1.0000", "-2.3000", "45,678.0000", "a", [], {}, undef],
+        },
+        {
+            name => 'style=scientific',
+            args => {style=>'scientific', decimal_digits=>3},
+            in   => [1, -2.3, 45678, "a", [], {}, undef],
+            out  => ["1.000e+00", "-2.300e+00", "4.568e+04", "a", [], {}, undef],
+        },
+        {
+            name => 'prefix & suffix',
+            args => {prefix=>"p", suffix=>"s"},
+            in   => [1, "a", [], {}, undef],
+            out  => ["p1s", "a", [], {}, undef],
+        },
+        {
+            name => 'style=kilo',
+            args => {style=>"kilo"},
+            in   => [0, 1, -2000, "a", [], {}, undef],
+            out  => ["0.0", "1.0", "-2.0k", "a", [], {}, undef],
+        },
+        {
+            name => 'style=kibi',
+            args => {style=>"kibi"},
+            in   => [0, 1, -2000, "a", [], {}, undef],
+            out  => ["0.0", "1.0", "-2.0ki", "a", [], {}, undef],
+        },
+    ],
+);
+
+done_testing;
