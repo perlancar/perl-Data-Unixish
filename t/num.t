@@ -42,6 +42,12 @@ test_dux_func(
             in   => [0, 1, -2000, "a", [], {}, undef],
             out  => ["0.0", "1.0", "-2.0ki", "a", [], {}, undef],
         },
+        {
+            name => 'thousands_sep',
+            args => {thousands_sep=>" "},
+            in   => [-20000],
+            out  => ["-20 000"],
+        },
     ],
 );
 
