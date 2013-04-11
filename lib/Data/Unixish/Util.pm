@@ -10,12 +10,12 @@ our %common_args = (
     in  => {
         summary => 'Input stream (e.g. array or filehandle)',
         schema  => 'any', # TODO: any* => of => [stream*, array*]
-        req => 1,
+        #req => 1,
     },
     out => {
         summary => 'Output stream (e.g. array or filehandle)',
         schema  => 'any', # TODO: any* => of => [stream*, array*]
-        req => 1,
+        #req => 1,
     },
 );
 
