@@ -5,8 +5,8 @@ use strict;
 use warnings;
 #use Log::Any '$log';
 
-use SHARYANTO::Package::Util qw(package_exists);
 use Module::Load;
+use SHARYANTO::Package::Util qw(package_exists);
 
 # VERSION
 

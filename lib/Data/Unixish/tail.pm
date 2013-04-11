@@ -4,9 +4,11 @@ use 5.010;
 use strict;
 use syntax 'each_on_array'; # to support perl < 5.12
 use warnings;
-use Log::Any '$log';
+#use Log::Any '$log';
 
 # VERSION
+
+use Data::Unixish::Util qw(%common_args);
 
 our %SPEC;
 
@@ -14,8 +16,7 @@ $SPEC{tail} = {
     v => 1.1,
     summary => 'Output the last items of data',
     args => {
-        in  => {schema=>'any'},
-        out => {schema=>'any'},
+        %common_args,
         items => {
             summary => 'Number of items to output',
             schema=>['int*' => {default=>10}],

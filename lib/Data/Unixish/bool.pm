@@ -5,7 +5,9 @@ use strict;
 use syntax 'each_on_array'; # to support perl < 5.12
 use utf8;
 use warnings;
-use Log::Any '$log';
+#use Log::Any '$log';
+
+use Data::Unixish::Util qw(%common_args);
 
 # VERSION
 
@@ -49,8 +51,7 @@ $SPEC{bool} = {
 
 _
     args => {
-        in  => {schema=>'any'},
-        out => {schema=>'any'},
+        %common_args,
         style => {
             schema=>[str => in=>[keys %styles], default=>'one_zero'],
             description => "Available styles:\n\n".

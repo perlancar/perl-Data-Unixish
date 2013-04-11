@@ -6,6 +6,7 @@ use syntax 'each_on_array'; # to support perl < 5.12
 use warnings;
 #use Log::Any '$log';
 
+use Data::Unixish::Util qw(%common_args);
 use Text::ANSI::Util qw(ta_wrap ta_mbwrap);
 use Text::WideChar::Util qw(mbwrap);
 use Text::Wrap ();
@@ -23,8 +24,7 @@ Currently implemented using Text::Wrap standard Perl module.
 
 _
     args => {
-        in  => {schema=>'any'},
-        out => {schema=>'any'},
+        %common_args,
         columns => {
             summary => 'Target column width',
             schema =>[int => {default=>80, min=>1}],

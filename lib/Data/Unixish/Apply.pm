@@ -3,10 +3,11 @@ package Data::Unixish::Apply;
 use 5.010;
 use strict;
 use warnings;
-use Log::Any '$log';
+#use Log::Any '$log';
 
-use SHARYANTO::Package::Util qw(package_exists);
+use Data::Unixish::Util qw(%common_args);
 use Module::Load;
+use SHARYANTO::Package::Util qw(package_exists);
 
 # VERSION
 

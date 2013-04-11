@@ -4,7 +4,9 @@ use 5.010;
 use strict;
 use syntax 'each_on_array'; # to support perl < 5.12
 use warnings;
-use Log::Any '$log';
+#use Log::Any '$log';
+
+use Data::Unixish::Util qw(%common_args);
 
 # VERSION
 
@@ -20,8 +22,7 @@ numerically.
 
 _
     args => {
-        in  => {schema=>'any'},
-        out => {schema=>'any'},
+        %common_args,
         numeric => {
             summary => 'Whether to sort numerically',
             schema=>[bool => {default=>0}],

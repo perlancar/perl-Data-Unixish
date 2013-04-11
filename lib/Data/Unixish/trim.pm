@@ -8,6 +8,8 @@ use warnings;
 
 # VERSION
 
+use Data::Unixish::Util qw(%common_args);
+
 our %SPEC;
 
 $SPEC{trim} = {
@@ -17,8 +19,7 @@ $SPEC{trim} = {
 
 _
     args => {
-        in  => {schema=>'any'},
-        out => {schema=>'any'},
+        %common_args,
         strip_newline => {
             summary => 'Whether to strip newlines at the '.
                 'beginning and end of text',

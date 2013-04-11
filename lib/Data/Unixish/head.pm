@@ -4,7 +4,9 @@ use 5.010;
 use strict;
 use syntax 'each_on_array'; # to support perl < 5.12
 use warnings;
-use Log::Any '$log';
+#use Log::Any '$log';
+
+use Data::Unixish::Util qw(%common_args);
 
 # VERSION
 
@@ -14,8 +16,7 @@ $SPEC{head} = {
     v => 1.1,
     summary => 'Output the first items of data',
     args => {
-        in  => {schema=>'any'},
-        out => {schema=>'any'},
+        %common_args,
         items => {
             summary => 'Number of items to output',
             schema=>['int*' => {default=>10}],

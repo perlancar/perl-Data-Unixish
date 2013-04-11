@@ -6,6 +6,8 @@ use syntax 'each_on_array'; # to support perl < 5.12
 use warnings;
 #use Log::Any '$log';
 
+use Data::Unixish::Util qw(%common_args);
+
 # VERSION
 
 our %SPEC;
@@ -17,8 +19,7 @@ $SPEC{rtrim} = {
 
 _
     args => {
-        in  => {schema=>'any'},
-        out => {schema=>'any'},
+        %common_args,
         strip_newline => {
             summary => 'Whether to strip newlines at the end of text',
             schema =>[bool => {default=>0}],

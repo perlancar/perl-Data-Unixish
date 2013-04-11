@@ -4,9 +4,11 @@ use 5.010;
 use strict;
 use syntax 'each_on_array'; # to support perl < 5.12
 use warnings;
-use Log::Any '$log';
+#use Log::Any '$log';
 use POSIX qw(strftime);
 use Scalar::Util qw(looks_like_number blessed);
+
+use Data::Unixish::Util qw(%common_args);
 
 # VERSION
 
@@ -19,8 +21,7 @@ $SPEC{date} = {
 
 _
     args => {
-        in  => {schema=>'any'},
-        out => {schema=>'any'},
+        %common_args,
         format => {
             summary => 'Format',
             schema=>[str => {default=>0}],

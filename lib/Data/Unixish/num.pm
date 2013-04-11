@@ -5,8 +5,9 @@ use locale;
 use strict;
 use syntax 'each_on_array'; # to support perl < 5.12
 use warnings;
-use Log::Any '$log';
+#use Log::Any '$log';
 
+use Data::Unixish::Util qw(%common_args);
 use Number::Format;
 use POSIX qw(locale_h);
 use Scalar::Util 'looks_like_number';
@@ -42,8 +43,7 @@ Undef and non-numbers are ignored.
 
 _
     args => {
-        in  => {schema=>'any'},
-        out => {schema=>'any'},
+        %common_args,
         style => {
             schema=>['str*', in=>[keys %styles], default=>'general'],
             cmdline_aliases => { s=>{} },

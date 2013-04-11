@@ -5,9 +5,10 @@ use locale;
 use strict;
 use syntax 'each_on_array'; # to support perl < 5.12
 use warnings;
-use Log::Any '$log';
+#use Log::Any '$log';
 
 use Data::Unixish::_pad;
+use Data::Unixish::Util qw(%common_args);
 
 # VERSION
 
@@ -26,8 +27,7 @@ you can turn of `mb` option even when your text contains wide characters.
 
 _
     args => {
-        in  => {schema=>'any'},
-        out => {schema=>'any'},
+        %common_args,
         width => {
             schema => ['int*', min => 0],
             req => 1,
