@@ -43,11 +43,8 @@ sub lcfirst {
 
 In Perl:
 
- use Data::Unixish::lcfirst;
- my $in  = ["STEVEN"];
- my $out = [];
- Data::Unixish::lcfirst::lcfirst(in=>$in, out=>$out);
- # $out = ["sTEVEN"]
+ use Data::Unixish::List qw(dux);
+ my @res = dux('lcfirst', 'Steven', 'STEVEN'); # => ('steven', 'sTEVEN')
 
 In command line:
 

@@ -52,11 +52,9 @@ sub rtrim {
 
 In Perl:
 
- use Data::Unixish::rtrim;
- my $in  = ["x", "a   ", "b \nc  \n", undef, ["d "]];
- my $out = [];
- Data::Unixish::rtrim::rtrim(in=>$in, out=>$out);
- # $out = ["x", "a", "b\nc\n", undef, ["d "]]
+ use Data::Unixish::List qw(dux);
+ my @res = dux('rtrim', "x", "a   ", "b \nc  \n", undef, ["d "]);
+ # => ("x", "a", "b\nc\n", undef, ["d "])
 
 In command line:
 

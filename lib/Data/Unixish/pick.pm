@@ -54,14 +54,12 @@ sub pick {
 
 In Perl:
 
- use Data::Unixish::pick;
- my $in  = [1..100];
- my $out = [];
- Data::Unixish::pick::pick(in=>$in, out=>$out); # $out = [73]
+ use Data::Unixish::List qw(dux);
+ my @pick = dux([pick => {items=>2}], 1..100); # => (52, 33)
 
 In command line:
 
- % seq 1 100 | dux pick -n 3
+ % seq 1 100 | dux pick -n 4
  .-------------------.
  | 18 | 22 |  2 | 24 |
  '----+----+----+----'

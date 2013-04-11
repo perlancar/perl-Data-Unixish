@@ -91,11 +91,9 @@ sub sprintf {
 
 In Perl:
 
- use Data::Unixish::sprintf;
- my $in  = [0, 1, [2], {}, "", undef];
- my $out = [];
- Data::Unixish::sprintf::sprintf(in=>$in, out=>$out, format=>"%.1f");
- # $out = ["0.0", "1.0", "2.0", {}, "", undef];
+ use Data::Unixish::List qw(dux);
+ my @res = dux([sprintf => {format=>"%.1f"}], 0, 1, [2], {}, "", undef);
+ # => ("0.0", "1.0", "2.0", {}, "", undef)
 
 In command line:
 

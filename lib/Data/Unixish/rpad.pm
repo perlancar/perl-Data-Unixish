@@ -70,11 +70,9 @@ sub rpad {
 
 In Perl:
 
- use Data::Unixish::rpad;
- my $in  = ["123", "1234"];
- my $out = [];
- Data::Unixish::rpad::rpad(in=>$in, out=>$out, width=>6);
- # $out = ["123   ", "1234  "]
+ use Data::Unixish::List qw(dux);
+ my @res = dux([rpad => {width=>6}],"123", "1234");
+ # => ("123   ", "1234  ")
 
 In command line:
 

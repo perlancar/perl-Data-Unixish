@@ -80,11 +80,8 @@ sub trunc {
 
 In Perl:
 
- use Data::Unixish::trunc;
- my $in  = ["123", "1234", "12345"];
- my $out = [];
- Data::Unixish::trunc::trunc(in=>$in, out=>$out, width=>4);
- # $out = ["123", "1234", "1234"]
+ use Data::Unixish::List qw(dux);
+ my @res = dux([trunc => {width=>4}], "123", "1234", "12345"); # => ("123", "1234", "1234")
 
 In command line:
 

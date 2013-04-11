@@ -39,10 +39,8 @@ sub rev {
 
 In Perl:
 
- use Data::Unixish::rev;
- my $in  = [1, 2, 3];
- my $out = [];
- Data::Unixish::rev::rev(in=>$in, out=>$out); # $out = [3, 2, 1]
+ use Data::Unixish::List qw(dux);
+ my @rev = dux('rev', 1, 2, 3); # => (3, 2, 1)
 
 In command line:
 

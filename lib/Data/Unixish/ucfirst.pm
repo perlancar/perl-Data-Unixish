@@ -43,11 +43,8 @@ sub ucfirst {
 
 In Perl:
 
- use Data::Unixish::ucfirst;
- my $in  = ["steven"];
- my $out = [];
- Data::Unixish::ucfirst::ucfirst(in=>$in, out=>$out);
- # $out = ["Steven"]
+ use Data::Unixish::List qw(dux);
+ my @res = dux('ucfirst', 'steven', 'de Java'); # => ('Steven', 'De Java')
 
 In command line:
 

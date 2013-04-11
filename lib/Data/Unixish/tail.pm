@@ -51,10 +51,10 @@ sub tail {
 
 In Perl:
 
- use Data::Unixish::tail;
- my $in  = [1..100];
- my $out = [];
- Data::Unixish::tail::tail(in=>$in, out=>$out); # $out = [91..100]
+ use Data::Unixish::List qw(dux);
+ my @res;
+ @res = dux(tail => (1..100)); # => (91..100)
+ @res = dux([tail => {items=>3}], (1..100)); # => (98, 99, 100)
 
 In command line:
 

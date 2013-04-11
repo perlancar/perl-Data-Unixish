@@ -46,9 +46,9 @@ sub head {
 In Perl:
 
  use Data::Unixish::head;
- my $in  = [1..100];
- my $out = [];
- Data::Unixish::head::head(in=>$in, out=>$out); # $out = [1..10]
+ my @res;
+ @res = dux("head", 1..100); # => (1..10)
+ @res = dux([head => {items=>3}], 1..100); # => (1, 2, 3)
 
 In command line:
 

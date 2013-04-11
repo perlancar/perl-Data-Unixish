@@ -43,11 +43,8 @@ sub lc {
 
 In Perl:
 
- use Data::Unixish::lc;
- my $in  = ["STEVEN"];
- my $out = [];
- Data::Unixish::lc::lc(in=>$in, out=>$out);
- # $out = ["steven"]
+ use Data::Unixish::List qw(dux);
+ my @res = dux('lc', 'Steven', 'STEVEN'); # => ('steven', 'steven')
 
 In command line:
 

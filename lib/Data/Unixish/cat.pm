@@ -37,10 +37,8 @@ sub cat {
 
 In Perl:
 
- use Data::Unixish::cat;
- my $in  = [1, 2, 3];
- my $out = [];
- Data::Unixish::cat::cat(in=>$in, out=>$out); # $out = [1, 2, 3]
+ use Data::Unixish::List qw(dux);
+ my @res = dux("cat", 1, 2, 3, 4); # => (1, 2, 3, 4)
 
 In command line:
 

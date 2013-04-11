@@ -43,11 +43,8 @@ sub uc {
 
 In Perl:
 
- use Data::Unixish::uc;
- my $in  = ["steven"];
- my $out = [];
- Data::Unixish::uc::uc(in=>$in, out=>$out);
- # $out = ["STEVEN"]
+ use Data::Unixish::List qw(dux);
+ my @res = dux('uc', 'steven', 'Steven'); # => ('STEVEN', 'STEVEN')
 
 In command line:
 

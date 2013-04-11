@@ -95,11 +95,9 @@ sub sprintfn {
 
 In Perl:
 
- use Data::Unixish::sprintfn;
- my $in  = [{n=>1}, {n=>2}, "", undef];
- my $out = [];
- Data::Unixish::sprintfn::sprintfn(in=>$in, out=>$out, format=>"%(n).1f");
- # $out = ["1.0", "2.0", "", undef];
+ use Data::Unixish::List qw(dux);
+ my @res = dux([sprintfn => {format=>"%(n).1f"}], {n=>1}, {n=>2}, "", undef);
+ # => ("1.0", "2.0", "", undef)
 
 =cut
 

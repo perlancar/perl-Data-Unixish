@@ -57,15 +57,12 @@ sub wrap {
 
 In Perl:
 
- use Data::Unixish::wrap;
- my $in  = ["xxxx xxxx xxxx xxxx xxxx"];
- my $out = [];
- Data::Unixish::wrap::wrap(in=>$in, out=>$out, columns => 20);
- # $out = ["xxxx xxxx xxxx xxxx\nxxxx"]
+ use Data::Unixish::List qw(dux);
+ $wrapped = dux([wrap => {columns=>20}], "xxxx xxxx xxxx xxxx xxxx"); # "xxxx xxxx xxxx xxxx\nxxxx"
 
 In command line:
 
- % echo -e "xxxx xxxx xxxx xxxx xxxx" | dux rtrim -c 20
+ % echo -e "xxxx xxxx xxxx xxxx xxxx" | dux wrap -c 20
  xxxx xxxx xxxx xxxx
  xxxx
 

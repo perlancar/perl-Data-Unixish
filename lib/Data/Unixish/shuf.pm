@@ -41,10 +41,8 @@ sub shuf {
 
 In Perl:
 
- use Data::Unixish::shuf;
- my $in  = [1, 2, 3];
- my $out = [];
- Data::Unixish::shuf::shuf(in=>$in, out=>$out); # $out = [2, 1, 3]
+ use Data::Unixish::List qw(dux);
+ my @shuffled = dux('shuffle', 1, 2, 3); # => (2, 1, 3)
 
 In command line:
 

@@ -111,11 +111,9 @@ sub bool {
 
 In Perl:
 
- use Data::Unixish::bool;
- my $in  = [0, "one", 2, ""];
- my $out = [];
- Data::Unixish::bool::bool(in=>$in, out=>$out, style=>"check_cross");
- # $out = ["✕","✓","✓","✕"]
+ use Data::Unixish::List qw(dux);
+ my @res = dux([bool => {style=>"check_cross"}], [0, "one", 2, ""])
+ # => ("✕","✓","✓","✕")
 
 In command line:
 

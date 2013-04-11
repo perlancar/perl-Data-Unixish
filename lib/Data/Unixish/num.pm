@@ -140,16 +140,14 @@ sub num {
 
 In Perl:
 
- use Data::Unixish::num;
- my $in  = [0, 10, -2, 34.5 [2], {}, "", undef];
- my $out = [];
- Data::Unixish::num::num(in=>$in, out=>$out, style=>"fixed");
- # $out = ["0.00", "10.00", "-2.00", "34.50", [2], {}, "", undef];
+ use Data::Unixish::List qw(dux);
+ my @res = dux([num => {style=>"fixed"}], 0, 10, -2, 34.5, [2], {}, "", undef);
+ # => ("0.00", "10.00", "-2.00", "34.50", [2], {}, "", undef)
 
 In command line:
 
- % echo -e "1\n-2\n" | dux num -s fixed --format=text-simple
- 1.00
- -2.00
+ % echo -e "1\n-2\n" | LANG=id_ID dux num -s fixed --format=text-simple
+ 1,00
+ -2,00
 
 =cut
