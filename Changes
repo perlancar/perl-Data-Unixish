@@ -1,5 +1,17 @@
 Revision history for Data-Unixish
 
+1.29    2013-04-11 (SHARYANTO)
+
+        - Add Data::Unixish::List to simplify using dux function in Perl for
+          lists.
+
+        - Replace Perl examples with the ones using Data::Unixish::List.
+
+        - Add dux function: avg.
+
+        - wrap: Add 'mb' and 'ansi' options.
+
+
 1.28    2013-04-10 (SHARYANTO)
 
         - Add dux function: num.

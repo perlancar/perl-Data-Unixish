@@ -61,6 +61,20 @@ sub dux {
 =head1 DESCRIPTION
 
 
+=head1 FUNCTIONS
+
+=head2 dux($func, @data) => LIST (OR SCALAR)
+
+Apply dux function C<$func> to C<@data>. Return the result list. If called in
+scalar context, return the first row of result list.
+
+C<$func> is either a string containing the name of dux function (without the
+C<Data::Unixish::> prefix) or a 2-element array like C<[$fname, \%args]> where
+the first element is the dux function name and the second element contains the
+arguments for the function. If you do not need to pass any arguments/options to
+the dux function, you can use the simpler string version.
+
+
 =head1 SEE ALSO
 
 L<Data::Unixish::Apply>
