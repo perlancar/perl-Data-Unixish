@@ -6,6 +6,8 @@ use syntax 'each_on_array'; # to support perl < 5.12
 use warnings;
 #use Log::Any '$log';
 
+use Text::ANSI::Util qw(ta_wrap ta_mbwrap);
+use Text::WideChar::Util qw(mbwrap);
 use Text::Wrap ();
 
 # VERSION
@@ -28,6 +30,14 @@ _
             schema =>[int => {default=>80, min=>1}],
             cmdline_aliases => { c=>{} },
         },
+        ansi => {
+            summary => 'Whether to handle ANSI escape codes',
+            schema => ['bool', default => 0],
+        },
+        mb => {
+            summary => 'Whether to handle wide characters',
+            schema => ['bool', default => 0],
+        },
     },
     tags => [qw/text/],
 };
@@ -35,15 +45,26 @@ sub wrap {
     my %args = @_;
     my ($in, $out) = ($args{in}, $args{out});
     my $cols = $args{columns} // 80;
+    my $ansi  = $args{ansi};
+    my $mb    = $args{mb};
 
     local $Text::Wrap::columns = $cols;
 
     while (my ($index, $item) = each @$in) {
-        my @lt;
-        if (defined($item) && !ref($item)) {
-            $item = Text::Wrap::wrap("", "", $item);
+        {
+            last if !defined($item) || ref($item);
+            if ($ansi) {
+                if ($mb) {
+                    $item = ta_mbwrap($item, $cols);
+                } else {
+                    $item = ta_wrap  ($item, $cols);
+                }
+            } elsif ($mb) {
+                $item = mbwrap($item, $cols);
+            } else {
+                $item = Text::Wrap::wrap("", "", $item);
+            }
         }
-
         push @$out, $item;
     }
 
