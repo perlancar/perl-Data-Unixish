@@ -40,10 +40,8 @@ sub sum {
 
 In Perl:
 
- use Data::Unixish::sum;
- my $in  = [1, 2, 3];
- my $out = [];
- Data::Unixish::sum::sum(in=>$in, out=>$out); # $out = [6]
+ use Data::Unixish::List qw(dux);
+ my $sum = dux('sum', 1, 2, 3, 4, 5); # => 15
 
 In command line:
 
