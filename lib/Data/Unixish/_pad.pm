@@ -19,7 +19,7 @@ sub _pad {
     my $w     = $args{width};
     my $ansi  = $args{ansi};
     my $mb    = $args{mb};
-    my $char  = $args{padchar} // " ";
+    my $char  = $args{char} // " ";
     my $trunc = $args{trunc};
 
     while (my ($index, $item) = each @$in) {
