@@ -3,7 +3,7 @@
 use 5.010;
 use strict;
 use warnings;
-use Data::Unixish::Apply qw(apply);
+use Data::Unixish::Apply;
 use Test::More 0.98;
 
 is_deeply(Data::Unixish::Apply::apply(in=>[1, 2, 3, 4, 5], functions=>["sum"]), [200, "OK", [15]]);
