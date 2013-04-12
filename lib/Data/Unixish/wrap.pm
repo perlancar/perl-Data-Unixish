@@ -8,8 +8,7 @@ use warnings;
 
 use Data::Unixish::Util qw(%common_args);
 use Text::ANSI::Util qw(ta_wrap ta_mbwrap);
-use Text::WideChar::Util qw(mbwrap);
-use Text::Wrap ();
+use Text::WideChar::Util qw(mbwrap wrap);
 
 # VERSION
 
@@ -48,8 +47,6 @@ sub wrap {
     my $ansi  = $args{ansi};
     my $mb    = $args{mb};
 
-    local $Text::Wrap::columns = $cols;
-
     while (my ($index, $item) = each @$in) {
         {
             last if !defined($item) || ref($item);
@@ -62,7 +59,7 @@ sub wrap {
             } elsif ($mb) {
                 $item = mbwrap($item, $cols);
             } else {
-                $item = Text::Wrap::wrap("", "", $item);
+                $item = wrap  ($item, $cols);
             }
         }
         push @$out, $item;
