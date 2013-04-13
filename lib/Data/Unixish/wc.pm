@@ -51,7 +51,7 @@ _
     },
     tags => [qw/text group/],
     "x.dux.strip_newlines" => 0,
-    "x.dux.default_format" => "text-simple",
+    "x.perinci.cmdline.default_format" => "text-simple",
 };
 sub wc {
     my %args = @_;
