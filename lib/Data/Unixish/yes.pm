@@ -35,7 +35,6 @@ sub yes {
     my ($in, $out) = ($args{in}, $args{out});
 
     my $str = $args{string} // 'y';
-    $str .= "\n" unless $str =~ /\n\z/;
 
     while (1) {
         push @$out, $str;
