@@ -8,7 +8,7 @@ use warnings;
 
 use Data::Unixish::Util qw(%common_args);
 use Text::ANSI::Util qw(ta_wrap ta_mbwrap);
-use Text::WideChar::Util qw(mbwrap wrap);
+use Text::WideChar::Util qw(mbwrap);
 
 # VERSION
 
@@ -17,11 +17,6 @@ our %SPEC;
 $SPEC{wrap} = {
     v => 1.1,
     summary => 'Wrap text',
-    description => <<'_',
-
-Currently implemented using Text::Wrap standard Perl module.
-
-_
     args => {
         %common_args,
         columns => {
@@ -59,7 +54,7 @@ sub wrap {
             } elsif ($mb) {
                 $item = mbwrap($item, $cols);
             } else {
-                $item = wrap  ($item, $cols);
+                $item = Text::WideChar::Util::wrap($item, $cols);
             }
         }
         push @$out, $item;
