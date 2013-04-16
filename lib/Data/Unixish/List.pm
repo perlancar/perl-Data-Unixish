@@ -25,7 +25,8 @@ sub dux {
 
     my $pkg = "Data::Unixish::$f";
     load $pkg unless package_exists($pkg);
-    my $fn = "Data::Unixish::$f\::$f";
+    my $fleaf = $f; $fleaf =~ s/.+:://;
+    my $fn = "Data::Unixish::$f\::$fleaf";
     die "Subroutine &$fn not defined" unless defined &$fn;
 
     no strict 'refs';
