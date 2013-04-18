@@ -1,5 +1,11 @@
 Revision history for Data-Unixish
 
+1.32    2013-04-18 (SHARYANTO)
+
+        No functional changes. A couple of fixes for Data::Unixish::List and
+        reenable t/wrap.t.
+
+
 1.31    2013-04-14 (SHARYANTO)
 
         - Add dux function: yes (test output streaming, App::dux 1.32+).
