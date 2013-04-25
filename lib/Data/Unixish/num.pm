@@ -48,7 +48,7 @@ _
             schema=>['str*', in=>[keys %styles], default=>'general'],
             cmdline_aliases => { s=>{} },
             description => "Available styles:\n\n".
-                join("", map {" * $_  ($styles{$_}\n"} sort keys %styles),
+                join("", map {" * $_  ($styles{$_})\n"} sort keys %styles),
         },
         decimal_digits => {
             summary => 'Number of digits to the right of decimal point',
