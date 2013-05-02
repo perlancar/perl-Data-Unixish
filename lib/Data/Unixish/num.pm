@@ -23,7 +23,7 @@ my %styles = (
     scientific => 'Scientific notation, e.g. 1.23e+21',
     kilo       => 'Use K/M/G/etc suffix with base-2, e.g. 1.2M',
     kibi       => 'Use Ki/Mi/GiB/etc suffix with base-10 [1000], e.g. 1.2Mi',
-    # XXX percent
+    percent    => 'Percentage, e.g. 10.00%',
     # XXX fraction
     # XXX currency?
 );
@@ -118,6 +118,8 @@ sub num {
                     $item, {base=>10, return_array=>1});
                 $item = $nf->format_number($res->[0], $decdigs, $decdigs) .
                     $res->[1];
+            } elsif ($style eq 'percent') {
+                $item = sprintf("%.${decdigs}f%%", $item*100);
             } else {
                 # general
                 $item = $nf->format_number($item);

@@ -48,6 +48,12 @@ test_dux_func(
             in   => [-20000],
             out  => ["-20 000"],
         },
+        {
+            name => 'style=percent',
+            args => {style=>"percent"},
+            in   => [0, 1, -0.21, "a", [], {}, undef],
+            out  => ["0.00%", "100.00%", "-21.00%", "a", [], {}, undef],
+        },
     ],
 );
 
