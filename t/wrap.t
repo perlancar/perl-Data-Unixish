@@ -10,7 +10,7 @@ test_dux_func(
     func => 'wrap',
     tests => [
         {in =>["xxxx xxxx xxxx xxxx xxxx"],
-         args=>{columns=>20},
+         args=>{width=>20},
          out=>["xxxx xxxx xxxx xxxx\nxxxx"]},
     ],
 );

@@ -19,7 +19,7 @@ $SPEC{wrap} = {
     summary => 'Wrap text',
     args => {
         %common_args,
-        columns => {
+        width => {
             summary => 'Target column width',
             schema =>[int => {default=>80, min=>1}],
             cmdline_aliases => { c=>{} },
@@ -38,7 +38,7 @@ $SPEC{wrap} = {
 sub wrap {
     my %args = @_;
     my ($in, $out) = ($args{in}, $args{out});
-    my $cols = $args{columns} // 80;
+    my $w     = $args{width} // 80;
     my $ansi  = $args{ansi};
     my $mb    = $args{mb};
 
@@ -47,14 +47,14 @@ sub wrap {
             last if !defined($item) || ref($item);
             if ($ansi) {
                 if ($mb) {
-                    $item = ta_mbwrap($item, $cols);
+                    $item = ta_mbwrap($item, $w);
                 } else {
-                    $item = ta_wrap  ($item, $cols);
+                    $item = ta_wrap  ($item, $w);
                 }
             } elsif ($mb) {
-                $item = mbwrap($item, $cols);
+                $item = mbwrap($item, $w);
             } else {
-                $item = Text::WideChar::Util::wrap($item, $cols);
+                $item = Text::WideChar::Util::wrap($item, $w);
             }
         }
         push @$out, $item;
@@ -71,7 +71,7 @@ sub wrap {
 In Perl:
 
  use Data::Unixish::List qw(dux);
- $wrapped = dux([wrap => {columns=>20}], "xxxx xxxx xxxx xxxx xxxx"); # "xxxx xxxx xxxx xxxx\nxxxx"
+ $wrapped = dux([wrap => {width=>20}], "xxxx xxxx xxxx xxxx xxxx"); # "xxxx xxxx xxxx xxxx\nxxxx"
 
 In command line:
 
