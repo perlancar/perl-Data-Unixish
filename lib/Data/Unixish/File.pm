@@ -95,7 +95,9 @@ to the dux function, you can use the simpler string version.
 =head1 TODO
 
 Function C<fduxf> which is similar to C<fduxl> but instead of returning a list,
-returns a filehandle that can be read from.
+returns a filehandle that can be read from. Like in L<App::dux>, it should be
+streaming, i.e. it returns the result filehandle immediately. Reading the
+filehandle will execute the dux function as needed.
 
 
 =head1 SEE ALSO
