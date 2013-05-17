@@ -76,6 +76,14 @@ arguments for the function. If you do not need to pass any arguments/options to
 the dux function, you can use the simpler string version.
 
 
+=head1 TODO
+
+Rename dux to lduxl (accepts list, returns list). But keep dux as alias to lduxl
+for backward compatibility.
+
+Create aduxl, lduxa, aduxa (accepts arrayref/list, returns arrayref/list).
+
+
 =head1 SEE ALSO
 
 L<Data::Unixish::Apply>
