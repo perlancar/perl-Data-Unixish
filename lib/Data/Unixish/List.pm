@@ -20,7 +20,7 @@ sub dux { goto &Data::Unixish::lduxl }
 
 =head1 SYNOPSIS
 
- # Deprecated, please use Data::Unixish::lduxl instead.
+ # Deprecated, please use lduxl function in Data::Unixish instead.
 
 
 =head1 DESCRIPTION
@@ -32,5 +32,7 @@ sub dux { goto &Data::Unixish::lduxl }
 
 
 =head1 SEE ALSO
+
+L<Data::Unixish>
 
 L<Data::Unixish::Apply>
