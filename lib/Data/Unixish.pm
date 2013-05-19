@@ -57,15 +57,14 @@ sub _dux {
     my $funcname = "Data::Unixish::$func\::$funcleaf";
     die "Subroutine &$funcname not defined" unless defined &$funcname;
 
+    my @out;
     if ($returns eq 'c') {
         require Tie::Simple;
-        my @out;
         tie @out, "Tie::Simple", undef,
-            PUSH => sub { $callback->(shift) };
+            PUSH => sub { $callback->($_[1]) };
         $args{out} = \@out;
     } else {
-        my $out = [];
-        $args{out} = $out;
+        $args{out} = \@out;
     }
     no strict 'refs';
     my $res = $funcname->(%args);
@@ -74,12 +73,12 @@ sub _dux {
 
     if ($returns eq 'l') {
         if (wantarray) {
-            return @$out;
+            return @out;
         } else {
-            return $out->[0];
+            return $out[0];
         }
     } elsif ($returns eq 'a') {
-        return $out;
+        return \@out;
     } elsif ($returns eq 'c') {
         return;
     }
