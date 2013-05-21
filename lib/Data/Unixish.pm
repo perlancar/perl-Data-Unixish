@@ -14,9 +14,8 @@ our @ISA       = qw(Exporter);
 our @EXPORT_OK = qw(
                        aduxa fduxa lduxa
                        aduxc fduxc lduxc
+                       aduxf fduxf lduxf
                        aduxl fduxl lduxl
-                       aduxp fduxp lduxp
-                       aduxP fduxP lduxP
                );
 
 sub _dux {
@@ -43,7 +42,7 @@ sub _dux {
     } elsif ($accepts eq 'a') {
         $args{in} = $_[0];
     } else {
-        die "Invalid accepts value '$accepts'";
+        die "Invalid accepts, must be a|f|l";
     }
 
     if (ref($func) eq 'ARRAY') {
@@ -58,18 +57,39 @@ sub _dux {
     die "Subroutine &$funcname not defined" unless defined &$funcname;
 
     my @out;
+    my $kidfh;
+    my $pid;
     if ($returns eq 'c') {
         require Tie::Simple;
         tie @out, "Tie::Simple", undef,
-            PUSH => sub { $callback->($_[1]) };
+            PUSH => sub {
+                my $data = shift; # for Tie::Simple
+                $callback->($_) for @_;
+            };
         $args{out} = \@out;
+    } elsif ($returns eq 'f') {
+        require Tie::Simple;
+        tie @out, "Tie::Simple", undef,
+            PUSH => sub {
+                my $data = shift; # for Tie::Simple
+                for my $item (@_) {
+                    $item .= "\n" unless $item =~ /\n\z/;
+                    print STDOUT $item;
+                }
+            };
+        $args{out} = \@out;
+        $pid = open $kidfh, "-|";
+        defined $pid or die "Can't fork: $!";
     } else {
         $args{out} = \@out;
     }
-    no strict 'refs';
-    my $res = $funcname->(%args);
-    die "Dux function $funcname failed: $res->[0] - $res->[1]"
-        unless $res->[0] == 200;
+
+    unless ($pid) {
+        no strict 'refs';
+        my $res = $funcname->(%args);
+        die "Dux function $funcname failed: $res->[0] - $res->[1]"
+            unless $res->[0] == 200;
+    }
 
     if ($returns eq 'l') {
         if (wantarray) {
@@ -81,6 +101,14 @@ sub _dux {
         return \@out;
     } elsif ($returns eq 'c') {
         return;
+    } elsif ($returns eq 'f') {
+        if ($pid) {
+            return $kidfh;
+        } else {
+            exit;
+        }
+    } else {
+        die "Invalid returns, must be a|c|f|l";
     }
 }
 
@@ -92,17 +120,13 @@ sub aduxc { _dux('a', 'c', @_) }
 sub fduxc { _dux('f', 'c', @_) }
 sub lduxc { _dux('l', 'c', @_) }
 
+sub aduxf { _dux('a', 'f', @_) }
+sub fduxf { _dux('f', 'f', @_) }
+sub lduxf { _dux('l', 'f', @_) }
+
 sub aduxl { _dux('a', 'l', @_) }
 sub fduxl { _dux('f', 'l', @_) }
 sub lduxl { _dux('l', 'l', @_) }
-
-sub aduxp { _dux('a', 'p', @_) }
-sub fduxp { _dux('f', 'p', @_) }
-sub lduxp { _dux('l', 'p', @_) }
-
-sub aduxP { _dux('a', 'P', @_) }
-sub fduxP { _dux('f', 'P', @_) }
-sub lduxP { _dux('l', 'P', @_) }
 
 1;
 # ABSTRACT: Implementation for Unixish, a data transformation framework
@@ -110,17 +134,15 @@ sub lduxP { _dux('l', 'P', @_) }
 =head1 SYNOPSIS
 
  # the a/f/l prefix determines whether function accepts
- # arrayref/file(handle)/list as input. the a/c/l/p/P suffix determines whether
- # function returns an array, calls a callback, returns a list, or immediately
- # return a child process handle that returns lines of text, or a child process
- # handle that returns Perl data items.
+ # arrayref/file(handle)/list as input. the a/f/l/c suffix determines whether
+ # function returns an array, a list, a filehandle, or calls a callback. If
+ # filehandle is selected, a child process is forked to
 
  use Data::Unixish qw(
                        aduxa fduxa lduxa
                        aduxc fduxc lduxc
+                       aduxf fduxf lduxf
                        aduxl fduxl lduxl
-                       aduxp fduxp lduxp
-                       aduxP fduxP lduxP
  );
 
  # apply function, without argument
@@ -129,7 +151,8 @@ sub lduxP { _dux('l', 'P', @_) }
  my $res = fduxl('wc', "file.txt");    # => "12\n234\n2093" # like wc's output
 
  # apply function, with some arguments
- my $p = fduxf([trunc => {width=>80, ansi=>1, mb=>1}], \*STDIN);
+ my $fh = fduxf([trunc => {width=>80, ansi=>1, mb=>1}], \*STDIN);
+ say while <$fh>;
 
 
 =head1 DESCRIPTION
@@ -144,11 +167,9 @@ inspired by Unix toolbox philosophy.
 
 =head2 aduxc($func, $callback, \@input)
 
+=head2 aduxf($func, \@input) => FILEHANDLE
+
 =head2 aduxl($func, \@input) => LIST (OR SCALAR)
-
-=head2 aduxp($func, \@input) => HANDLE
-
-=head2 aduxP($func, \@input) => HANDLE
 
 The C<adux*> functions accept an arrayref as input. C<$func> is a string
 containing dux function name (if no arguments to the dux function is to be
@@ -158,9 +179,9 @@ prefix.
 
 The C<*duxc> functions will call the callback repeatedly with every output item.
 
-The C<*duxp> and C<*duxP> functions returns process handle immediately. Dux
-function is forked as a child process. With C<*duxp> you read output as lines,
-with C<*duxP> you get output as Perl data items.
+The C<*duxf> functions returns filehandle immediately. A child process is
+forked, and dux function is run in the child process. You read output as lines
+from the returned filehandle.
 
 The C<*duxl> functions returns result as list. It can be evaluated in scalar to
 return only the first element of the list. However, the whole list will be
@@ -170,11 +191,9 @@ calculated first. Use C<*duxf> for streaming interface.
 
 =head2 fduxc($func, $callback, $file_or_handle, @args)
 
+=head2 fduxf($func, $file_or_handle, @args) => FILEHANDLE
+
 =head2 fduxl($func, $file_or_handle, @args) => LIST
-
-=head2 fduxp($func, $file_or_handle, @args) => HANDLE
-
-=head2 fduxP($func, $file_or_handle, @args) => HANDLE
 
 The C<fdux*> functions accepts filename or filehandle. C<@args> is optional and
 will be passed to L<Tie::File>.
@@ -183,11 +202,9 @@ will be passed to L<Tie::File>.
 
 =head2 lduxc($func, $callback, @input)
 
+=head2 lduxf($func, @input) => FILEHANDLE
+
 =head2 lduxl($func, @input) => LIST
-
-=head2 lduxp($func, @input) => HANDLE
-
-=head2 lduxP($func, @input) => HANDLE
 
 The C<ldux*> functions accepts list as input.
 
@@ -202,9 +219,14 @@ You can use L<Tie::Diamond>, e.g.:
  tie my(@in), "Tie::Diamond";
  my $out = aduxa($func, \@in);
 
+Also see the L<dux> command-line utility in the L<App::dux> distribution which
+allows you to access dux function from the command-line.
+
 
 =head1 SEE ALSO
 
 L<Unixish>
+
+L<dux> script in L<App::dux>
 
 =cut
