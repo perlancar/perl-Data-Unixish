@@ -1,5 +1,11 @@
 Revision history for Data-Unixish
 
+1.34    2013-06-25 (SHARYANTO) (not yet released)
+
+        No functional changes. Force LANG=C in t/sprintf.t so test passes in
+        other LANG environments (RT#86306).
+
+
 1.33    2013-05-02 (SHARYANTO)
 
         - num: Add style: percent.
