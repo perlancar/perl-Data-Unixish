@@ -1,9 +1,16 @@
 Revision history for Data-Unixish
 
-1.34    2013-06-25 (SHARYANTO) (not yet released)
+1.35    2013-06-25 (SHARYANTO) (not yet released)
 
         No functional changes. Force LANG=C in t/sprintf.t so test passes in
         other LANG environments (RT#86306).
+
+
+1.34    2013-05-21 (SHARYANTO)
+
+        - Add functions: {a,f,l}dux{a,c,f,l}.
+
+        - Deprecate Data::Unixish::List.
 
 
 1.33    2013-05-02 (SHARYANTO)
