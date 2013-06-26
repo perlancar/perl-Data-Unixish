@@ -136,7 +136,8 @@ sub lduxl { _dux('l', 'l', @_) }
  # the a/f/l prefix determines whether function accepts
  # arrayref/file(handle)/list as input. the a/f/l/c suffix determines whether
  # function returns an array, a list, a filehandle, or calls a callback. If
- # filehandle is selected, a child process is forked to
+ # filehandle is chosen as output, a child process is forked to process input as
+ # requested.
 
  use Data::Unixish qw(
                        aduxa fduxa lduxa
