@@ -1,5 +1,10 @@
 Revision history for Data-Unixish
 
+1.36    2013-06-25 (SHARYANTO)
+
+        Add export tag :all.
+
+
 1.35    2013-06-25 (SHARYANTO)
 
         No functional changes. Force LANG=C in t/sprintf.t so test passes in
