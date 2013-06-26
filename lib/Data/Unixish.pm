@@ -17,6 +17,12 @@ our @EXPORT_OK = qw(
                        aduxf fduxf lduxf
                        aduxl fduxl lduxl
                );
+our %EXPORT_TAGS = (
+    all => [qw/aduxa fduxa lduxa
+               aduxc fduxc lduxc
+               aduxf fduxf lduxf
+               aduxl fduxl lduxl/],
+);
 
 sub _dux {
     my $accepts = shift;
@@ -163,6 +169,9 @@ inspired by Unix toolbox philosophy.
 
 
 =head1 FUNCTIONS
+
+The functions are not exported by default. They can be exported individually or
+altogether using export tag C<:all>.
 
 =head2 aduxa($func, \@input) => ARRAYREF
 
