@@ -1,5 +1,10 @@
 Revision history for Data-Unixish
 
+1.37    2013-06-26 (SHARYANTO)
+
+        Add cdux* functions which accept callback.
+
+
 1.36    2013-06-25 (SHARYANTO)
 
         Add export tag :all.
