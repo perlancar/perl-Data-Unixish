@@ -5,10 +5,10 @@ use strict;
 use warnings;
 
 use Data::Unixish qw(
-                       aduxa fduxa lduxa
-                       aduxc fduxc lduxc
-                       aduxf fduxf lduxf
-                       aduxl fduxl lduxl
+                       aduxa cduxa fduxa lduxa
+                       aduxc cduxc fduxc lduxc
+                       aduxf cduxf fduxf lduxf
+                       aduxl cduxl fduxl lduxl
                 );
 use File::Temp qw(tempfile);
 use Test::More 0.98;
@@ -61,11 +61,29 @@ subtest "f output" => sub {
     @a = (); $fh = aduxf('sort', [1, 3, 2]); push @a, $_ while <$fh>;
     is_deeply(\@a, ["1\n", "2\n", "3\n"]);
 
+    # cduxf in "c input"
+
     @a = (); $fh = lduxf('sort', 1, 3, 2); push @a, $_ while <$fh>;
     is_deeply(\@a, ["1\n", "2\n", "3\n"]);
 
     @a = (); $fh = fduxf('sort', $filename); push @a, $_ while <$fh>;
     is_deeply(\@a, ["a\n", "b\n", "c\n", "d\n"]);
+};
+
+subtest "c input" => sub {
+    my @in;
+    my $icb = sub { if (!@in) { return () } else { return shift(@in) x 2 } };
+
+    @in = (2,3,1); is_deeply(cduxa('sort', $icb), [11,22,33]);
+
+    # cduxc in "c output"
+
+    @in = (2,3,1);
+    my (@a, $fh);
+    @a = (); $fh = cduxf('sort', $icb); push @a, $_ while <$fh>;
+    is_deeply(\@a, ["11\n","22\n","33\n"]);
+
+    @in = (2,3,1); is_deeply([cduxl('sort', $icb)], [11,22,33]);
 };
 
 subtest "c output" => sub {
@@ -76,6 +94,11 @@ subtest "c output" => sub {
 
     @a = (); lduxc('sort', sub { push @a, shift }, 1, 3, 2);
     is_deeply(\@a, [1, 2, 3]);
+
+    my @in = (2,3,1);
+    my $icb = sub { if (!@in) { return () } else { return shift(@in) x 2 } };
+    @a = (); cduxc('sort', $icb, sub { push @a, shift });
+    is_deeply(\@a, [11, 22, 33]);
 
     @a = (); fduxc('sort', sub { push @a, shift }, $filename);
     is_deeply(\@a, [qw/a b c d/]);

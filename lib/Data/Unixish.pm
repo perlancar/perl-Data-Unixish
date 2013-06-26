@@ -11,17 +11,21 @@ use SHARYANTO::Package::Util qw(package_exists);
 
 require Exporter;
 our @ISA       = qw(Exporter);
-our @EXPORT_OK = qw(
-                       aduxa fduxa lduxa
-                       aduxc fduxc lduxc
-                       aduxf fduxf lduxf
-                       aduxl fduxl lduxl
-               );
+our @EXPORT_OK =
+    qw(
+          aduxa cduxa fduxa lduxa
+          aduxc cduxc fduxc lduxc
+          aduxf cduxf fduxf lduxf
+          aduxl cduxl fduxl lduxl
+  );
 our %EXPORT_TAGS = (
-    all => [qw/aduxa fduxa lduxa
-               aduxc fduxc lduxc
-               aduxf fduxf lduxf
-               aduxl fduxl lduxl/],
+    all => [
+        qw/
+              aduxa cduxa fduxa lduxa
+              aduxc cduxc fduxc lduxc
+              aduxf cduxf fduxf lduxf
+              aduxl cduxl fduxl lduxl
+          /],
 );
 
 sub _dux {
@@ -30,25 +34,47 @@ sub _dux {
 
     my $func = shift;
 
-    my $callback;
-    if ($returns eq 'c') {
-        $callback = shift;
-    }
-
     my %args;
 
-    my $in;
+    my ($icallback, $ocallback);
+    if ($accepts eq 'c') {
+        $icallback = shift;
+    }
+    if ($returns eq 'c') {
+        $ocallback = shift;
+    }
+
     if ($accepts eq 'f') {
         require Tie::File;
         my @in;
         tie @in, "Tie::File", @_;
+        $args{in} = \@in;
+    } elsif ($accepts eq 'c') {
+        require Tie::Simple;
+        my @in;
+        my @els;
+        my $elcount = 0;
+        tie(@in, "Tie::Simple", undef,
+            FETCHSIZE => sub {
+                my $data = shift; # from Tie::Simple
+                my @res = $icallback->();
+                $elcount += @res;
+                push @els, @res;
+                #say "D: res=[".join(",", @res), "], elcount=$elcount";
+                $elcount;
+            },
+            FETCH => sub {
+                my $data = shift; # from Tie::Simple
+                shift @els;
+            }
+        );
         $args{in} = \@in;
     } elsif ($accepts eq 'l') {
         $args{in} = \@_;
     } elsif ($accepts eq 'a') {
         $args{in} = $_[0];
     } else {
-        die "Invalid accepts, must be a|f|l";
+        die "Invalid accepts, must be a|c|f|l";
     }
 
     if (ref($func) eq 'ARRAY') {
@@ -69,15 +95,15 @@ sub _dux {
         require Tie::Simple;
         tie @out, "Tie::Simple", undef,
             PUSH => sub {
-                my $data = shift; # for Tie::Simple
-                $callback->($_) for @_;
+                my $data = shift; # from Tie::Simple
+                $ocallback->($_) for @_;
             };
         $args{out} = \@out;
     } elsif ($returns eq 'f') {
         require Tie::Simple;
         tie @out, "Tie::Simple", undef,
             PUSH => sub {
-                my $data = shift; # for Tie::Simple
+                my $data = shift; # from Tie::Simple
                 for my $item (@_) {
                     $item .= "\n" unless $item =~ /\n\z/;
                     print STDOUT $item;
@@ -119,18 +145,22 @@ sub _dux {
 }
 
 sub aduxa { _dux('a', 'a', @_) }
+sub cduxa { _dux('c', 'a', @_) }
 sub fduxa { _dux('f', 'a', @_) }
 sub lduxa { _dux('l', 'a', @_) }
 
 sub aduxc { _dux('a', 'c', @_) }
+sub cduxc { _dux('c', 'c', @_) }
 sub fduxc { _dux('f', 'c', @_) }
 sub lduxc { _dux('l', 'c', @_) }
 
 sub aduxf { _dux('a', 'f', @_) }
+sub cduxf { _dux('c', 'f', @_) }
 sub fduxf { _dux('f', 'f', @_) }
 sub lduxf { _dux('l', 'f', @_) }
 
 sub aduxl { _dux('a', 'l', @_) }
+sub cduxl { _dux('c', 'l', @_) }
 sub fduxl { _dux('f', 'l', @_) }
 sub lduxl { _dux('l', 'l', @_) }
 
@@ -139,18 +169,18 @@ sub lduxl { _dux('l', 'l', @_) }
 
 =head1 SYNOPSIS
 
- # the a/f/l prefix determines whether function accepts
- # arrayref/file(handle)/list as input. the a/f/l/c suffix determines whether
- # function returns an array, a list, a filehandle, or calls a callback. If
- # filehandle is chosen as output, a child process is forked to process input as
- # requested.
+ # the a/f/l/c prefix determines whether function accepts
+ # arrayref/file(handle)/list/callback as input. the a/f/l/c suffix determines
+ # whether function returns an array, a list, a filehandle, or calls a callback.
+ # If filehandle is chosen as output, a child process is forked to process input
+ # as requested.
 
  use Data::Unixish qw(
-                       aduxa fduxa lduxa
-                       aduxc fduxc lduxc
-                       aduxf fduxf lduxf
-                       aduxl fduxl lduxl
- );
+                       aduxa cduxa fduxa lduxa
+                       aduxc cduxc fduxc lduxc
+                       aduxf cduxf fduxf lduxf
+                       aduxl cduxl fduxl lduxl
+ ); # or you can use :all to export all functions
 
  # apply function, without argument
  my @out = lduxl('sort', 7, 2, 4, 1);  # => (1, 2, 4, 7)
@@ -196,6 +226,29 @@ from the returned filehandle.
 The C<*duxl> functions returns result as list. It can be evaluated in scalar to
 return only the first element of the list. However, the whole list will be
 calculated first. Use C<*duxf> for streaming interface.
+
+=head2 cduxa($func, $icallback) => ARRAYREF
+
+=head2 cduxc($func, $icallback, $ocallback)
+
+=head2 cduxf($func, $icallback) => FILEHANDLE
+
+=head2 cduxl($func, $icallback) => LIST (OR SCALAR)
+
+The C<cdux*> functions accepts a callback (C<$icallback>) to get input elements
+from. Input callback function should return a list of one or more elements, or
+an empty list to signal end of stream.
+
+An example:
+
+ cduxa($func, sub {
+     state $a = [1,2,3,4];
+     if (@$a) {
+         return shift(@$a);
+     } else {
+         return ();
+     }
+ });
 
 =head2 fduxa($func, $file_or_handle, @args) => ARRAYREF
 
