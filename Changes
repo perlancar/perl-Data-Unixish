@@ -1,5 +1,16 @@
 Revision history for Data-Unixish
 
+1.39    2013-09-29 (SHARYANTO)
+
+        - Add dux functions: lins, rins.
+
+        [BUG FIXES]
+
+        - Force LC_ALL=C and LC_NUMERIC=C when testing locale-related output.
+
+        - ltrim & rtrim didn't respect strip_newline argument (used alias name).
+
+
 1.38    2013-06-28 (SHARYANTO)
 
         - Add dux functions: grep, map (thanks Toby Inkster).
@@ -7,18 +18,18 @@ Revision history for Data-Unixish
 
 1.37    2013-06-26 (SHARYANTO)
 
-        Add cdux* functions which accept callback.
+        - Add cdux* functions which accept callback.
 
 
 1.36    2013-06-25 (SHARYANTO)
 
-        Add export tag :all.
+        - Add export tag :all.
 
 
 1.35    2013-06-25 (SHARYANTO)
 
-        No functional changes. Force LANG=C in t/sprintf.t so test passes in
-        other LANG environments (RT#86306).
+        - No functional changes. Force LANG=C in t/sprintf.t so test passes in
+          other LANG environments (RT#86306).
 
 
 1.34    2013-05-21 (SHARYANTO)
@@ -35,8 +46,8 @@ Revision history for Data-Unixish
 
 1.32    2013-04-18 (SHARYANTO)
 
-        No functional changes. A couple of fixes for Data::Unixish::List and
-        reenable t/wrap.t.
+        - No functional changes. A couple of fixes for Data::Unixish::List and
+          reenable t/wrap.t.
 
 
 1.31    2013-04-14 (SHARYANTO)
@@ -91,20 +102,20 @@ Revision history for Data-Unixish
 
 1.23    2012-08-07 (SHARYANTO)
 
-        No functional changes. Split bin/dux to its own dist App-dux to avoid
-        circular dependency problem (dfpc -> dux -> pericmd -> dfpc), reported
-        by Dagfinn Ilmari Mannsåker.
+        - No functional changes. Split bin/dux to its own dist App-dux to avoid
+          circular dependency problem (dfpc -> dux -> pericmd -> dfpc), reported
+          by Dagfinn Ilmari Mannsåker.
 
 
 1.22    2012-07-27 (SHARYANTO)
 
-        No functional changes. Bump version number. 1.21.1 = 1.021000 < 1.20.
+        - No functional changes. Bump version number. 1.21.1 = 1.021000 < 1.20.
 
 
 1.21.1  2012-07-27 (SHARYANTO)
 
-        No functional changes. Replace dep feature::each_on_array with
-        Syntax::Feature::EachOnArray (module renamed).
+        - No functional changes. Replace dep feature::each_on_array with
+          Syntax::Feature::EachOnArray (module renamed).
 
 
 1.21.0  2012-07-27 (SHARYANTO)
@@ -116,10 +127,10 @@ Revision history for Data-Unixish
 
 1.20    2012-07-21 (SHARYANTO)
 
-        No functional changes. Rename distribution from
-        Data-Unixish-Implementation to Data-Unixish, since the specification is
-        now renamed to Unixish. Bump version number to work around PAUSE
-        restriction.
+        - No functional changes. Rename distribution from
+          Data-Unixish-Implementation to Data-Unixish, since the specification
+          is now renamed to Unixish. Bump version number to work around PAUSE
+          restriction.
 
 
 0.03    2012-07-18 (SHARYANTO)
@@ -156,4 +167,4 @@ Revision history for Data-Unixish
 
 0.01    2012-07-13 (SHARYANTO)
 
-        First version.
+        - First version.
