@@ -31,7 +31,7 @@ _
 sub rtrim {
     my %args = @_;
     my ($in, $out) = ($args{in}, $args{out});
-    my $nl  = $args{nl} // 0;
+    my $nl  = $args{strip_newline} // 0;
 
     while (my ($index, $item) = each @$in) {
         my @lt;
@@ -64,4 +64,3 @@ In command line:
  a
 
 =cut
-
