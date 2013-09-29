@@ -9,6 +9,8 @@ use Test::More 0.96;
 
 {
     local $ENV{LANG} = 'C';
+    local $ENV{LC_ALL} = 'C';
+    local $ENV{LC_NUMERIC} = 'C';
 
     test_dux_func(
         func => 'sprintf',
