@@ -38,7 +38,6 @@ sub lins {
     my $text = $args{text};
 
     while (my ($index, $item) = each @$in) {
-        my @lt;
         if (defined($item) && !ref($item)) {
             $item =~ s/^/$text/mg;
         }
