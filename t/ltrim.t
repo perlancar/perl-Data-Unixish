@@ -13,7 +13,7 @@ test_dux_func(
          args=>{},
          out=>["x ", "\na ", "b\nc\n", [" d"]]},
         {in =>["x ", "\na ", "  b\n c\n", [" d"]],
-         args=>{nl=>1},
+         args=>{strip_newline=>1},
          out=>["x ", "a ", "b\nc\n", [" d"]]},
     ],
 );
