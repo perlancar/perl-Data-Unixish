@@ -65,4 +65,9 @@ In command line:
  xx1
  xx 2
 
+
+=head1 SEE ALSO
+
+indent, rins
+
 =cut
