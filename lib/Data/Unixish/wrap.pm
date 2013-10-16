@@ -79,5 +79,9 @@ In command line:
  xxxx xxxx xxxx xxxx
  xxxx
 
-=cut
 
+=head1 SEE ALSO
+
+fmt(1)
+
+=cut

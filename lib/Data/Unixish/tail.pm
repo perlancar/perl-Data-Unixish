@@ -66,4 +66,11 @@ In command line:
  99
  100
 
+
+=head1 SEE ALSO
+
+tail(1)
+
+L<Data::Unixish::head>
+
 =cut

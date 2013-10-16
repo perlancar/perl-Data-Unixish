@@ -57,4 +57,9 @@ In Perl:
  my @res = dux([grep => {callback => sub { $_ % 2 }}], 1, 2, 3, 4, 5);
  # => (1, 3, 5)
 
+
+=head1 SEE ALSO
+
+grep(1)
+
 =cut

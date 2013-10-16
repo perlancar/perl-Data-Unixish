@@ -48,5 +48,9 @@ In command line:
  2
  3
 
-=cut
 
+=head1 SEE ALSO
+
+cat(1)
+
+=cut

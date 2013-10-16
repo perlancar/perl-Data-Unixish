@@ -56,5 +56,9 @@ In command line:
  y
  ...
 
-=cut
 
+=head1 SEE ALSO
+
+yes(1)
+
+=cut

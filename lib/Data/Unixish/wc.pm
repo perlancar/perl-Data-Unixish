@@ -109,4 +109,9 @@ In command line:
  % seq 1 100 | dux wc
  100    100    292
 
+
+=head1 SEE ALSO
+
+wc(1)
+
 =cut

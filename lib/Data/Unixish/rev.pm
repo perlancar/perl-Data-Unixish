@@ -50,5 +50,9 @@ In command line:
  2
  1
 
-=cut
 
+=head1 SEE ALSO
+
+rev(1)
+
+=cut

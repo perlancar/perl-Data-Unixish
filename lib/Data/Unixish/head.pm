@@ -60,4 +60,11 @@ In command line:
  19
  20
 
+
+=head1 SEE ALSO
+
+head(1)
+
+L<Data::Unixish::tail>
+
 =cut

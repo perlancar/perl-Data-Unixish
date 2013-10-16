@@ -51,5 +51,9 @@ In command line:
  1
  2
 
-=cut
 
+=head1 SEE ALSO
+
+shuf(1)
+
+=cut

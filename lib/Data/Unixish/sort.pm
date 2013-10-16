@@ -109,5 +109,9 @@ In command line:
  b
  c
 
-=cut
 
+=head1 SEE ALSO
+
+sort(1)
+
+=cut
