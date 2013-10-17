@@ -99,5 +99,9 @@ In Perl:
  my @res = dux([sprintfn => {format=>"%(n).1f"}], {n=>1}, {n=>2}, "", undef);
  # => ("1.0", "2.0", "", undef)
 
-=cut
 
+=head1 SEE ALSO
+
+L<Data::Unixish::sprintf>
+
+=cut

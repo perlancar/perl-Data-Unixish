@@ -103,5 +103,11 @@ In command line:
 
  x
 
-=cut
 
+=head1 SEE ALSO
+
+printf(1)
+
+L<Data::Unixish::sprintfn>
+
+=cut
