@@ -42,10 +42,6 @@ sub lins {
             $item =~ s/^/$text/mg;
         }
 
-        # weird, keeps getting undef warning here on one of my scripts, but
-        # there is actually no undef value when $out/$item is dumped
-        no warnings;
-
         push @$out, $item;
     }
 
