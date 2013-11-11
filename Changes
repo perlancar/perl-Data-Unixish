@@ -1,5 +1,11 @@
 Revision history for Data-Unixish
 
+1.42    2013-11-11 (SHARYANTO)
+
+        - No functional changes. Add FAQ entry about 'Use of uninitialized value
+          in push' warnings.
+
+
 1.41    2013-10-04 (SHARYANTO)
 
         - Add dux function: indent.
