@@ -274,6 +274,11 @@ The C<ldux*> functions accepts list as input.
 
 =head1 FAQ
 
+=head2 I'm getting "Use of uninitialized value in push at lib/Data/Unixish/XXX.pm line XX." messages!
+
+This looks like a bug in perl 5.10.1 or earlier. Try upgrading to perl 5.12 or
+later.
+
 =head2 How do I use the diamond operator as input?
 
 You can use L<Tie::Diamond>, e.g.:
