@@ -27,7 +27,7 @@ _
             greedy => 1,
         },
     },
-    tags => [qw/text/],
+    tags => [qw/text gen-data/],
     'x.dux.is_stream_output' => 1,
 };
 sub yes {
