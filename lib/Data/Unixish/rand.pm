@@ -36,7 +36,7 @@ $SPEC{rand} = {
             cmdline_aliases => { n=>{} },
         },
     },
-    tags => [qw/text gen-data/],
+    tags => [qw/number gen-data/],
     'x.dux.is_stream_output' => 1,
 };
 sub rand {
