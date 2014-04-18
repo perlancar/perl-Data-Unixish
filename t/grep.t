@@ -30,6 +30,12 @@ test_dux_func(
             in   => [ qw/category dogma cataclysm catalyst/ ],
             out  => [ qw/category       cataclysm catalyst/ ],
         },
+        {
+            name => 'accept code string',
+            args => { callback => '$. % 2' },
+            in   => [ 1 .. 10 ],
+            out  => [ 2, 4, 6, 8, 10 ],
+        },
     ],
 );
 

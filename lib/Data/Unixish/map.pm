@@ -25,6 +25,9 @@ _
         %common_args,
         callback => {
             summary => 'The callback coderef to use',
+            schema  => ['any*' => of => ['code*', 'str*']],
+            req     => 1,
+            pos     => 0,
         },
     },
     tags => [qw//],
@@ -33,6 +36,11 @@ sub map {
     my %args = @_;
     my ($in, $out) = ($args{in}, $args{out});
     my $callback = $args{callback} or die "missing callback for map";
+
+    if (ref($callback) ne 'CODE') {
+        $callback = eval "sub { $callback }";
+        die "invalid Perl code for map: $@" if $@;
+    }
 
     local ($., $_);
     while (($., $_) = each @$in) {
@@ -52,5 +60,12 @@ In Perl:
  use Data::Unixish::List qw(dux);
  my @res = dux([map => {callback => sub { 1 + $_ }}], 1, 2, 3);
  # => (2, 3, 4)
+
+In command-line:
+
+ % echo -e "1\n2\n3" | dux map '1 + $_'
+ 2
+ 3
+ 4
 
 =cut

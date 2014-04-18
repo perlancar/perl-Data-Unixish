@@ -24,7 +24,10 @@ _
     args => {
         %common_args,
         callback => {
-            summary => 'The callback coderef or regexp to use',
+            summary => 'The callback code or regexp to use',
+            schema  => ['any*' => of => ['str*', 're*', 'code*']],
+            req     => 1,
+            pos     => 0,
         },
     },
     tags => [qw//],
@@ -36,6 +39,9 @@ sub grep {
     if (ref($callback) eq ref(qr{})) {
         my $re = $callback;
         $callback = sub { $_ =~ $re };
+    } elsif (ref($callback) ne 'CODE') {
+        $callback = eval "sub { $callback }";
+        die "invalid code for grep: $@" if $@;
     }
 
     local ($., $_);
@@ -56,6 +62,13 @@ In Perl:
  use Data::Unixish::List qw(dux);
  my @res = dux([grep => {callback => sub { $_ % 2 }}], 1, 2, 3, 4, 5);
  # => (1, 3, 5)
+
+In command-line:
+
+ % echo -e "1\n2\n3\n4\n5" | dux grep '$_ % 2'
+ 1
+ 3
+ 5
 
 
 =head1 SEE ALSO
