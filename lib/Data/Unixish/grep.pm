@@ -30,7 +30,7 @@ _
             pos     => 0,
         },
     },
-    tags => [qw//],
+    tags => [qw/filtering perl unsafe/],
 };
 sub grep {
     my %args = @_;

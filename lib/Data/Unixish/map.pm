@@ -30,7 +30,7 @@ _
             pos     => 0,
         },
     },
-    tags => [qw//],
+    tags => [qw/perl unsafe/],
 };
 sub map {
     my %args = @_;
