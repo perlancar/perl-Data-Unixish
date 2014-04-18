@@ -21,20 +21,25 @@ _
     args => {
         %common_args,
     },
-    tags => [qw/text/],
+    tags => [qw/text itemfunc/],
 };
 sub ucfirst {
     my %args = @_;
     my ($in, $out) = ($args{in}, $args{out});
 
     while (my ($index, $item) = each @$in) {
-        if (defined($item) && !ref($item)) {
-            $item = CORE::ucfirst($item);
-        }
-        push @$out, $item;
+        push @$out, _ucfirst_item($item);
     }
 
     [200, "OK"];
+}
+
+sub _ucfirst_item {
+    my $item = shift;
+    if (defined($item) && !ref($item)) {
+        $item = CORE::ucfirst($item);
+    }
+    return $item;
 }
 
 1;

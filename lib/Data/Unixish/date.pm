@@ -29,32 +29,44 @@ _
         },
         # tz?
     },
-    tags => [qw/format/],
+    tags => [qw/format itemfunc/],
 };
 sub date {
     my %args = @_;
     my ($in, $out) = ($args{in}, $args{out});
-    my $format  = $args{format} // '%Y-%m-%d %H:%M:%S';
 
+    _date_begin(\%args);
     while (my ($index, $item) = each @$in) {
-        my @lt;
-        if (looks_like_number($item) &&
-                $item >= 0 && $item <= 2**31) { # XXX Y2038-bug
-            @lt = localtime($item);
-        } elsif (blessed($item) && $item->isa('DateTime')) {
-            # XXX timezone!
-            @lt = localtime($item->epoch);
-        } else {
-            goto OUT_ITEM;
-        }
-
-        $item = strftime $format, @lt;
-
-      OUT_ITEM:
-        push @$out, $item;
+        push @$out, _date_item($item, \%args);
     }
 
     [200, "OK"];
+}
+
+sub _date_begin {
+    my $args = shift;
+
+    $args->{format} //= '%Y-%m-%d %H:%M:%S';
+}
+
+sub _date_item {
+    my ($item, $args) = @_;
+
+    my @lt;
+    if (looks_like_number($item) &&
+            $item >= 0 && $item <= 2**31) { # XXX Y2038-bug
+        @lt = localtime($item);
+    } elsif (blessed($item) && $item->isa('DateTime')) {
+        # XXX timezone!
+        @lt = localtime($item->epoch);
+    } else {
+        goto OUT_ITEM;
+    }
+
+    $item = strftime $args->{format}, @lt;
+
+  OUT_ITEM:
+    return $item;
 }
 
 1;

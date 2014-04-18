@@ -16,31 +16,42 @@ use Text::WideChar::Util qw(mbpad);
 sub _pad {
     my ($which, %args) = @_;
     my ($in, $out) = ($args{in}, $args{out});
-    my $w     = $args{width};
-    my $ansi  = $args{ansi};
-    my $mb    = $args{mb};
-    my $char  = $args{char} // " ";
-    my $trunc = $args{trunc};
 
+    __pad_begin($which, \%args);
     while (my ($index, $item) = each @$in) {
-        {
-            last if !defined($item) || ref($item);
-            if ($ansi) {
-                if ($mb) {
-                    $item = ta_mbpad($item, $w, $which, $char, $trunc);
-                } else {
-                    $item = ta_pad  ($item, $w, $which, $char, $trunc);
-                }
-            } elsif ($mb) {
-                $item = mbpad($item, $w, $which, $char, $trunc);
-            } else {
-                $item = pad  ($item, $w, $which, $char, $trunc);
-            }
-        }
-        push @$out, $item;
+        push @$out, __pad_item($which, $item, \%args);
     }
 
     [200, "OK"];
+}
+
+sub __pad_begin {
+    my ($which, $args) = @_;
+    $args->{char} //= ' ';
+}
+
+sub __pad_item {
+    my ($which, $item, $args) = @_;
+
+    {
+        last if !defined($item) || ref($item);
+        if ($args->{ansi}) {
+            if ($args->{mb}) {
+                $item = ta_mbpad($item, $args->{width}, $which,
+                                 $args->{char}, $args->{trunc});
+            } else {
+                $item = ta_pad  ($item, $args->{width}, $which,
+                                 $args->{char}, $args->{trunc});
+            }
+        } elsif ($args->{mb}) {
+            $item = mbpad($item, $args->{width}, $which,
+                          $args->{char}, $args->{trunc});
+        } else {
+            $item = pad  ($item, $args->{width}, $which,
+                          $args->{char}, $args->{trunc});
+        }
+    }
+    return $item;
 }
 
 1;

@@ -27,26 +27,29 @@ _
             cmdline_aliases => { nl=>{} },
         },
     },
-    tags => [qw/text/],
+    tags => [qw/text itemfunc/],
 };
 sub trim {
     my %args = @_;
     my ($in, $out) = ($args{in}, $args{out});
-    my $nl  = $args{nl} // 0;
 
     while (my ($index, $item) = each @$in) {
-        my @lt;
-        if (defined($item) && !ref($item)) {
-            $item =~ s/\A[\r\n]+// if $nl;
-            $item =~ s/[\r\n]+\z// if $nl;
-            $item =~ s/^[ \t]+//mg;
-            $item =~ s/[ \t]+$//mg;
-        }
-
-        push @$out, $item;
+        push @$out, _trim_item($item, \%args);
     }
 
     [200, "OK"];
+}
+
+sub _trim_item {
+    my ($item, $args) = @_;
+
+    if (defined($item) && !ref($item)) {
+        $item =~ s/\A[\r\n]+// if $args->{strip_newline};
+        $item =~ s/[\r\n]+\z// if $args->{strip_newline};
+        $item =~ s/^[ \t]+//mg;
+        $item =~ s/[ \t]+$//mg;
+    }
+    return $item;
 }
 
 1;

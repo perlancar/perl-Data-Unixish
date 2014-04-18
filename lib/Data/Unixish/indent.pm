@@ -32,22 +32,34 @@ $SPEC{indent} = {
             },
         },
     },
-    tags => [qw/text/],
+    tags => [qw/text itemfunc/],
 };
 sub indent {
     my %args = @_;
     my ($in, $out) = ($args{in}, $args{out});
-    my $indent = ($args{tab} ? "\t" : " ") x ($args{num} // 4);
 
+    _indent_begin(\%args);
     while (my ($index, $item) = each @$in) {
-        if (defined($item) && !ref($item)) {
-            $item =~ s/^/$indent/mg;
-        }
-
-        push @$out, $item;
+        push @$out, _indent_item($item, \%args);
     }
 
     [200, "OK"];
+}
+
+sub _indent_begin {
+    my $args = shift;
+
+    # args abused to store state
+    $args->{_indent} = ($args->{tab} ? "\t" : " ") x ($args->{num} // 4);
+}
+
+sub _indent_item {
+    my ($item, $args) = @_;
+
+    if (defined($item) && !ref($item)) {
+        $item =~ s/^/$args->{_indent}/mg;
+    }
+    return $item;
 }
 
 1;

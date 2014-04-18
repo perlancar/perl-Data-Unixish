@@ -43,34 +43,33 @@ _
             schema => ['bool', default => 0],
         },
     },
-    tags => [qw/format/],
+    tags => [qw/format itemfunc/],
 };
 sub trunc {
     my %args = @_;
     my ($in, $out) = ($args{in}, $args{out});
-    my $w    = $args{width};
-    my $ansi = $args{ansi};
-    my $mb   = $args{mb};
 
     while (my ($index, $item) = each @$in) {
-        {
-            last if !defined($item) || ref($item);
-            if ($ansi) {
-                if ($mb) {
-                    $item = ta_mbtrunc($item, $w);
-                } else {
-                    $item = ta_trunc($item, $w);
-                }
-            } elsif ($mb) {
-                $item = mbtrunc($item, $w);
-            } else {
-                $item = substr($item, 0, $w);
-            }
-        }
-        push @$out, $item;
+        push @$out, _trunc_item($item, \%args);
     }
 
     [200, "OK"];
+}
+
+sub _trunc_item {
+    my ($item, $args) = @_;
+    return $item if !defined($item) || ref($item);
+    if ($args->{ansi}) {
+        if ($args->{mb}) {
+            return ta_mbtrunc($item, $args->{width});
+        } else {
+            return ta_trunc($item, $args->{width});
+        }
+    } elsif ($args->{mb}) {
+        return mbtrunc($item, $args->{width});
+    } else {
+        return substr($item, 0, $args->{width});
+    }
 }
 
 1;

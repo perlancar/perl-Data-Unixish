@@ -56,12 +56,15 @@ _
             schema => ['bool', default => 0],
         },
     },
-    tags => [qw/format/],
+    tags => [qw/format itemfunc/],
 };
 sub lpad {
     my %args = @_;
     Data::Unixish::_pad::_pad("l", %args);
 }
+
+sub _lpad_begin { Data::Unixish::_pad::__pad_begin('l', @_) }
+sub _lpad_item { Data::Unixish::_pad::__pad_item('l', @_) }
 
 1;
 # ABSTRACT: Pad text to the left until a certain column width

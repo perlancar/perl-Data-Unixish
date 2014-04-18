@@ -17,6 +17,10 @@ our @EXPORT_OK =
           aduxc cduxc fduxc lduxc
           aduxf cduxf fduxf lduxf
           aduxl cduxl fduxl lduxl
+
+          siduxs
+          aiduxa aiduxl
+          liduxa liduxl
   );
 our %EXPORT_TAGS = (
     all => [
@@ -25,6 +29,10 @@ our %EXPORT_TAGS = (
               aduxc cduxc fduxc lduxc
               aduxf cduxf fduxf lduxf
               aduxl cduxl fduxl lduxl
+
+              siduxs
+              aiduxa aiduxl
+              liduxa liduxl
           /],
 );
 
@@ -164,6 +172,71 @@ sub cduxl { _dux('c', 'l', @_) }
 sub fduxl { _dux('f', 'l', @_) }
 sub lduxl { _dux('l', 'l', @_) }
 
+sub _idux {
+    my $accepts = shift;
+    my $returns = shift;
+
+    my $func = shift;
+
+    my %args;
+    my @items;
+
+    if ($accepts eq 's') {
+        @items = ($_[0]);
+    } elsif ($accepts eq 'a') {
+        @items = @{ $_[0] };
+    } elsif ($accepts eq 'l') {
+        @items = @_;
+    } else {
+        die "Invalid accepts, must be a|l|s";
+    }
+
+    if (ref($func) eq 'ARRAY') {
+        $args{$_} = $func->[1]{$_} for keys %{$func->[1]};
+        $func = $func->[0];
+    }
+
+    my $pkg = "Data::Unixish::$func";
+    load $pkg unless package_exists($pkg);
+    my $funcleaf = $func; $funcleaf =~ s/.+:://;
+    my $funcname_i = "Data::Unixish::$func\::_${funcleaf}_item";
+    die "Subroutine &$funcname_i not defined" unless defined &$funcname_i;
+    my $funcname_b = "Data::Unixish::$func\::_${funcleaf}_begin";
+    my $funcname_e = "Data::Unixish::$func\::_${funcleaf}_end";
+
+    my @res;
+    {
+        no strict 'refs';
+        my @bres = $funcname_b->(\%args) if defined &$funcname_b;
+        for (@items) {
+            push @res, $funcname_i->($_, \%args);
+        }
+        $funcname_e->(\%args, @bres) if defined &$funcname_e;
+    }
+
+    if ($returns eq 's') {
+        return $res[0];
+    } elsif ($returns eq 'l') {
+        if (wantarray) {
+            return @res;
+        } else {
+            return $res[0];
+        }
+    } elsif ($returns eq 'a') {
+        return \@res;
+    } else {
+        die "Invalid returns, must be a|l|s";
+    }
+}
+
+sub siduxs { _idux('s', 's', @_) }
+
+sub aiduxa { _idux('a', 'a', @_) }
+sub aiduxl { _idux('a', 'l', @_) }
+
+sub liduxa { _idux('l', 'a', @_) }
+sub liduxl { _idux('l', 'l', @_) }
+
 1;
 # ABSTRACT: Implementation for Unixish, a data transformation framework
 
@@ -180,6 +253,7 @@ sub lduxl { _dux('l', 'l', @_) }
                        aduxc cduxc fduxc lduxc
                        aduxf cduxf fduxf lduxf
                        aduxl cduxl fduxl lduxl
+                       siduxs
  ); # or you can use :all to export all functions
 
  # apply function, without argument
@@ -190,6 +264,12 @@ sub lduxl { _dux('l', 'l', @_) }
  # apply function, with some arguments
  my $fh = fduxf([trunc => {width=>80, ansi=>1, mb=>1}], \*STDIN);
  say while <$fh>;
+
+ # apply function to a single item, function must be itemfunc
+ my $res = duxitem(, $item);
+
+ # apply function to multiple items, function must be itemfunc
+ my @res = aduxitem(, $item1, $item2, $item3);
 
 
 =head1 DESCRIPTION
@@ -271,6 +351,26 @@ will be passed to L<Tie::File>.
 
 The C<ldux*> functions accepts list as input.
 
+=head2 siduxs($func, $item) => $res
+
+=head2 aiduxa($func, \@items) => ARRAYREF
+
+=head2 aiduxl($func, \@items) => LIST
+
+=head2 liduxa($func, @items) => ARRAYREF
+
+=head2 liduxl($func, @items) => LIST
+
+The C<*idux*> functions apply dux function on single item(s). Only dux functions
+tagged with C<itemfunc> can be used. These functions can operate on a single
+item and return a single result. Examples of itemfunc functions are C<uc>,
+C<lc>, C<sprintf>. Examples of non-itemfunc functions are C<head>, C<tail>,
+C<wc>.
+
+The C<*idux*> functions can be useful if you want to call a dux function from
+another dux function for each item. For example, see
+C<Data::Unixish::condapply>.
+
 
 =head1 FAQ
 
@@ -289,6 +389,9 @@ You can use L<Tie::Diamond>, e.g.:
 
 Also see the L<dux> command-line utility in the L<App::dux> distribution which
 allows you to access dux function from the command-line.
+
+
+=head1 TODO
 
 
 =head1 SEE ALSO

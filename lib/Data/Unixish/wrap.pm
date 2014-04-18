@@ -33,34 +33,42 @@ $SPEC{wrap} = {
             schema => ['bool', default => 0],
         },
     },
-    tags => [qw/text/],
+    tags => [qw/text itemfunc/],
 };
 sub wrap {
     my %args = @_;
     my ($in, $out) = ($args{in}, $args{out});
-    my $w     = $args{width} // 80;
-    my $ansi  = $args{ansi};
-    my $mb    = $args{mb};
 
+    _wrap_begin(\%args);
     while (my ($index, $item) = each @$in) {
-        {
-            last if !defined($item) || ref($item);
-            if ($ansi) {
-                if ($mb) {
-                    $item = ta_mbwrap($item, $w);
-                } else {
-                    $item = ta_wrap  ($item, $w);
-                }
-            } elsif ($mb) {
-                $item = mbwrap($item, $w);
-            } else {
-                $item = Text::WideChar::Util::wrap($item, $w);
-            }
-        }
-        push @$out, $item;
+        push @$out, _wrap_item($item, \%args);
     }
 
     [200, "OK"];
+}
+
+sub _wrap_begin {
+    my $args = shift;
+    $args->{width} //= 80;
+}
+
+sub _wrap_item {
+    my ($item, $args) = @_;
+    {
+        last if !defined($item) || ref($item);
+        if ($args->{ansi}) {
+            if ($args->{mb}) {
+                $item = ta_mbwrap($item, $args->{width});
+            } else {
+                $item = ta_wrap  ($item, $args->{width});
+            }
+        } elsif ($args->{mb}) {
+            $item = mbwrap($item, $args->{width});
+        } else {
+            $item = Text::WideChar::Util::wrap($item, $args->{width});
+        }
+    }
+    return $item;
 }
 
 1;

@@ -56,12 +56,15 @@ _
             schema => ['bool', default => 0],
         },
     },
-    tags => [qw/format/],
+    tags => [qw/format itemfunc/],
 };
 sub centerpad {
     my %args = @_;
     Data::Unixish::_pad::_pad("c", %args);
 }
+
+sub _centerpad_begin { Data::Unixish::_pad::__pad_begin('c', @_) }
+sub _centerpad_item { Data::Unixish::_pad::__pad_item('c', @_) }
 
 1;
 # ABSTRACT: Center text to a certain column width

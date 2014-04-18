@@ -73,18 +73,31 @@ _
             schema => ['str*'],
         },
     },
-    tags => [qw/format/],
+    tags => [qw/format itemfunc/],
 };
 sub num {
     my %args = @_;
     my ($in, $out) = ($args{in}, $args{out});
-    my $style = $args{style} // 'general';
-    $style = 'general' if !$styles{$style};
 
-    my $prefix  = $args{prefix} // "";
-    my $suffix  = $args{suffix} // "";
-    my $decdigs = $args{decimal_digits} //
-        ($style eq 'kilo' || $style eq 'kibi' ? 1 : 2);
+    my $orig_locale = _num_begin(\%args);
+    while (my ($index, $item) = each @$in) {
+        push @$out, _num_item($item, \%args);
+    }
+    _num_end(\%args, $orig_locale);
+
+    [200, "OK"];
+}
+
+sub _num_begin {
+    my $args = shift;
+
+    $args->{style} //= 'general';
+    $args->{style} = 'general' if !$styles{$args->{style}};
+
+    $args->{prefix} //= "";
+    $args->{suffix} //= "";
+    $args->{decimal_digits} //=
+        ($args->{style} eq 'kilo' || $args->{style} eq 'kibi' ? 1 : 2);
 
     my $orig_locale = setlocale(LC_ALL);
     if ($ENV{LC_NUMERIC}) {
@@ -95,44 +108,52 @@ sub num {
         setlocale(LC_ALL, $ENV{LANG});
     }
 
+    # args abused to store object/state
     my %nfargs;
-    if (defined $args{thousands_sep}) {
-        $nfargs{THOUSANDS_SEP} = $args{thousands_sep};
+    if (defined $args->{thousands_sep}) {
+        $nfargs{THOUSANDS_SEP} = $args->{thousands_sep};
     }
-    my $nf = Number::Format->new(%nfargs);
+    $args->{_nf} = Number::Format->new(%nfargs);
 
-    while (my ($index, $item) = each @$in) {
-        {
-            last if !defined($item) || !looks_like_number($item);
-            if ($style eq 'fixed') {
-                $item = $nf->format_number($item, $decdigs, $decdigs);
-            } elsif ($style eq 'scientific') {
-                $item = sprintf("%.${decdigs}e", $item);
-            } elsif ($style eq 'kilo') {
-                my $res = format_metric(
-                    $item, {base=>2, return_array=>1});
-                $item = $nf->format_number($res->[0], $decdigs, $decdigs) .
-                    $res->[1];
-            } elsif ($style eq 'kibi') {
-                my $res = format_metric(
-                    $item, {base=>10, return_array=>1});
-                $item = $nf->format_number($res->[0], $decdigs, $decdigs) .
-                    $res->[1];
-            } elsif ($style eq 'percent') {
-                $item = sprintf("%.${decdigs}f%%", $item*100);
-            } else {
-                # general
-                $item = $nf->format_number($item);
-            }
+    return $orig_locale;
+}
 
-            $item = "$prefix$item$suffix";
+sub _num_item {
+    my ($item, $args) = @_;
+
+    {
+        last if !defined($item) || !looks_like_number($item);
+        my $nf      = $args->{_nf};
+        my $style   = $args->{style};
+        my $decdigs = $args->{decimal_digits};
+
+        if ($style eq 'fixed') {
+            $item = $nf->format_number($item, $decdigs, $decdigs);
+        } elsif ($style eq 'scientific') {
+            $item = sprintf("%.${decdigs}e", $item);
+        } elsif ($style eq 'kilo') {
+            my $res = format_metric($item, {base=>2, return_array=>1});
+            $item = $nf->format_number($res->[0], $decdigs, $decdigs) .
+                $res->[1];
+        } elsif ($style eq 'kibi') {
+            my $res = format_metric(
+                $item, {base=>10, return_array=>1});
+            $item = $nf->format_number($res->[0], $decdigs, $decdigs) .
+                $res->[1];
+        } elsif ($style eq 'percent') {
+            $item = sprintf("%.${decdigs}f%%", $item*100);
+        } else {
+            # general
+            $item = $nf->format_number($item);
         }
-        push @$out, $item;
+        $item = "$args->{prefix}$item$args->{suffix}";
     }
+    return $item;
+}
 
+sub _num_end {
+    my ($args, $orig_locale) = @_;
     setlocale(LC_ALL, $orig_locale);
-
-    [200, "OK"];
 }
 
 1;

@@ -18,7 +18,7 @@ $SPEC{cat} = {
     args => {
         %common_args,
     },
-    tags => [qw/filtering/],
+    tags => [qw/filtering itemfunc/],
 };
 sub cat {
     my %args = @_;
@@ -29,6 +29,10 @@ sub cat {
     }
 
     [200, "OK"];
+}
+
+sub _cat_item {
+    $_[0];
 }
 
 1;

@@ -30,24 +30,34 @@ _
             pos     => 0,
         },
     },
-    tags => [qw/perl unsafe/],
+    tags => [qw/perl unsafe itemfunc/],
 };
 sub map {
     my %args = @_;
     my ($in, $out) = ($args{in}, $args{out});
-    my $callback = $args{callback} or die "missing callback for map";
 
-    if (ref($callback) ne 'CODE') {
-        $callback = eval "sub { $callback }";
-        die "invalid Perl code for map: $@" if $@;
-    }
-
+    _map_begin(\%args);
     local ($., $_);
     while (($., $_) = each @$in) {
-        push @$out, $callback->();
+        push @$out, $args{callback}->();
     }
 
     [200, "OK"];
+}
+
+sub _map_begin {
+    my $args = shift;
+
+    if (ref($args->{callback}) ne 'CODE') {
+        $args->{callback} = eval "sub { $args->{callback} }";
+        die "invalid Perl code for map: $@" if $@;
+    }
+}
+
+sub _map_item {
+    my ($item, $args) = @_;
+    local $_ = $item;
+    $args->{callback}->();
 }
 
 1;

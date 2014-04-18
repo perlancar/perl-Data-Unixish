@@ -58,35 +58,47 @@ _
             },
         },
     },
-    tags => [qw/text/],
+    tags => [qw/text itemfunc/],
     "x.dux.strip_newlines" => 0,
 };
 sub linum {
     my %args = @_;
     my ($in, $out) = ($args{in}, $args{out});
 
-    my $fmt = $args{format} // '%4s|';
-    my $bel = $args{blank_empty_lines} // 1;
-    my $lineno = ($args{start} // 1)+0;
-    my $dux_cli = $args{-dux_cli};
-
+    _linum_begin(\%args);
     while (my ($index, $item) = each @$in) {
-        if (defined($item) && !ref($item)) {
-            my @l;
-            for (split /^/, $item) {
-                my $n;
-                $n = ($bel && !/\S/) ? "" : $lineno;
-                push @l, sprintf($fmt, $n), $_;
-                $lineno++;
-            }
-            $item = join "", @l;
-            chomp($item) if $dux_cli;
-        }
-
-        push @$out, $item;
+        push @$out, _linum_item($item, \%args);
     }
 
     [200, "OK"];
+}
+
+sub _linum_begin {
+    my $args = shift;
+
+    $args->{format} //= '%4s|';
+    $args->{blank_empty_lines} //= 1;
+    $args->{start} //= 1;
+
+    # abuse, use args to store a temp var
+    $args->{_lineno} = $args->{start};
+}
+
+sub _linum_item {
+    my ($item, $args) = @_;
+
+    if (defined($item) && !ref($item)) {
+        my @l;
+        for (split /^/, $item) {
+            my $n;
+            $n = ($args->{blank_empty_lines} && !/\S/) ? "" : $args->{_lineno};
+            push @l, sprintf($args->{format}, $n), $_;
+            $args->{_lineno}++;
+        }
+        $item = join "", @l;
+        chomp($item) if $args->{-dux_cli};
+    }
+    return $item;
 }
 
 1;

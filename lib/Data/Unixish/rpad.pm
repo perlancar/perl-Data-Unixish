@@ -56,12 +56,15 @@ _
             schema => ['bool', default => 0],
         },
     },
-    tags => [qw/format/],
+    tags => [qw/format itemfunc/],
 };
 sub rpad {
     my %args = @_;
     Data::Unixish::_pad::_pad("r", %args);
 }
+
+sub _rpad_begin { Data::Unixish::_pad::__pad_begin('r', @_) }
+sub _rpad_item { Data::Unixish::_pad::__pad_item('r', @_) }
 
 1;
 # ABSTRACT: Pad text to the right until a certain column width

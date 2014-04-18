@@ -43,13 +43,25 @@ _
             schema=>[bool => default=>0],
         },
     },
-    tags => [qw/format/],
+    tags => [qw/format itemfunc/],
 };
 sub sprintf {
     my %args = @_;
     my ($in, $out) = ($args{in}, $args{out});
     my $format = $args{format};
 
+    my $orig_locale = _sprintf_begin();
+
+    while (my ($index, $item) = each @$in) {
+        push @$out, _sprintf_item($item, \%args);
+    }
+
+    _sprintf_end(\%args, $orig_locale);
+
+    [200, "OK"];
+}
+
+sub _sprintf_begin {
     my $orig_locale = setlocale(LC_ALL);
     if ($ENV{LC_NUMERIC}) {
         setlocale(LC_NUMERIC, $ENV{LC_NUMERIC});
@@ -58,30 +70,35 @@ sub sprintf {
     } elsif ($ENV{LANG}) {
         setlocale(LC_ALL, $ENV{LANG});
     }
+    return $orig_locale;
+}
 
-    while (my ($index, $item) = each @$in) {
-        {
-            last unless defined($item);
-            my $r = ref($item);
-            if ($r eq 'ARRAY' && !$args{skip_array}) {
-                no warnings;
-                $item = CORE::sprintf($format, @$item);
-                last;
-            }
-            last if $r;
-            last if $item eq '';
-            last if !looks_like_number($item) && $args{skip_non_number};
-            {
-                no warnings;
-                $item = CORE::sprintf($format, $item);
-            }
-        }
-        push @$out, $item;
-    }
-
+sub _sprintf_end {
+    my ($args, $orig_locale) = @_;
     setlocale(LC_ALL, $orig_locale);
+}
 
-    [200, "OK"];
+sub _sprintf_item {
+    my ($item, $args) = @_;
+
+    {
+        last unless defined($item);
+
+        my $r = ref($item);
+        if ($r eq 'ARRAY' && !$args->{skip_array}) {
+            no warnings;
+            $item = CORE::sprintf($args->{format}, @$item);
+            last;
+        }
+        last if $r;
+        last if $item eq '';
+        last if !looks_like_number($item) && $args->{skip_non_number};
+        {
+            no warnings;
+            $item = CORE::sprintf($args->{format}, $item);
+        }
+    }
+    return $item;
 }
 
 1;

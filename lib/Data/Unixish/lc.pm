@@ -21,20 +21,25 @@ _
     args => {
         %common_args,
     },
-    tags => [qw/text/],
+    tags => [qw/text itemfunc/],
 };
 sub lc {
     my %args = @_;
     my ($in, $out) = ($args{in}, $args{out});
 
     while (my ($index, $item) = each @$in) {
-        if (defined($item) && !ref($item)) {
-            $item = CORE::lc($item);
-        }
-        push @$out, $item;
+        push @$out, _lc_item($item);
     }
 
     [200, "OK"];
+}
+
+sub _lc_item {
+    my $item = shift;
+    if (defined($item) && !ref($item)) {
+        $item = CORE::lc($item);
+    }
+    return $item;
 }
 
 1;

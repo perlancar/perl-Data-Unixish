@@ -30,22 +30,25 @@ _
             pos     => 0,
         },
     },
-    tags => [qw/text/],
+    tags => [qw/text itemfunc/],
 };
 sub rins {
     my %args = @_;
     my ($in, $out) = ($args{in}, $args{out});
-    my $text = $args{text};
 
     while (my ($index, $item) = each @$in) {
-        if (defined($item) && !ref($item)) {
-            $item =~ s/$/$text/mg;
-        }
-
-        push @$out, $item;
+        push @$out, _rins_item($item, \%args);
     }
 
     [200, "OK"];
+}
+
+sub _rins_item {
+    my ($item, $args) = @_;
+    if (defined($item) && !ref($item)) {
+        $item =~ s/$/$args->{text}/mg;
+    }
+    return $item;
 }
 
 1;

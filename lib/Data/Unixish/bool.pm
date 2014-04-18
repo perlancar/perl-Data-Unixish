@@ -84,25 +84,36 @@ _
         },
         # XXX: flag to ignore references
     },
-    tags => [qw/format/],
+    tags => [qw/format itemfunc/],
 };
 sub bool {
     my %args = @_;
     my ($in, $out) = ($args{in}, $args{out});
-    my $notion = $args{notion} // 'perl';
-    my $style  = $args{style}  // 'one_zero';
-    $style = 'one_zero' if !$styles{$style};
 
-    my $tc = $args{true_char}  // $styles{$style}[0];
-    my $fc = $args{false_char} // $styles{$style}[1];
-
+    _bool_begin(\%args);
     while (my ($index, $item) = each @$in) {
-        my $t = _is_true($item, $notion);
-        $item = $t ? $tc : defined($t) ? $fc : undef;
-        push @$out, $item;
+        push @$out, _bool_item($item, \%args);
     }
 
     [200, "OK"];
+}
+
+sub _bool_begin {
+    my $args = shift;
+
+    $args->{notion} //= 'perl';
+    $args->{style}  //= 'one_zero';
+    $args->{style} = 'one_zero' if !$styles{$args->{style}};
+
+    $args->{true_char}  //= $styles{$args->{style}}[0];
+    $args->{false_char} //= $styles{$args->{style}}[1];
+}
+
+sub _bool_item {
+    my ($item, $args) = @_;
+
+    my $t = _is_true($item, $args->{notion});
+    $t ? $args->{true_char} : defined($t) ? $args->{false_char} : undef;
 }
 
 1;

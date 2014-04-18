@@ -23,6 +23,7 @@ test_dux_func(
             args => { callback => sub { int($.) } },
             in   => [ "2.2", "3.3", "4.4", "5.5" ],
             out  => [ 0 .. 3 ],
+            skip_itemfunc => 1,
         },
         {
             name => 'returning a list',

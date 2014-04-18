@@ -26,24 +26,27 @@ _
             cmdline_aliases => { nl=>{} },
         },
     },
-    tags => [qw/text/],
+    tags => [qw/text itemfunc/],
 };
 sub ltrim {
     my %args = @_;
     my ($in, $out) = ($args{in}, $args{out});
-    my $nl  = $args{strip_newline} // 0;
 
     while (my ($index, $item) = each @$in) {
-        my @lt;
-        if (defined($item) && !ref($item)) {
-            $item =~ s/\A[\r\n]+// if $nl;
-            $item =~ s/^[ \t]+//mg;
-        }
-
-        push @$out, $item;
+        push @$out, _ltrim_item($item, \%args);
     }
 
     [200, "OK"];
+}
+
+sub _ltrim_item {
+    my ($item, $args) = @_;
+
+    if (defined($item) && !ref($item)) {
+        $item =~ s/\A[\r\n]+// if $args->{strip_newline};
+        $item =~ s/^[ \t]+//mg;
+    }
+    return $item;
 }
 
 1;
