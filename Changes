@@ -1,5 +1,19 @@
 Revision history for Data-Unixish
 
+1.43    2014-04-18 (SHARYANTO) (not yet released)
+
+        - Add dux functions: rand, randstr, cond.
+
+        - map & grep can now accept code string, so these functions can be used
+          on the command-line.
+
+        - Tag some functions as 'itemfunc', these functions can be used inside
+          cond. Examples: uc, lc, trunc, lpad, sprintf.
+
+        - Tag some functions as 'perl' and 'unsafe', these functions accept Perl
+          code and evals code. Examples: map, grep, cond.
+
+
 1.42    2013-11-11 (SHARYANTO)
 
         - No functional changes. Add FAQ entry about 'Use of uninitialized value
