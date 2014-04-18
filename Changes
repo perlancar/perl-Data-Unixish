@@ -1,6 +1,6 @@
 Revision history for Data-Unixish
 
-1.43    2014-04-18 (SHARYANTO) (not yet released)
+1.43    2014-04-18 (SHARYANTO)
 
         - Add dux functions: rand, randstr, cond.
 
