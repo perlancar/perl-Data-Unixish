@@ -64,8 +64,8 @@ sub date {
 
 In Perl:
 
- use Data::Unixish::List qw(dux);
- my @res = dux([date => {format=>"%Y-%m-%d"}], DateTime->new(year=>2012, month=>9, day=>6), 1290380232, "foo");
+ use Data::Unixish qw(lduxl);
+ my @res = lduxl([date => {format=>"%Y-%m-%d"}], DateTime->new(year=>2012, month=>9, day=>6), 1290380232, "foo");
  # => ("2012-09-06","2010-11-22","foo")
 
 In command line:
@@ -75,4 +75,3 @@ In command line:
  foo
 
 =cut
-

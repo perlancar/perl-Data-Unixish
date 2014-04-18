@@ -70,8 +70,8 @@ sub centerpad {
 
 In Perl:
 
- use Data::Unixish::List qw(dux);
- my @res = dux([centerpad => {width=>6}], "123", "1234"); # => (" 123  ", " 1234 ")
+ use Data::Unixish qw(lduxl);
+ my @res = lduxl([centerpad => {width=>6}], "123", "1234"); # => (" 123  ", " 1234 ")
 
 In command line:
 

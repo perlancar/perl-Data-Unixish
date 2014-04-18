@@ -53,8 +53,8 @@ sub rtrim {
 
 In Perl:
 
- use Data::Unixish::List qw(dux);
- my @res = dux('rtrim', "x", "a   ", "b \nc  \n", undef, ["d "]);
+ use Data::Unixish qw(lduxl);
+ my @res = lduxl('rtrim', "x", "a   ", "b \nc  \n", undef, ["d "]);
  # => ("x", "a", "b\nc\n", undef, ["d "])
 
 In command line:

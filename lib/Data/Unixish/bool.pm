@@ -112,8 +112,8 @@ sub bool {
 
 In Perl:
 
- use Data::Unixish::List qw(dux);
- my @res = dux([bool => {style=>"check_cross"}], [0, "one", 2, ""])
+ use Data::Unixish qw(lduxl);
+ my @res = lduxl([bool => {style=>"check_cross"}], [0, "one", 2, ""])
  # => ("✕","✓","✓","✕")
 
 In command line:
@@ -125,4 +125,3 @@ In command line:
  n
 
 =cut
-

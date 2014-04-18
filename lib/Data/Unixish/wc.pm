@@ -100,9 +100,9 @@ sub wc {
 
 In Perl:
 
- use Data::Unixish::List qw(dux);
+ use Data::Unixish qw(lduxl);
  my @text = split /^/, "What do you want?\nWhat do you want me to want?\n";
- my $res = dux([wc => {words=>1, lines=>1}], @text); # => "2\t11"
+ my $res = lduxl([wc => {words=>1, lines=>1}], @text); # => "2\t11"
 
 In command line:
 

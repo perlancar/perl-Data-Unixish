@@ -57,8 +57,8 @@ sub map {
 
 In Perl:
 
- use Data::Unixish::List qw(dux);
- my @res = dux([map => {callback => sub { 1 + $_ }}], 1, 2, 3);
+ use Data::Unixish qw(lduxl);
+ my @res = lduxl([map => {callback => sub { 1 + $_ }}], 1, 2, 3);
  # => (2, 3, 4)
 
 In command-line:

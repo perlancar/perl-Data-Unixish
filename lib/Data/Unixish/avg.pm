@@ -45,8 +45,8 @@ sub avg {
 
 In Perl:
 
- use Data::Unixish::List qw(dux);
- my $avg = dux('avg', 1, 2, 3, 4, 5); # => 3
+ use Data::Unixish qw(lduxl);
+ my $avg = lduxl('avg', 1, 2, 3, 4, 5); # => 3
 
 In command line:
 

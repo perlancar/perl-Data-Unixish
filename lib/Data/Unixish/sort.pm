@@ -97,10 +97,10 @@ sub sort {
 
 In Perl:
 
- use Data::Unixish::List qw(dux);
+ use Data::Unixish qw(lduxl);
  my @res;
- @res = dux('sort', 4, 7, 2, 5); # => (2, 4, 5, 7)
- @res = dux([sort => {reverse=>1}], 4, 7, 2, 5); # => (7, 5, 4, 2)
+ @res = lduxl('sort', 4, 7, 2, 5); # => (2, 4, 5, 7)
+ @res = lduxl([sort => {reverse=>1}], 4, 7, 2, 5); # => (7, 5, 4, 2)
 
 In command line:
 

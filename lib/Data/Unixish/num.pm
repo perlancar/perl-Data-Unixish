@@ -142,8 +142,8 @@ sub num {
 
 In Perl:
 
- use Data::Unixish::List qw(dux);
- my @res = dux([num => {style=>"fixed"}], 0, 10, -2, 34.5, [2], {}, "", undef);
+ use Data::Unixish qw(lduxl);
+ my @res = lduxl([num => {style=>"fixed"}], 0, 10, -2, 34.5, [2], {}, "", undef);
  # => ("0.00", "10.00", "-2.00", "34.50", [2], {}, "", undef)
 
 In command line:

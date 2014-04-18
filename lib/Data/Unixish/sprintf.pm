@@ -91,8 +91,8 @@ sub sprintf {
 
 In Perl:
 
- use Data::Unixish::List qw(dux);
- my @res = dux([sprintf => {format=>"%.1f"}], 0, 1, [2], {}, "", undef);
+ use Data::Unixish qw(lduxl);
+ my @res = lduxl([sprintf => {format=>"%.1f"}], 0, 1, [2], {}, "", undef);
  # => ("0.0", "1.0", "2.0", {}, "", undef)
 
 In command line:

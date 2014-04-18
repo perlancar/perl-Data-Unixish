@@ -55,8 +55,8 @@ sub pick {
 
 In Perl:
 
- use Data::Unixish::List qw(dux);
- my @pick = dux([pick => {items=>2}], 1..100); # => (52, 33)
+ use Data::Unixish qw(lduxl);
+ my @pick = lduxl([pick => {items=>2}], 1..100); # => (52, 33)
 
 In command line:
 

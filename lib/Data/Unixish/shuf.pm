@@ -41,8 +41,8 @@ sub shuf {
 
 In Perl:
 
- use Data::Unixish::List qw(dux);
- my @shuffled = dux('shuffle', 1, 2, 3); # => (2, 1, 3)
+ use Data::Unixish qw(lduxl);
+ my @shuffled = lduxl('shuffle', 1, 2, 3); # => (2, 1, 3)
 
 In command line:
 

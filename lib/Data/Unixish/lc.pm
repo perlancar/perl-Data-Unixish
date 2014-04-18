@@ -44,8 +44,8 @@ sub lc {
 
 In Perl:
 
- use Data::Unixish::List qw(dux);
- my @res = dux('lc', 'Steven', 'STEVEN'); # => ('steven', 'steven')
+ use Data::Unixish qw(lduxl);
+ my @res = lduxl('lc', 'Steven', 'STEVEN'); # => ('steven', 'steven')
 
 In command line:
 
@@ -53,4 +53,3 @@ In command line:
  steven
 
 =cut
-

@@ -52,10 +52,10 @@ sub tail {
 
 In Perl:
 
- use Data::Unixish::List qw(dux);
+ use Data::Unixish qw(lduxl);
  my @res;
- @res = dux(tail => (1..100)); # => (91..100)
- @res = dux([tail => {items=>3}], (1..100)); # => (98, 99, 100)
+ @res = lduxl(tail => (1..100)); # => (91..100)
+ @res = lduxl([tail => {items=>3}], (1..100)); # => (98, 99, 100)
 
 In command line:
 

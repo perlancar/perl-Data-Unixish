@@ -80,8 +80,8 @@ sub trunc {
 
 In Perl:
 
- use Data::Unixish::List qw(dux);
- my @res = dux([trunc => {width=>4}], "123", "1234", "12345"); # => ("123", "1234", "1234")
+ use Data::Unixish qw(lduxl);
+ my @res = lduxl([trunc => {width=>4}], "123", "1234", "12345"); # => ("123", "1234", "1234")
 
 In command line:
 
@@ -91,4 +91,3 @@ In command line:
  1234
 
 =cut
-

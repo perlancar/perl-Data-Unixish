@@ -59,8 +59,8 @@ sub grep {
 
 In Perl:
 
- use Data::Unixish::List qw(dux);
- my @res = dux([grep => {callback => sub { $_ % 2 }}], 1, 2, 3, 4, 5);
+ use Data::Unixish qw(lduxl);
+ my @res = lduxl([grep => {callback => sub { $_ % 2 }}], 1, 2, 3, 4, 5);
  # => (1, 3, 5)
 
 In command-line:

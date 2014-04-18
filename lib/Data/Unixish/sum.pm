@@ -41,8 +41,8 @@ sub sum {
 
 In Perl:
 
- use Data::Unixish::List qw(dux);
- my $sum = dux('sum', 1, 2, 3, 4, 5); # => 15
+ use Data::Unixish qw(lduxl);
+ my $sum = lduxl('sum', 1, 2, 3, 4, 5); # => 15
 
 In command line:
 

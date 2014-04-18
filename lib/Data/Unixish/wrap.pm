@@ -70,8 +70,8 @@ sub wrap {
 
 In Perl:
 
- use Data::Unixish::List qw(dux);
- $wrapped = dux([wrap => {width=>20}], "xxxx xxxx xxxx xxxx xxxx"); # "xxxx xxxx xxxx xxxx\nxxxx"
+ use Data::Unixish qw(lduxl);
+ $wrapped = lduxl([wrap => {width=>20}], "xxxx xxxx xxxx xxxx xxxx"); # "xxxx xxxx xxxx xxxx\nxxxx"
 
 In command line:
 

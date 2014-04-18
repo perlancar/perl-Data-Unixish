@@ -40,8 +40,8 @@ sub rev {
 
 In Perl:
 
- use Data::Unixish::List qw(dux);
- my @rev = dux('rev', 1, 2, 3); # => (3, 2, 1)
+ use Data::Unixish::List qw(lduxl);
+ my @rev = lduxl('rev', 1, 2, 3); # => (3, 2, 1)
 
 In command line:
 

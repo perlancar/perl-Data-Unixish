@@ -38,8 +38,8 @@ sub cat {
 
 In Perl:
 
- use Data::Unixish::List qw(dux);
- my @res = dux("cat", 1, 2, 3, 4); # => (1, 2, 3, 4)
+ use Data::Unixish qw(lduxl);
+ my @res = lduxl("cat", 1, 2, 3, 4); # => (1, 2, 3, 4)
 
 In command line:
 

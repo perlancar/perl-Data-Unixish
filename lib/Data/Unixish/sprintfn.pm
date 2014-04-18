@@ -95,8 +95,8 @@ sub sprintfn {
 
 In Perl:
 
- use Data::Unixish::List qw(dux);
- my @res = dux([sprintfn => {format=>"%(n).1f"}], {n=>1}, {n=>2}, "", undef);
+ use Data::Unixish qw(lduxl);
+ my @res = lduxl([sprintfn => {format=>"%(n).1f"}], {n=>1}, {n=>2}, "", undef);
  # => ("1.0", "2.0", "", undef)
 
 

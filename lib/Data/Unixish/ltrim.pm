@@ -53,8 +53,8 @@ sub ltrim {
 
 In Perl:
 
- use Data::Unixish::List qw(dux);
- my @res = dux('ltrim', "x", "   a", "  b\n   c\n", undef, [" d"]);
+ use Data::Unixish qw(lduxl);
+ my @res = lduxl('ltrim', "x", "   a", "  b\n   c\n", undef, [" d"]);
  # => ("x", "a", "b\nc\n", undef, [" d"])
 
 In command line:

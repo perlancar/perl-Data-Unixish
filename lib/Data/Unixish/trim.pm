@@ -56,8 +56,8 @@ sub trim {
 
 In Perl:
 
- use Data::Unixish::List qw(dux);
- dux('trim', "x", "   a   ", "  b  \n   c  \n", undef, [" d "]);
+ use Data::Unixish qw(lduxl);
+ @res = lduxl('trim', "x", "   a   ", "  b  \n   c  \n", undef, [" d "]);
  # => ("x", "a", "b\nc\n", undef, [" d "])
 
 In command line:
@@ -67,4 +67,3 @@ In command line:
  a
 
 =cut
-

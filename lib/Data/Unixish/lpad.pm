@@ -70,8 +70,8 @@ sub lpad {
 
 In Perl:
 
- use Data::Unixish::List qw(dux);
- my @res = dux([lpad => {width=>6}], "123", "1234");
+ use Data::Unixish qw(lduxl);
+ my @res = lduxl([lpad => {width=>6}], "123", "1234");
  # => ("   123", "  1234")
 
 In command line:
