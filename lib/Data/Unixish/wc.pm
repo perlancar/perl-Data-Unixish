@@ -50,7 +50,7 @@ _
         },
     },
     tags => [qw/text group/],
-    "x.dux.strip_newlines" => 0,
+    "x.app.dux.strip_newlines" => 0,
     "x.perinci.cmdline.default_format" => "text-simple",
 };
 sub wc {

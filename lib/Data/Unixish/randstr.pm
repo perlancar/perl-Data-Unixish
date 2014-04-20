@@ -65,7 +65,7 @@ $SPEC{randstr} = {
         },
     },
     tags => [qw/text gen-data/],
-    'x.dux.is_stream_output' => 1,
+    'x.app.dux.is_stream_output' => 1,
 };
 sub randstr {
     my %args = @_;

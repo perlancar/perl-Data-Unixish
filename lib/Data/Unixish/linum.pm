@@ -59,7 +59,7 @@ _
         },
     },
     tags => [qw/text itemfunc/],
-    "x.dux.strip_newlines" => 0,
+    "x.app.dux.strip_newlines" => 0,
 };
 sub linum {
     my %args = @_;

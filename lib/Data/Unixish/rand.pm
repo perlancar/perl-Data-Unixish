@@ -37,7 +37,7 @@ $SPEC{rand} = {
         },
     },
     tags => [qw/number gen-data/],
-    'x.dux.is_stream_output' => 1,
+    'x.app.dux.is_stream_output' => 1,
 };
 sub rand {
     my %args = @_;
