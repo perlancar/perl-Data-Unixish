@@ -59,6 +59,7 @@ _
         },
     },
     tags => [qw/text itemfunc/],
+    "x.dux.strip_newlines" => 0, # for duxapp < 1.41, will be removed later
     "x.app.dux.strip_newlines" => 0,
 };
 sub linum {

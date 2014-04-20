@@ -28,6 +28,7 @@ _
         },
     },
     tags => [qw/text gen-data/],
+    'x.dux.is_stream_output' => 1, # for duxapp < 1.41, will be removed later
     'x.app.dux.is_stream_output' => 1,
 };
 sub yes {
