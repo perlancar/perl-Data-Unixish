@@ -31,6 +31,7 @@ _
         width => {
             schema => ['int*', min => 0],
             req => 1,
+            pos => 0,
             cmdline_aliases => { w => {} },
         },
         ansi => {

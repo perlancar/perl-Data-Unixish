@@ -23,6 +23,7 @@ $SPEC{wrap} = {
             summary => 'Target column width',
             schema =>[int => {default=>80, min=>1}],
             cmdline_aliases => { c=>{} },
+            pos => 0,
         },
         ansi => {
             summary => 'Whether to handle ANSI escape codes',

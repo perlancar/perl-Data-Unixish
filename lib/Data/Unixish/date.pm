@@ -24,8 +24,9 @@ _
         %common_args,
         format => {
             summary => 'Format',
-            schema=>[str => {default=>0}],
+            schema => 'str*',
             cmdline_aliases => { f=>{} },
+            pos => 0,
         },
         # tz?
     },

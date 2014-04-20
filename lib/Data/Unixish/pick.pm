@@ -22,6 +22,7 @@ $SPEC{pick} = {
             schema=>['int*' => {default=>1}],
             tags => ['main'],
             cmdline_aliases => { n=>{} },
+            pos => 0,
         },
     },
     tags => [qw/filtering/],

@@ -25,10 +25,12 @@ Example: `%04d|`.
 
 _
             schema  => [str => default=>'%4s|'],
+            cmdline_aliases => { f=>{} },
         },
         start => {
             summary => 'Number to start from',
             schema  => [int => default => 1],
+            cmdline_aliases => { s=>{} },
         },
         blank_empty_lines => {
             schema => [bool => default=>1],

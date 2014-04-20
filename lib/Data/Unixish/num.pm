@@ -47,6 +47,7 @@ _
         style => {
             schema=>['str*', in=>[keys %styles], default=>'general'],
             cmdline_aliases => { s=>{} },
+            pos => 0,
             description => "Available styles:\n\n".
                 join("", map {" * $_  ($styles{$_})\n"} sort keys %styles),
         },
