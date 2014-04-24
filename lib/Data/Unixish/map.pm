@@ -49,8 +49,12 @@ sub _map_begin {
     my $args = shift;
 
     if (ref($args->{callback}) ne 'CODE') {
-        $args->{callback} = eval "sub { $args->{callback} }";
-        die "invalid Perl code for map: $@" if $@;
+        if ($args{-cmdline}) {
+            $args->{callback} = eval "sub { $args->{callback} }";
+            die "invalid Perl code for map: $@" if $@;
+        } else {
+            die "Please supply coderef for 'callback'";
+        }
     }
 }
 

@@ -46,6 +46,7 @@ _
         },
     },
     tags => [qw/perl unsafe itemfunc/],
+    "x.app.dux.is_stream_output" => 1,
 };
 sub cond {
     my %args = @_;
@@ -65,8 +66,12 @@ sub _cond_begin {
     my $args = shift;
 
     if (ref($args->{if}) ne 'CODE') {
-        $args->{if} = eval "sub { $args->{if} }";
-        die "invalid Perl code for if: $@" if $@;
+        if ($args->{-cmdline}) {
+            $args->{if} = eval "sub { $args->{if} }";
+            die "invalid Perl code for if: $@" if $@;
+        } else {
+            die "Please supply coderef for 'if'";
+        }
     }
     $args->{then} //= 'cat';
     $args->{else} //= 'cat';

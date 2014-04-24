@@ -40,8 +40,12 @@ sub grep {
         my $re = $callback;
         $callback = sub { $_ =~ $re };
     } elsif (ref($callback) ne 'CODE') {
-        $callback = eval "sub { $callback }";
-        die "invalid code for grep: $@" if $@;
+        if ($args{-cmdline}) {
+            $callback = eval "sub { $callback }";
+            die "invalid code for grep: $@" if $@;
+        } else {
+            die "Please supply coderef (or regex) for 'callback'";
+        }
     }
 
     local ($., $_);
