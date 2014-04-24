@@ -1,5 +1,20 @@
 Revision history for Data-Unixish
 
+1.44    2014-04-24 (SHARYANTO)
+
+        [SECURITY]
+
+        - map/grep/cond: Only eval string code when run under cli. If called
+          through apply() or ?dux?() (which means, in-process), disallow it to
+          avoid running untrusted Perl string code. This is motivated by
+          Text::ANSITable allowing reading formats from environment variables
+          and apply it using apply().
+
+        [REMOVED FEATURES]
+
+        - Remove deprecated module Data::Unixish::List.
+
+
 1.43    2014-04-18 (SHARYANTO)
 
         - Add dux functions: rand, randstr, cond.
