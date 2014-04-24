@@ -4,7 +4,7 @@ package Data::Unixish::Util;
 
 require Exporter;
 our @ISA       = qw(Exporter);
-our @EXPORT_OK = qw(%common_args);
+our @EXPORT_OK = qw(%common_args filter_args);
 
 our %common_args = (
     in  => {
@@ -19,5 +19,21 @@ our %common_args = (
     },
 );
 
+sub filter_args {
+    my $hash = shift;
+    return { map {$_=>$hash->{$_}} grep {/\A\w+\z/} keys %$hash };
+}
+
 1;
 #ABSTRACT: Utility routines
+
+=head1 EXPORTS
+
+C<%common_args>
+
+
+=head1 FUNCTIONS
+
+=head2 filter_args
+
+=cut

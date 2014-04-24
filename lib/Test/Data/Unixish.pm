@@ -6,14 +6,21 @@ use warnings;
 use experimental 'smartmatch';
 
 use Data::Unixish qw(aiduxa);
-use Test::More 0.96;
+use File::Which qw(which);
+use IPC::Cmd qw(run_forked);
+use JSON;
 use Module::Load;
+use String::ShellQuote;
+use Test::More 0.96;
 
 # VERSION
+# DATE
 
 require Exporter;
 our @ISA = qw(Exporter);
 our @EXPORT = qw(test_dux_func);
+
+my $json = JSON->new->allow_nonref;
 
 sub test_dux_func {
     no strict 'refs';
@@ -30,6 +37,7 @@ sub test_dux_func {
 
     my $i = 0;
     subtest $fn => sub {
+      TEST:
         for my $t (@{$args{tests}}) {
             $i++;
             my $tn = $t->{name} // "test[$i]";
@@ -38,22 +46,87 @@ sub test_dux_func {
                     my $msg = $t->{skip}->();
                     plan skip_all => $msg if $msg;
                 }
-                my $in   = $t->{in};
-                my $out  = $t->{out};
-                my $rout = [];
-                my $res  = $f->(in=>$in, out=>$rout, %{$t->{args}});
-                is($res->[0], 200, "status");
-                is_deeply($rout, $out, "out")
-                    or diag explain $rout;
 
-                # if itemfunc, test against each item
-                if ('itemfunc' ~~ @{$meta->{tags}} && ref($in) eq 'ARRAY') {
-                    if ($t->{skip_itemfunc}) {
-                        diag "itemfunc test skipped";
-                    } else {
-                        my $rout = aiduxa([$fn, $t->{args}], $in);
-                        is_deeply($rout, $out, "itemfunc")
+                # test func
+                if ($t->{skip_func}) {
+                    diag "func test skipped";
+                } else {
+                    subtest "func" => sub {
+                        my $in   = $t->{in};
+                        my $out  = $t->{out};
+                        my $rout = [];
+                        my $res;
+                        eval { $res = $f->(in=>$in,out=>$rout,%{$t->{args}}) };
+                        my $err = $@;
+                        if ($t->{func_dies} // $t->{dies} // 0) {
+                            ok($err, "dies");
+                            return;
+                        } else {
+                            ok(!$err, "doesn't die") or do {
+                                diag "func dies: $err";
+                                return;
+                            };
+                        }
+                        is($res->[0], 200, "status");
+                        is_deeply($rout, $out, "out")
                             or diag explain $rout;
+
+                        # if itemfunc, test against each item
+                        if ('itemfunc' ~~ @{$meta->{tags}} &&
+                                ref($in) eq 'ARRAY') {
+                            if ($t->{skip_itemfunc}) {
+                                diag "itemfunc test skipped";
+                            } else {
+                                my $rout;
+                                $rout = aiduxa([$fn, $t->{args}], $in);
+                                is_deeply($rout, $out, "itemfunc")
+                                    or diag explain $rout;
+                            }
+                        }
+                    };
+                }
+
+                # test running through cmdline
+                if ($t->{skip_cli} // 1) {
+                    #diag "cli test skipped";
+                } else {
+                    subtest cli => sub {
+                        if ($^O =~ /win/i) {
+                            plan skip_all => "run_forked() not available ".
+                                "on Windows";
+                            return;
+                        }
+                        unless (which("dux")) {
+                            plan skip_all => "dux command-line not available, ".
+                                "you might want to install App::dux first";
+                            return;
+                        }
+                        my $cmd = "dux $fn ".
+                            join(" ", map {
+                                my $v = $t->{args}{$_};
+                                my $p = $_; $p =~ s/_/-/g;
+                                ref($v) ?
+                                    ("--$p-json",
+                                     shell_quote($json->encode($v))) :
+                                    ("--$p", shell_quote($v))
+                                }
+                                     keys %{ $t->{args} });
+                        #diag "cmd: $cmd";
+                        my %runopts = (
+                            child_stdin => join("", map {"$_\n"} @{ $t->{in} }),
+                        );
+                        my $res = run_forked($cmd, \%runopts);
+                        if ($t->{cli_dies} // $t->{dies} // 0) {
+                            ok($res->{exit_code}, "dies");
+                            return;
+                        } else {
+                            ok(!$res->{exit_code}, "doesn't die") or do {
+                                diag "dux dies ($res->{exit_code})";
+                                return;
+                            };
+                        }
+                        is_deeply(join("", map {"$_\n"} @{ $t->{out} }),
+                                       $res->{stdout}, "output");
                     }
                 }
             };

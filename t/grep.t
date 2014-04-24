@@ -35,6 +35,8 @@ test_dux_func(
             args => { callback => '$. % 2' },
             in   => [ 1 .. 10 ],
             out  => [ 2, 4, 6, 8, 10 ],
+            func_dies => 1, # because cond only accepts string code over cli
+            skip_cli => 0,  # to test that cli accepts string code
         },
     ],
 );

@@ -86,7 +86,7 @@ sub _dux {
     }
 
     if (ref($func) eq 'ARRAY') {
-        $args{$_} = $func->[1]{$_} for keys %{$func->[1]};
+        $args{$_} = $func->[1]{$_} for grep {/\A\w+\z/} keys %{$func->[1]};
         $func = $func->[0];
     }
 

@@ -5,7 +5,7 @@ use strict;
 use warnings;
 #use Log::Any '$log';
 
-use Data::Unixish::Util qw(%common_args);
+use Data::Unixish::Util qw(%common_args filter_args);
 use Module::Load;
 use SHARYANTO::Package::Util qw(package_exists);
 
@@ -66,7 +66,7 @@ sub apply {
         my ($fn0, $fargs);
         if (ref($f) eq 'ARRAY') {
             $fn0 = $f->[0];
-            $fargs = $f->[1] // {};
+            $fargs = filter_args($f->[1]) // {};
         } else {
             $fn0 = $f;
             $fargs = {};
@@ -115,4 +115,3 @@ sub apply {
 
 
 =head1 DESCRIPTION
-

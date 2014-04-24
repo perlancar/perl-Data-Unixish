@@ -36,6 +36,8 @@ test_dux_func(
             args => { callback => 'split /\./' },
             in   => [ "2.2", "3.3", "4.4", "5.5" ],
             out  => [ 2, 2, 3, 3, 4, 4, 5, 5 ],
+            func_dies => 1, # because cond only accepts string code over cli
+            skip_cli => 0,  # to test that cli accepts string code
         },
     ],
 );
