@@ -8,7 +8,7 @@ Revision history for Data-Unixish
           through apply() or ?dux?() (which means, in-process), disallow it to
           avoid running untrusted Perl string code. This is motivated by
           Text::ANSITable allowing reading formats from environment variables
-          and apply it using apply().
+          and applying them using apply().
 
         [REMOVED FEATURES]
 
