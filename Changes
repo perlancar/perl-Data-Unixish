@@ -1,5 +1,10 @@
 Revision history for Data-Unixish
 
+1.45    2014-05-02 (SHARYANTO)
+
+        - Add dux func: chain.
+
+
 1.44    2014-04-24 (SHARYANTO)
 
         [SECURITY]
