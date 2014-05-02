@@ -8,6 +8,7 @@ use Module::Load;
 use SHARYANTO::Package::Util qw(package_exists);
 
 # VERSION
+# DATE
 
 require Exporter;
 our @ISA       = qw(Exporter);
