@@ -19,7 +19,7 @@ $SPEC{avg} = {
     args => {
         %common_args,
     },
-    tags => [qw/group/],
+    tags => [qw/datatype:num group/],
 };
 sub avg {
     my %args = @_;

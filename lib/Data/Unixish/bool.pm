@@ -84,7 +84,7 @@ _
         },
         # XXX: flag to ignore references
     },
-    tags => [qw/format itemfunc/],
+    tags => [qw/datatype:bool itemfunc formatting/],
 };
 sub bool {
     my %args = @_;

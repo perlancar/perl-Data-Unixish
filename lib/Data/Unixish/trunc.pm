@@ -44,7 +44,7 @@ _
             schema => ['bool', default => 0],
         },
     },
-    tags => [qw/format itemfunc/],
+    tags => [qw/itemfunc text/],
 };
 sub trunc {
     my %args = @_;

@@ -30,7 +30,7 @@ _
         },
         # tz?
     },
-    tags => [qw/format itemfunc/],
+    tags => [qw/datatype:date itemfunc formatting/],
 };
 sub date {
     my %args = @_;

@@ -57,7 +57,7 @@ _
             schema => ['bool', default => 0],
         },
     },
-    tags => [qw/format itemfunc/],
+    tags => [qw/itemfunc text/],
 };
 sub lpad {
     my %args = @_;

@@ -43,7 +43,7 @@ _
             schema=>[bool => default=>0],
         },
     },
-    tags => [qw/format itemfunc/],
+    tags => [qw/formatting itemfunc text/],
 };
 sub sprintf {
     my %args = @_;

@@ -74,7 +74,7 @@ _
             schema => ['str*'],
         },
     },
-    tags => [qw/format itemfunc/],
+    tags => [qw/formatting itemfunc datatype:num/],
 };
 sub num {
     my %args = @_;
