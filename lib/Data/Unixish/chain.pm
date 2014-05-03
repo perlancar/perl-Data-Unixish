@@ -43,7 +43,7 @@ _
             cmdline_aliases => {f => {}},
         },
     },
-    tags => [qw/itemfunc/],
+    tags => [qw/itemfunc func/],
 };
 sub chain {
     my %args = @_;
