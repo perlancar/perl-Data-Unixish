@@ -302,7 +302,8 @@ The C<*duxc> functions will call the callback repeatedly with every output item.
 
 The C<*duxf> functions returns filehandle immediately. A child process is
 forked, and dux function is run in the child process. You read output as lines
-from the returned filehandle.
+from the returned filehandle. (Currently not yet supported on Windows due to no
+support for open '-|').
 
 The C<*duxl> functions returns result as list. It can be evaluated in scalar to
 return only the first element of the list. However, the whole list will be
@@ -340,7 +341,7 @@ An example:
 =head2 fduxl($func, $file_or_handle, @args) => LIST
 
 The C<fdux*> functions accepts filename or filehandle. C<@args> is optional and
-will be passed to L<Tie::File>.
+will be passed to L<Tie::File>. Currently not yet supported on Windows.
 
 =head2 lduxa($func, @input) => ARRAYREF
 

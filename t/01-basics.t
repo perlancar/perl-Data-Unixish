@@ -49,6 +49,7 @@ subtest "l output" => sub {
 };
 
 subtest "f input" => sub {
+    plan skip_all => "fdux* is currently fudged on Windows" if $^O =~ /mswin32/i;
     is_deeply( fduxa('sort', $filename) , [qw/a b c d/]);
     # fduxc in "c output"
     # fduxf in "f output"
@@ -56,6 +57,7 @@ subtest "f input" => sub {
 };
 
 subtest "f output" => sub {
+    plan skip_all => "*duxf not available on Windows (no support for open '-|')" if $^O =~ /mswin32/i;
     my (@a, $fh);
 
     @a = (); $fh = aduxf('sort', [1, 3, 2]); push @a, $_ while <$fh>;
@@ -78,10 +80,13 @@ subtest "c input" => sub {
 
     # cduxc in "c output"
 
-    @in = (2,3,1);
-    my (@a, $fh);
-    @a = (); $fh = cduxf('sort', $icb); push @a, $_ while <$fh>;
-    is_deeply(\@a, ["11\n","22\n","33\n"]);
+    subtest "cduxf" => sub {
+        plan skip_all => "cduxf not available on Windows (no support for open '-|')" if $^O =~ /mswin32/i;
+        @in = (2,3,1);
+        my (@a, $fh);
+        @a = (); $fh = cduxf('sort', $icb); push @a, $_ while <$fh>;
+        is_deeply(\@a, ["11\n","22\n","33\n"]);
+    };
 
     @in = (2,3,1); is_deeply([cduxl('sort', $icb)], [11,22,33]);
 };
@@ -100,8 +105,11 @@ subtest "c output" => sub {
     @a = (); cduxc('sort', $icb, sub { push @a, shift });
     is_deeply(\@a, [11, 22, 33]);
 
-    @a = (); fduxc('sort', sub { push @a, shift }, $filename);
-    is_deeply(\@a, [qw/a b c d/]);
+    subtest fduxc => sub {
+        plan skip_all => "fdux* is currently fudged on Windows" if $^O =~ /mswin32/i;
+        @a = (); fduxc('sort', sub { push @a, shift }, $filename);
+        is_deeply(\@a, [qw/a b c d/]);
+    };
 };
 
 done_testing;
