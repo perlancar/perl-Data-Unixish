@@ -24,7 +24,14 @@ test_dux_func(
             name => 'style=scientific',
             args => {style=>'scientific', decimal_digits=>3},
             in   => [1, -2.3, 45678, "a", [], {}, undef],
-            out  => ["1.000e+00", "-2.300e+00", "4.568e+04", "a", [], {}, undef],
+            test_out => sub {
+                my $rout = shift;
+                my $v;
+                $v = shift @$rout; like($v, qr/\A1\.000e\+0?00\z/, "elem 0");
+                $v = shift @$rout; like($v, qr/\A-2\.300e\+0?00\z/, "elem 1");
+                $v = shift @$rout; like($v, qr/\A4\.568e\+0?04\z/, "elem 2");
+            },
+            skip_itemfunc=>1,
         },
         {
             name => 'prefix & suffix',

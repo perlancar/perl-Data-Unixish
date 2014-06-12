@@ -68,8 +68,12 @@ sub test_dux_func {
                             };
                         }
                         is($res->[0], 200, "status");
-                        is_deeply($rout, $out, "out")
+                        if ($t->{test_out}) {
+                            $t->{test_out}->($rout);
+                        } else {
+                            is_deeply($rout, $out, "out")
                             or diag explain $rout;
+                        }
 
                         # if itemfunc, test against each item
                         if ('itemfunc' ~~ @{$meta->{tags}} &&
@@ -79,8 +83,12 @@ sub test_dux_func {
                             } else {
                                 my $rout;
                                 $rout = aiduxa([$fn, $t->{args}], $in);
-                                is_deeply($rout, $out, "itemfunc")
-                                    or diag explain $rout;
+                                if ($t->{test_out}) {
+                                    $t->{test_out}->($rout);
+                                } else {
+                                    is_deeply($rout, $out, "out")
+                                        or diag explain $rout;
+                                }
                             }
                         }
                     };
