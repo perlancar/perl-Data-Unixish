@@ -1,5 +1,14 @@
 Revision history for Data-Unixish
 
+1.47    2014-06-12 (SHARYANTO)
+
+        - No functional changes.
+
+        - Document that duxf* and fdux* are currently not supported on Windows.
+
+        - Skip/adjust some tests to pass on Windows again.
+
+
 1.46    2014-05-05 (SHARYANTO)
 
         - No functional changes.
