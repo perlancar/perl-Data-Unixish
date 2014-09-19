@@ -51,11 +51,11 @@ sub _uc_item {
 In Perl:
 
  use Data::Unixish qw(lduxl);
- my @res = lduxl('uc', 'steven', 'Steven'); # => ('STEVEN', 'STEVEN')
+ my @res = lduxl('uc', 'januar', 'Januar'); # => ('JANUAR', 'JANUAR')
 
 In command line:
 
- % echo -e "steven" | dux uc
- STEVEN
+ % echo -e "januar" | dux uc
+ JANUAR
 
 =cut

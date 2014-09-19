@@ -51,11 +51,11 @@ sub _lcfirst_item {
 In Perl:
 
  use Data::Unixish qw(lduxl);
- my @res = lduxl('lcfirst', 'Steven', 'STEVEN'); # => ('steven', 'sTEVEN')
+ my @res = lduxl('lcfirst', 'Januar', 'JANUAR'); # => ('januar', 'jANUAR')
 
 In command line:
 
- % echo -e "STEVEN" | dux lcfirst
- sTEVEN
+ % echo -e "JANUAR" | dux lcfirst
+ jANUAR
 
 =cut
