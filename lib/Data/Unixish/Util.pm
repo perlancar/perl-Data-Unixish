@@ -1,5 +1,6 @@
 package Data::Unixish::Util;
 
+# DATE
 # VERSION
 
 require Exporter;
@@ -9,7 +10,8 @@ our @EXPORT_OK = qw(%common_args filter_args);
 our %common_args = (
     in  => {
         summary => 'Input stream (e.g. array or filehandle)',
-        schema  => 'any', # TODO: any* => of => [stream*, array*]
+        schema  => ['array'],
+        stream => 1,
         #req => 1,
     },
     out => {
