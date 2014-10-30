@@ -67,7 +67,7 @@ sub _cond_begin {
 
     if (ref($args->{if}) ne 'CODE') {
         if ($args->{-cmdline}) {
-            $args->{if} = eval "sub { $args->{if} }";
+            $args->{if} = eval "no strict; no warnings; sub { $args->{if} }";
             die "invalid Perl code for if: $@" if $@;
         } else {
             die "Please supply coderef for 'if'";

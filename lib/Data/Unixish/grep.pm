@@ -41,7 +41,7 @@ sub grep {
         $callback = sub { $_ =~ $re };
     } elsif (ref($callback) ne 'CODE') {
         if ($args{-cmdline}) {
-            $callback = eval "sub { $callback }";
+            $callback = eval "no strict; no warnings; sub { $callback }";
             die "invalid code for grep: $@" if $@;
         } else {
             die "Please supply coderef (or regex) for 'callback'";
