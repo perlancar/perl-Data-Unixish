@@ -11,8 +11,8 @@ our %common_args = (
     in  => {
         summary => 'Input stream (e.g. array or filehandle)',
         schema  => ['array'],
-        cmdline_src => 'stdin_or_files',
-        stream => 1,
+        #cmdline_src => 'stdin_or_files', # not until pericmd-base supports streaming
+        #stream => 1,
     },
     out => {
         summary => 'Output stream (e.g. array or filehandle)',
