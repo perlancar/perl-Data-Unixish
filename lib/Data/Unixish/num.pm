@@ -1,5 +1,8 @@
 package Data::Unixish::num;
 
+# DATE
+# VERSION
+
 use 5.010;
 use locale;
 use strict;
@@ -9,11 +12,9 @@ use warnings;
 
 use Data::Unixish::Util qw(%common_args);
 use Number::Format;
+use Number::Format::Metric qw(format_metric);
 use POSIX qw(locale_h);
 use Scalar::Util 'looks_like_number';
-use SHARYANTO::Number::Util qw(format_metric);
-
-# VERSION
 
 our %SPEC;
 
@@ -52,6 +53,7 @@ _
                 join("", map {" * $_  ($styles{$_})\n"} sort keys %styles),
         },
         decimal_digits => {
+            schema => ['int*'],
             summary => 'Number of digits to the right of decimal point',
         },
         thousands_sep => {
