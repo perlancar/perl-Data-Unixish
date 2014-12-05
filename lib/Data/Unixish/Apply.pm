@@ -1,5 +1,8 @@
 package Data::Unixish::Apply;
 
+# DATE
+# VERSION
+
 use 5.010;
 use strict;
 use warnings;
@@ -7,9 +10,7 @@ use warnings;
 
 use Data::Unixish::Util qw(%common_args filter_args);
 use Module::Load;
-use SHARYANTO::Package::Util qw(package_exists);
-
-# VERSION
+use Package::MoreUtil qw(package_exists);
 
 our %SPEC;
 

@@ -1,14 +1,14 @@
 package Data::Unixish;
 
+# DATE
+# VERSION
+
 use 5.010001;
 use strict;
 use warnings;
 
 use Module::Load;
-use SHARYANTO::Package::Util qw(package_exists);
-
-# VERSION
-# DATE
+use Package::MoreUtil qw(package_exists);
 
 require Exporter;
 our @ISA       = qw(Exporter);
