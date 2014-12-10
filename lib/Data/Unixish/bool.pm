@@ -124,8 +124,8 @@ sub _bool_item {
 In Perl:
 
  use Data::Unixish qw(lduxl);
- my @res = lduxl([bool => {style=>"Y_N"}], [0, "one", 2, ""])
- # => ("N","Y","Y","N")
+ my @res = lduxl([bool => {style=>"check_cross"}], [0, "one", 2, ""])
+ # => ("✕","✓","✓","✕")
 
 In command line:
 
