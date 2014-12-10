@@ -1,5 +1,8 @@
 package Data::Unixish::_pad;
 
+# DATE
+# VERSION
+
 use 5.010;
 use locale;
 use strict;
@@ -7,11 +10,9 @@ use syntax 'each_on_array'; # to support perl < 5.12
 use warnings;
 #use Log::Any '$log';
 
-use SHARYANTO::String::Util qw(pad);
+use String::Pad qw(pad);
 use Text::ANSI::Util qw(ta_pad ta_mbpad);
 use Text::WideChar::Util qw(mbpad);
-
-# VERSION
 
 sub _pad {
     my ($which, %args) = @_;
