@@ -3,6 +3,7 @@ package Data::Unixish::bool;
 use 5.010;
 use strict;
 use syntax 'each_on_array'; # to support perl < 5.12
+use utf8;
 use warnings;
 #use Log::Any '$log';
 
@@ -35,11 +36,11 @@ my %styles = (
     Y_N               => ['Y', 'N'],
     yes_no            => ['yes', 'no'],
     v_X               => ['v', 'X'],
-    check             => ["\x{2703}", ' ', 'uses Unicode'],
-    check_cross       => ["\x{2703}", "\x{2715}", 'uses Unicode'],
-    heavy_check_cross => ["\x{2714}", "\x{2718}", 'uses Unicode'],
-    dot               => ["\x{25cf}", ' ', 'uses Unicode'],
-    dot_cross         => ["\x{25cf}", "\x{2718}", 'uses Unicode'],
+    check             => ['✓', ' ', 'uses Unicode'],
+    check_cross       => ['✓', '✕', 'uses Unicode'],
+    heavy_check_cross => ['✔', '✘', 'uses Unicode'],
+    dot               => ['●', ' ', 'uses Unicode'],
+    dot_cross         => ['●', '✘', 'uses Unicode'],
 
 );
 
