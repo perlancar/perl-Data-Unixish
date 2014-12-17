@@ -68,7 +68,7 @@ sub _lpad_begin { Data::Unixish::_pad::__pad_begin('l', @_) }
 sub _lpad_item { Data::Unixish::_pad::__pad_item('l', @_) }
 
 1;
-# ABSTRACT: Pad text to the left until a certain column width
+# ABSTRACT: 
 
 =head1 SYNOPSIS
 

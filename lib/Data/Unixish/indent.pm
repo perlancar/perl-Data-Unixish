@@ -63,7 +63,7 @@ sub _indent_item {
 }
 
 1;
-# ABSTRACT: Add spaces or tabs to the beginning of each line of text
+# ABSTRACT:
 
 =head1 SYNOPSIS
 

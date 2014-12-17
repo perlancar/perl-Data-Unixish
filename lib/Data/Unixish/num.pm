@@ -160,7 +160,7 @@ sub _num_end {
 }
 
 1;
-# ABSTRACT: Format number
+# ABSTRACT: 
 
 =head1 SYNOPSIS
 

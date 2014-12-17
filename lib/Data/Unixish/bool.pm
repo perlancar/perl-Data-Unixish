@@ -117,7 +117,7 @@ sub _bool_item {
 }
 
 1;
-# ABSTRACT: Format bool
+# ABSTRACT:
 
 =head1 SYNOPSIS
 

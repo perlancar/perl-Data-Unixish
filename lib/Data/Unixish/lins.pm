@@ -53,7 +53,7 @@ sub _lins_item {
 }
 
 1;
-# ABSTRACT: Add some text at the beginning of each line of text
+# ABSTRACT: 
 
 =head1 SYNOPSIS
 

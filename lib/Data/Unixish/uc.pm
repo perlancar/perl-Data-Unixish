@@ -44,7 +44,7 @@ sub _uc_item {
 }
 
 1;
-# ABSTRACT: Convert text to uppercase
+# ABSTRACT: 
 
 =head1 SYNOPSIS
 

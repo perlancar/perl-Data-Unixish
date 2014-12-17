@@ -105,7 +105,7 @@ sub _linum_item {
 }
 
 1;
-# ABSTRACT: Add line numbers
+# ABSTRACT: 
 
 =head1 SYNOPSIS
 

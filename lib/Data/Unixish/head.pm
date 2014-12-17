@@ -40,7 +40,7 @@ sub head {
 }
 
 1;
-# ABSTRACT: Output the first items of data
+# ABSTRACT:
 
 =head1 SYNOPSIS
 

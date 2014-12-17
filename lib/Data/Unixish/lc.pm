@@ -43,7 +43,7 @@ sub _lc_item {
 }
 
 1;
-# ABSTRACT: Convert text to lowercase
+# ABSTRACT: 
 
 =head1 SYNOPSIS
 

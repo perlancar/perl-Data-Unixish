@@ -94,7 +94,7 @@ sub wc {
 }
 
 1;
-# ABSTRACT: Print newline, word, and byte counts
+# ABSTRACT: 
 
 =head1 SYNOPSIS
 

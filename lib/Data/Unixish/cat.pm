@@ -36,7 +36,7 @@ sub _cat_item {
 }
 
 1;
-# ABSTRACT: Pass input unchanged
+# ABSTRACT:
 
 =head1 SYNOPSIS
 

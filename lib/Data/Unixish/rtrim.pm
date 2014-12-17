@@ -50,7 +50,7 @@ sub _rtrim_item {
 }
 
 1;
-# ABSTRACT: Strip whitespace at the end of each line of text
+# ABSTRACT: 
 
 =head1 SYNOPSIS
 

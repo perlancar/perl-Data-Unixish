@@ -74,7 +74,7 @@ sub _trunc_item {
 }
 
 1;
-# ABSTRACT: Truncate string to a certain column width
+# ABSTRACT: 
 
 =head1 SYNOPSIS
 

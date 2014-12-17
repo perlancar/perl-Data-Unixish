@@ -68,7 +68,7 @@ sub _centerpad_begin { Data::Unixish::_pad::__pad_begin('c', @_) }
 sub _centerpad_item { Data::Unixish::_pad::__pad_item('c', @_) }
 
 1;
-# ABSTRACT: Center text to a certain column width
+# ABSTRACT:
 
 =head1 SYNOPSIS
 

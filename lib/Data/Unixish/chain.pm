@@ -116,7 +116,7 @@ sub _chain_end {
 }
 
 1;
-# ABSTRACT: Chain several dux functions together
+# ABSTRACT:
 
 =head1 SYNOPSIS
 

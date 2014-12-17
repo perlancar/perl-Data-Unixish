@@ -53,7 +53,7 @@ sub _trim_item {
 }
 
 1;
-# ABSTRACT: Strip whitespace at the beginning and end of each line of text
+# ABSTRACT: 
 
 =head1 SYNOPSIS
 

@@ -91,7 +91,7 @@ sub sort {
 }
 
 1;
-# ABSTRACT: Sort items
+# ABSTRACT: 
 
 =head1 SYNOPSIS
 

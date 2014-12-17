@@ -104,7 +104,7 @@ sub _sprintfn_end {
 }
 
 1;
-# ABSTRACT: Like sprintf, but use sprintfn() from Text::sprintfn
+# ABSTRACT: 
 
 =head1 SYNOPSIS
 

@@ -44,7 +44,7 @@ sub _lcfirst_item {
 }
 
 1;
-# ABSTRACT: Convert first character of text to lowercase
+# ABSTRACT:
 
 =head1 SYNOPSIS
 

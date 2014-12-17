@@ -91,7 +91,7 @@ sub _cond_item {
 }
 
 1;
-# ABSTRACT: Apply dux function conditionally
+# ABSTRACT:
 
 =head1 SYNOPSIS
 

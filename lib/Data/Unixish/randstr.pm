@@ -93,7 +93,7 @@ sub randstr {
 }
 
 1;
-# ABSTRACT: Generate a stream of random strings
+# ABSTRACT: 
 
 =head1 SYNOPSIS
 

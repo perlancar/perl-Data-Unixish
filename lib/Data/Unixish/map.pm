@@ -65,7 +65,7 @@ sub _map_item {
 }
 
 1;
-# ABSTRACT: Perl map
+# ABSTRACT: 
 
 =head1 SYNOPSIS
 

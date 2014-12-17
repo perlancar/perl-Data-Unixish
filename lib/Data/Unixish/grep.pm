@@ -57,7 +57,7 @@ sub grep {
 }
 
 1;
-# ABSTRACT: Perl grep
+# ABSTRACT:
 
 =head1 SYNOPSIS
 

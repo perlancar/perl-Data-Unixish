@@ -35,7 +35,7 @@ sub sum {
 }
 
 1;
-# ABSTRACT: Sum numbers
+# ABSTRACT: 
 
 =head1 SYNOPSIS
 

@@ -43,7 +43,7 @@ sub _ucfirst_item {
 }
 
 1;
-# ABSTRACT: Convert first character of text to uppercase
+# ABSTRACT: 
 
 =head1 SYNOPSIS
 

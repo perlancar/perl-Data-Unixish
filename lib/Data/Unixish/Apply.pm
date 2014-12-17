@@ -104,7 +104,7 @@ sub apply {
 }
 
 1;
-# ABSTRACT: Apply one or more dux functions to data
+# ABSTRACT:
 
 =head1 SYNOPSIS
 

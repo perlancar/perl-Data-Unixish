@@ -73,7 +73,7 @@ sub _wrap_item {
 }
 
 1;
-# ABSTRACT: Wrap text
+# ABSTRACT: 
 
 =head1 SYNOPSIS
 

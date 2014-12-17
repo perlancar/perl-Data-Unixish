@@ -62,7 +62,7 @@ sub rand {
 }
 
 1;
-# ABSTRACT: Generate a stream of random numbers
+# ABSTRACT: 
 
 =head1 SYNOPSIS
 

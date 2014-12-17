@@ -45,7 +45,7 @@ sub yes {
 }
 
 1;
-# ABSTRACT: Output a string repeatedly until killed
+# ABSTRACT: 
 
 =head1 SYNOPSIS
 

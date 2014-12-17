@@ -71,7 +71,7 @@ sub _date_item {
 }
 
 1;
-# ABSTRACT: Format date
+# ABSTRACT:
 
 =head1 SYNOPSIS
 

@@ -34,7 +34,7 @@ sub rev {
 }
 
 1;
-# ABSTRACT: Reverse items
+# ABSTRACT: 
 
 =head1 SYNOPSIS
 

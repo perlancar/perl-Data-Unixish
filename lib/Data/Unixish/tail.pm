@@ -46,7 +46,7 @@ sub tail {
 }
 
 1;
-# ABSTRACT: Output the last items of data
+# ABSTRACT: 
 
 =head1 SYNOPSIS
 

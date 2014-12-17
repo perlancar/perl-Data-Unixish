@@ -102,7 +102,7 @@ sub _sprintf_item {
 }
 
 1;
-# ABSTRACT: Apply sprintf() on input
+# ABSTRACT: 
 
 =head1 SYNOPSIS
 

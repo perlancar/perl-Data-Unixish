@@ -50,7 +50,7 @@ sub pick {
 }
 
 1;
-# ABSTRACT: Pick one or more random items
+# ABSTRACT: 
 
 =head1 SYNOPSIS
 

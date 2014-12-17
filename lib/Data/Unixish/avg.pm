@@ -39,7 +39,7 @@ sub avg {
 }
 
 1;
-# ABSTRACT: Average numbers
+# ABSTRACT:
 
 =head1 SYNOPSIS
 

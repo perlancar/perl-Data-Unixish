@@ -35,7 +35,7 @@ sub shuf {
 }
 
 1;
-# ABSTRACT: Shuffle items
+# ABSTRACT: 
 
 =head1 SYNOPSIS
 

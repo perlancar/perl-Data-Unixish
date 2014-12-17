@@ -50,7 +50,7 @@ sub _ltrim_item {
 }
 
 1;
-# ABSTRACT: Strip whitespace at the beginning of each line of text
+# ABSTRACT: 
 
 =head1 SYNOPSIS
 
