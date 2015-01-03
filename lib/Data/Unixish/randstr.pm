@@ -93,7 +93,7 @@ sub randstr {
 }
 
 1;
-# ABSTRACT: 
+# ABSTRACT:
 
 =head1 SYNOPSIS
 
@@ -109,12 +109,6 @@ In command line:
  QMEH
  JDOCK
 
-
-=head1 TODO
-
-More choices in character sets: full ASCII, Unicode, etc.
-
-Allow users to specify their own charset.
 
 =head1 SEE ALSO
 
