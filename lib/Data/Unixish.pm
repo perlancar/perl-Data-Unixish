@@ -393,9 +393,6 @@ Also see the L<dux> command-line utility in the L<App::dux> distribution which
 allows you to access dux function from the command-line.
 
 
-=head1 TODO
-
-
 =head1 SEE ALSO
 
 L<Unixish>
