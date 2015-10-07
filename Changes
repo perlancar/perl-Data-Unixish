@@ -1,5 +1,10 @@
 Revision history for Data-Unixish
 
+1.51    2015-10-07 (PERLANCAR)
+
+	- Add dux function: subsort.
+
+
 1.50    2015-09-03 (PERLANCAR)
 
 	- No functional changes.
