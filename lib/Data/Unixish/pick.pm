@@ -37,11 +37,12 @@ sub pick {
         if (@picked < $n) {
             # we haven't reached n items, put item to picked list, in a random
             # position
-            splice @picked, rand(@picked), 0, $item;
+            splice @picked, rand(@picked+1), 0, $item;
         } else {
             # we have reached n items, just replace an item randomly, using
             # algorithm from Learning Perl, slightly modified.
-            rand($.) <= $n and $picked[rand(@picked)] = $item;
+            rand($index+1) < @picked and
+                splice @picked, rand(@picked), 1, $item;
         }
     }
 
@@ -50,7 +51,7 @@ sub pick {
 }
 
 1;
-# ABSTRACT: 
+# ABSTRACT:
 
 =head1 SYNOPSIS
 
