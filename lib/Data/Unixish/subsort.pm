@@ -20,7 +20,7 @@ $SPEC{subsort} = {
         %common_args,
         routine => {
             summary => 'Sort::Sub routine name',
-            schema=>['str*'],
+            schema=>['str*', match=>qr/\A\w+\z/],
             req => 1,
             pos => 0,
         },
@@ -38,8 +38,6 @@ $SPEC{subsort} = {
     tags => [qw/ordering/],
 };
 sub subsort {
-    require Sort::Sub;
-
     my %args = @_;
     my ($in, $out) = ($args{in}, $args{out});
     my $routine = $args{routine} or return [400, "Please specify routine"];
@@ -55,11 +53,11 @@ sub subsort {
         push @buf, $item;
     }
 
-    Sort::Sub->import("$args{routine}<".
-                          ($ci ? "i":"").
-                          ($reverse ? "r":"").
-                          ">");
-    @buf = sort {&{"$routine"}} @buf;
+    require "Sort/Sub/$routine.pm";
+    my $gen_sorter = \&{"Sort::Sub::$routine\::gen_sorter"};
+    my $sorter = $gen_sorter->($reverse, $ci);
+
+    @buf = sort {$sorter->($a, $b)} @buf;
 
     push @$out, $_ for @buf;
 
