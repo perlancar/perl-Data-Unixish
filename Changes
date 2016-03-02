@@ -1,5 +1,11 @@
 Revision history for Data-Unixish
 
+1.53    2016-03-02 (PERLANCAR)
+
+	- [Bugfix] Fix subsort (avoid importing directly into
+          Data::Unixish::subsort package).
+
+
 1.52    2015-11-22 (PERLANCAR)
 
 	- [Bugfix] pick: fix algorithm.
