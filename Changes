@@ -1,5 +1,10 @@
 Revision history for Data-Unixish
 
+1.54    2016-03-11 (PERLANCAR)
+
+	- Adjust to Text::ANSI::Util 0.22.
+
+
 1.53    2016-03-02 (PERLANCAR)
 
 	- [Bugfix] Fix subsort (avoid importing directly into
