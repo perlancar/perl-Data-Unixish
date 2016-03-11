@@ -11,7 +11,8 @@ use warnings;
 #use Log::Any '$log';
 
 use String::Pad qw(pad);
-use Text::ANSI::Util qw(ta_pad ta_mbpad);
+use Text::ANSI::Util qw(ta_pad);
+use Text::ANSI::WideUtil qw(ta_mbpad);
 use Text::WideChar::Util qw(mbpad);
 
 sub _pad {

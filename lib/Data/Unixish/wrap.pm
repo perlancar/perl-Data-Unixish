@@ -1,5 +1,8 @@
 package Data::Unixish::wrap;
 
+# DATE
+# VERSION
+
 use 5.010;
 use strict;
 use syntax 'each_on_array'; # to support perl < 5.12
@@ -7,10 +10,9 @@ use warnings;
 #use Log::Any '$log';
 
 use Data::Unixish::Util qw(%common_args);
-use Text::ANSI::Util qw(ta_wrap ta_mbwrap);
+use Text::ANSI::Util qw(ta_wrap);
+use Text::ANSI::WideUtil qw(ta_mbwrap);
 use Text::WideChar::Util qw(mbwrap);
-
-# VERSION
 
 our %SPEC;
 
@@ -73,7 +75,7 @@ sub _wrap_item {
 }
 
 1;
-# ABSTRACT: 
+# ABSTRACT:
 
 =head1 SYNOPSIS
 

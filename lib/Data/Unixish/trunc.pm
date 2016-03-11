@@ -1,5 +1,8 @@
 package Data::Unixish::trunc;
 
+# DATE
+# VERSION
+
 use 5.010;
 use locale;
 use strict;
@@ -8,10 +11,9 @@ use warnings;
 #use Log::Any '$log';
 
 use Data::Unixish::Util qw(%common_args);
-use Text::ANSI::Util qw(ta_trunc ta_mbtrunc);
+use Text::ANSI::Util qw(ta_trunc);
+use Text::ANSI::WideUtil qw(ta_mbtrunc);
 use Text::WideChar::Util qw(mbtrunc);
-
-# VERSION
 
 our %SPEC;
 
@@ -74,7 +76,7 @@ sub _trunc_item {
 }
 
 1;
-# ABSTRACT: 
+# ABSTRACT:
 
 =head1 SYNOPSIS
 
