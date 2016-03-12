@@ -3,6 +3,9 @@ package Data::Unixish::Util;
 # DATE
 # VERSION
 
+use strict;
+use warnings;
+
 require Exporter;
 our @ISA       = qw(Exporter);
 our @EXPORT_OK = qw(%common_args filter_args);
