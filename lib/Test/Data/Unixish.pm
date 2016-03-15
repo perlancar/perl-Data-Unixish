@@ -8,7 +8,7 @@ use experimental 'smartmatch';
 use Data::Unixish qw(aiduxa);
 use File::Which qw(which);
 use IPC::Cmd qw(run_forked);
-use JSON;
+use JSON::MaybeXS;
 use Module::Load;
 use String::ShellQuote;
 use Test::More 0.96;
@@ -20,7 +20,7 @@ require Exporter;
 our @ISA = qw(Exporter);
 our @EXPORT = qw(test_dux_func);
 
-my $json = JSON->new->allow_nonref;
+my $json = JSON::MaybeXS->new->allow_nonref;
 
 sub test_dux_func {
     no strict 'refs';
