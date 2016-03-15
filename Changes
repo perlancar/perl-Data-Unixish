@@ -1,5 +1,12 @@
 Revision history for Data-Unixish
 
+1.55    2016-03-16 (PERLANCAR)
+
+	- No functional changes.
+
+	- Replace JSON with JSON::MaybeXS.
+
+
 1.54    2016-03-11 (PERLANCAR)
 
 	- Adjust to Text::ANSI::Util 0.22.
