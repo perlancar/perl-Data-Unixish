@@ -16,7 +16,7 @@ $SPEC{yes} = {
     summary => 'Output a string repeatedly until killed',
     description => <<'_',
 
-This is like the Unix `yes` utility.
+This is like the Unix <prog:yes> utility.
 
 _
     args => {
@@ -45,7 +45,7 @@ sub yes {
 }
 
 1;
-# ABSTRACT: 
+# ABSTRACT:
 
 =head1 SYNOPSIS
 

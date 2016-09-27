@@ -20,7 +20,7 @@ $SPEC{chain} = {
 
 Currently works for itemfunc only.
 
-See also the `Data::Unixish::Apply` function, which is related.
+See also the <pm:Data::Unixish::Apply> function, which is related.
 
 _
     args => {

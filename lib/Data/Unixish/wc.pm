@@ -17,8 +17,9 @@ $SPEC{wc} = {
     summary => 'Print newline, word, and byte counts',
     description => <<'_',
 
-Behavior mimics that of the Unix `wc` utility. The order of the counts which is
-returned is always: newline, word, character, byte, maximum line length.
+Behavior mimics that of the Unix <prog:wc> utility. The order of the counts
+which is returned is always: newline, word, character, byte, maximum line
+length.
 
 _
     args => {
@@ -94,7 +95,7 @@ sub wc {
 }
 
 1;
-# ABSTRACT: 
+# ABSTRACT:
 
 =head1 SYNOPSIS
 
