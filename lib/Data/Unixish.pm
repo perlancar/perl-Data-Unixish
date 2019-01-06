@@ -208,7 +208,7 @@ sub _idux {
     my @res;
     {
         no strict 'refs';
-        my @bres = $funcname_b->(\%args) if defined &$funcname_b;
+        my @bres; @bres = $funcname_b->(\%args) if defined &$funcname_b;
         for (@items) {
             push @res, $funcname_i->($_, \%args);
         }

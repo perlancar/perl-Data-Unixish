@@ -1,9 +1,13 @@
+## no critic: (Modules::ProhibitAutomaticExportation)
+
 package Test::Data::Unixish;
 
-use 5.010;
+# DATE
+# VERSION
+
+use 5.010001;
 use strict;
 use warnings;
-use experimental 'smartmatch';
 
 use Data::Unixish qw(aiduxa);
 use File::Which qw(which);
@@ -12,9 +16,6 @@ use JSON::MaybeXS;
 use Module::Load;
 use String::ShellQuote;
 use Test::More 0.96;
-
-# VERSION
-# DATE
 
 require Exporter;
 our @ISA = qw(Exporter);
@@ -76,7 +77,7 @@ sub test_dux_func {
                         }
 
                         # if itemfunc, test against each item
-                        if ('itemfunc' ~~ @{$meta->{tags}} &&
+                        if ((grep {$_ eq 'itemfunc'} @{$meta->{tags}}) &&
                                 ref($in) eq 'ARRAY') {
                             if ($t->{skip_itemfunc}) {
                                 diag "itemfunc test skipped";
