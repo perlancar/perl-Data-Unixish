@@ -10,7 +10,7 @@ use warnings;
 
 use Data::Unixish::Util qw(%common_args filter_args);
 use Module::Load;
-use Package::MoreUtil qw(package_exists);
+use Package::Util::Lite qw(package_exists);
 
 our %SPEC;
 

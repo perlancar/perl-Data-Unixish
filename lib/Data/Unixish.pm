@@ -8,7 +8,7 @@ use strict;
 use warnings;
 
 use Module::Load;
-use Package::MoreUtil qw(package_exists);
+use Package::Util::Lite qw(package_exists);
 
 require Exporter;
 our @ISA       = qw(Exporter);
