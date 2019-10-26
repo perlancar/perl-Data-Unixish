@@ -68,7 +68,7 @@ sub split {
     # we don't call _split_item() to optimize
     my $re = _pattern_to_re(\%args);
     while (my ($index, $item) = each @$in) {
-        push @$out, [split $re, $item, $args{limit}//0];
+        push @$out, [CORE::split($re, $item, $args{limit}//0)];
     }
 
     [200, "OK"];
@@ -78,7 +78,7 @@ sub _split_item {
     my ($item, $args) = @_;
 
     my $re = _pattern_to_re($args);
-    [split $re, $item, $args->{limit}//0];
+    [CORE::split($re, $item, $args->{limit}//0)];
 }
 
 1;
@@ -91,5 +91,14 @@ In Perl:
  use Data::Unixish qw(lduxl);
  @res = lduxl([split => {pattern=>','}], "a,b,c", "d,e");
  # => (["a","b","c"], ["d","e"])
+
+
+=head1 SEE ALSO
+
+Perl's C<split> in L<perlfunc>
+
+L<Data::Unixish::join>
+
+L<Data::Unixish::splice>
 
 =cut

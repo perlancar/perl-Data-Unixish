@@ -59,4 +59,11 @@ In Perl:
  @res = lduxl([join => {string=>', '}], ["a","b","c"], ["d","e"], "f,g");
  # => ("a, b, c", "d, e", "f,g")
 
+
+=head1 SEE ALSO
+
+L<Data::Unixish::split>
+
+L<Data::Unixish::splice>
+
 =cut
