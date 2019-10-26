@@ -43,6 +43,18 @@ _
             schema=>[bool => {default=>0}],
             cmdline_aliases => { R=>{} },
         },
+
+        key_element => {
+            summary => 'Sort using an array element',
+            schema => 'uint*',
+            description => <<'_',
+
+If specified, `sort` will assume the item is an array and will sort using the
+<key_element>'th element (zero-based) as key. If an item turns out to not be an
+array, the item itself is used as key.
+
+_
+        },
     },
     tags => [qw/ordering/],
 };
@@ -68,20 +80,25 @@ sub sort {
     }
 
     while (my ($index, $item) = each @$in) {
-        my $rec = [$item];
-        push @$rec, $ci ? lc($item) : undef; # cache lowcased item
-        push @$rec, $numeric ? $item+0 : undef; # cache numeric item
-        push @buf, $rec;
+        my $key;
+        if (defined $args{key_element}) {
+            $key = ref $item eq 'ARRAY' ? ($item->[$args{key_element}] // '') : $item;
+        } else {
+            $key = $item;
+        }
+        $key = lc($key) if $ci;
+        # XXX: optimize: when !ci && !key_element, just use $item as $key so no
+        # need to produce a separate $key
+        push @buf, [$item, $key, $numeric ? $key+0 : undef];
     }
 
     my $sortsub;
     if ($numeric) {
         $sortsub = sub { $reverse * (
-            ($a->[2] <=> $b->[2]) ||
-                ($ci ? ($a->[1] cmp $b->[1]) : ($a->[0] cmp $b->[0]))) };
+            ($a->[2] <=> $b->[2]) || ($a->[1] cmp $b->[1]) ) };
     } else {
         $sortsub = sub { $reverse * (
-            $ci ? ($a->[1] cmp $b->[1]) : ($a->[0] cmp $b->[0])) };
+            ($a->[1] cmp $b->[1]) ) };
     }
     @buf = sort $sortsub @buf;
 
@@ -91,7 +108,7 @@ sub sort {
 }
 
 1;
-# ABSTRACT: 
+# ABSTRACT:
 
 =head1 SYNOPSIS
 
