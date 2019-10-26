@@ -15,6 +15,21 @@ use Data::Unixish::Util qw(%common_args);
 
 our %SPEC;
 
+sub _pattern_to_re {
+    my $args = shift;
+
+    my $re;
+    my $pattern = $args->{pattern}; defined $pattern or die "Please specify pattern";
+    if ($args->{fixed_string}) {
+        $re = $args->{ignore_case} ? qr/\Q$pattern/i : qr/\Q$pattern/;
+    } else {
+        eval { $re = $args->{ignore_case} ? qr/$pattern/i : qr/$pattern/ };
+        die "Invalid pattern: $@" if $@;
+    }
+
+    $re;
+}
+
 $SPEC{count} = {
     v => 1.1,
     summary => 'Count substrings (or regex pattern matches) in a string',
@@ -46,15 +61,8 @@ sub count {
     my %args = @_;
     my ($in, $out) = ($args{in}, $args{out});
 
-    my $re;
-    my $pattern = $args{pattern}; defined $pattern or die "Please specify pattern";
-    if ($args{fixed_string}) {
-        $re = $args{ignore_case} ? qr/\Q$pattern/i : qr/\Q$pattern/;
-    } else {
-        eval { $re = $args{ignore_case} ? qr/$pattern/i : qr/$pattern/ };
-        die "Invalid pattern: $@" if $@;
-    }
-
+    # we don't call _count_item() to optimize
+    my $re = _pattern_to_re(\%args);
     while (my ($index, $item) = each @$in) {
         my $n = 0;
         $n++ while $item =~ /$re/g;
@@ -62,6 +70,15 @@ sub count {
     }
 
     [200, "OK"];
+}
+
+sub _count_item {
+    my ($item, $args) = @_;
+
+    my $re = _pattern_to_re($args);
+    my $n = 0;
+    $n++ while $item =~ /$re/g;
+    $n;
 }
 
 1;

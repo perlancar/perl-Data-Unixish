@@ -87,7 +87,7 @@ sub test_dux_func {
                                 if ($t->{test_out}) {
                                     $t->{test_out}->($rout);
                                 } else {
-                                    is_deeply($rout, $out, "out")
+                                    is_deeply($rout, $out, "out (itemfunc)")
                                         or diag explain $rout;
                                 }
                             }
