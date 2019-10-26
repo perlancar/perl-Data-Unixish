@@ -1,3 +1,9 @@
+1.572   2019-10-26  Released-By: PERLANCAR; Urgency: medium
+
+	- subsort: Adjust to Sort::Sub 0.111 (allow passing arguments to
+          sorter).
+
+
 1.571   2019-10-26  Released-By: PERLANCAR; Urgency: medium
 
 	- Add dux functions: count, split, join, splice.
