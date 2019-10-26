@@ -24,6 +24,11 @@ $SPEC{subsort} = {
             req => 1,
             pos => 0,
         },
+        routine_args => {
+            summary => 'Pass arguments for Sort::Sub routine',
+            schema=>['hash*', of=>'str*'],
+            cmdline_aliases => {a=>{}},
+        },
         reverse => {
             summary => 'Whether to reverse sort result',
             schema=>[bool => {default=>0}],
@@ -41,6 +46,7 @@ sub subsort {
     my %args = @_;
     my ($in, $out) = ($args{in}, $args{out});
     my $routine = $args{routine} or return [400, "Please specify routine"];
+    my $routine_args = $args{routine_args} // {};
     my $reverse = $args{reverse};
     my $ci      = $args{ci};
 
@@ -55,7 +61,7 @@ sub subsort {
 
     require "Sort/Sub/$routine.pm";
     my $gen_sorter = \&{"Sort::Sub::$routine\::gen_sorter"};
-    my $sorter = $gen_sorter->($reverse, $ci);
+    my $sorter = $gen_sorter->($reverse, $ci, $routine_args);
 
     @buf = sort {$sorter->($a, $b)} @buf;
 
@@ -81,6 +87,12 @@ In command line:
  t1
  t2
  t10
+
+ % echo -e 'a::\nb:\nc::::\nd:::' | dux subsort by_count -a pattern=:
+ b:
+ a::
+ d:::
+ c::::
 
 
 =head1 SEE ALSO
