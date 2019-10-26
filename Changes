@@ -1,3 +1,10 @@
+1.571   2019-10-26  Released-By: PERLANCAR; Urgency: medium
+
+	- Add dux functions: count, split, join, splice.
+
+	- sort: Add --key-element option.
+
+
 1.570   2019-01-06  Released-By: PERLANCAR
 
 	- No functional changes.
