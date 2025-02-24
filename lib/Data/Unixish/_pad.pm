@@ -1,8 +1,5 @@
 package Data::Unixish::_pad;
 
-# DATE
-# VERSION
-
 use 5.010;
 use locale;
 use strict;
@@ -14,6 +11,11 @@ use String::Pad qw(pad);
 use Text::ANSI::Util qw(ta_pad);
 use Text::ANSI::WideUtil qw(ta_mbpad);
 use Text::WideChar::Util qw(mbpad);
+
+# AUTHORITY
+# DATE
+# DIST
+# VERSION
 
 sub _pad {
     my ($which, %args) = @_;

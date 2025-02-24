@@ -7,6 +7,10 @@ use warnings;
 #use Log::Any '$log';
 
 use Data::Unixish::Util qw(%common_args);
+
+# AUTHORITY
+# DATE
+# DIST
 # VERSION
 
 our %SPEC;
@@ -14,11 +18,11 @@ our %SPEC;
 $SPEC{yes} = {
     v => 1.1,
     summary => 'Output a string repeatedly until killed',
-    description => <<'_',
+    description => <<'MARKDOWN',
 
 This is like the Unix <prog:yes> utility.
 
-_
+MARKDOWN
     args => {
         %common_args,
         string => {

@@ -1,8 +1,5 @@
 package Data::Unixish::Apply;
 
-# DATE
-# VERSION
-
 use 5.010;
 use strict;
 use warnings;
@@ -11,6 +8,11 @@ use warnings;
 use Data::Unixish::Util qw(%common_args filter_args);
 use Module::Load;
 use Package::Util::Lite qw(package_exists);
+
+# AUTHORITY
+# DATE
+# DIST
+# VERSION
 
 our %SPEC;
 
@@ -29,7 +31,7 @@ $SPEC{apply} = {
                 ['array*', of => ['any' => of => [['str*'], ['array*']]]],
             ]],
             req => 1,
-            description => <<'_',
+            description => <<'MARKDOWN',
 
 A list of functions to apply. Each element is either a string (function name),
 or a 2-element array (function names + arguments hashref). If you do not want to
@@ -43,7 +45,7 @@ Example:
         ['head', {items=>5}], # specify arguments
     ]
 
-_
+MARKDOWN
         },
 
     },
@@ -92,7 +94,7 @@ sub apply {
         my $fn = "Data::Unixish::$fn0\::$fnl";
         return [500, "Subroutine &$fn not defined"] unless defined &$fn;
 
-        no strict 'refs';
+        no strict 'refs'; ## no critic: TestingAndDebugging::ProhibitNoStrict
         my $res = $fn->(%$fargs, in=>$in, out=>$out);
         unless ($res->[0] == 200) {
             return [500, "Function $fn0 did not return success: ".

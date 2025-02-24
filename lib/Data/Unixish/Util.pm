@@ -1,13 +1,15 @@
 package Data::Unixish::Util;
 
-# DATE
-# VERSION
-
 use strict;
 use warnings;
 
-require Exporter;
-our @ISA       = qw(Exporter);
+use Exporter qw(import);
+
+# AUTHORITY
+# DATE
+# DIST
+# VERSION
+
 our @EXPORT_OK = qw(%common_args filter_args);
 
 our %common_args = (

@@ -7,6 +7,10 @@ use warnings;
 #use Log::Any '$log';
 
 use Data::Unixish::Util qw(%common_args);
+
+# AUTHORITY
+# DATE
+# DIST
 # VERSION
 
 our %SPEC;
@@ -19,13 +23,13 @@ my %charsets = (
     'AZaz'   => 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz',
     'AZaz09' => 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789',
 );
-my $charsets_desc = <<'_';
+my $charsets_desc = <<'MARKDOWN';
 
 `az` is basic Latin lowercase letters. `AZ` uppercase letters. `AZaz` lowercase
 and uppercase letters. `AZaz09` lowercase + uppercase letters + Arabic numbers.
 `09` numbers.
 
-_
+MARKDOWN
 
 $SPEC{randstr} = {
     v => 1.1,

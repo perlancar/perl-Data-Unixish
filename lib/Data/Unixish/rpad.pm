@@ -10,6 +10,9 @@ use warnings;
 use Data::Unixish::_pad;
 use Data::Unixish::Util qw(%common_args);
 
+# AUTHORITY
+# DATE
+# DIST
 # VERSION
 
 our %SPEC;
@@ -17,7 +20,7 @@ our %SPEC;
 $SPEC{rpad} = {
     v => 1.1,
     summary => 'Pad text to the right until a certain column width',
-    description => <<'_',
+    description => <<'MARKDOWN',
 
 This function can handle text containing wide characters and ANSI escape codes.
 
@@ -25,7 +28,7 @@ Note: to pad to a certain character length instead of column width (note that
 wide characters like Chinese can have width of more than 1 column in terminal),
 you can turn of `mb` option even when your text contains wide characters.
 
-_
+MARKDOWN
     args => {
         %common_args,
         width => {
@@ -45,11 +48,11 @@ _
         char => {
             summary => 'Character to use for padding',
             schema => ['str*', len=>1, default=>' '],
-            description => <<'_',
+            description => <<'MARKDOWN',
 
 Character should have column width of 1. The default is space (ASCII 32).
 
-_
+MARKDOWN
             cmdline_aliases => { c => {} },
         },
         trunc => {
@@ -68,7 +71,7 @@ sub _rpad_begin { Data::Unixish::_pad::__pad_begin('r', @_) }
 sub _rpad_item { Data::Unixish::_pad::__pad_item('r', @_) }
 
 1;
-# ABSTRACT: 
+# ABSTRACT:
 
 =head1 SYNOPSIS
 

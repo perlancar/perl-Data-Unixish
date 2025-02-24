@@ -11,6 +11,9 @@ use Data::Unixish::Util qw(%common_args);
 use POSIX qw(locale_h);
 use Scalar::Util 'looks_like_number';
 
+# AUTHORITY
+# DATE
+# DIST
 # VERSION
 
 our %SPEC;
@@ -18,7 +21,7 @@ our %SPEC;
 $SPEC{sprintf} = {
     v => 1.1,
     summary => 'Apply sprintf() on input',
-    description => <<'_',
+    description => <<'MARKDOWN',
 
 Array will also be processed (all the elements are fed to sprintf(), the result
 is a single string), unless `skip_array` is set to true.
@@ -27,7 +30,7 @@ Non-numbers can be skipped if you use `skip_non_number`.
 
 Undef, hashes, and other non-scalars are ignored.
 
-_
+MARKDOWN
     args => {
         %common_args,
         format => {
@@ -102,7 +105,7 @@ sub _sprintf_item {
 }
 
 1;
-# ABSTRACT: 
+# ABSTRACT:
 
 =head1 SYNOPSIS
 

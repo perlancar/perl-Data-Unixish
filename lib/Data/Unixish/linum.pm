@@ -8,6 +8,9 @@ use warnings;
 
 use Data::Unixish::Util qw(%common_args);
 
+# AUTHORITY
+# DATE
+# DIST
 # VERSION
 
 our %SPEC;
@@ -19,11 +22,11 @@ $SPEC{linum} = {
         %common_args,
         format => {
             summary => 'Sprintf-style format to use',
-            description => <<'_',
+            description => <<'MARKDOWN',
 
 Example: `%04d|`.
 
-_
+MARKDOWN
             schema  => [str => default=>'%4s|'],
             cmdline_aliases => { f=>{} },
         },
@@ -34,7 +37,7 @@ _
         },
         blank_empty_lines => {
             schema => [bool => default=>1],
-            description => <<'_',
+            description => <<'MARKDOWN',
 
 Example when set to false:
 
@@ -50,7 +53,7 @@ Example when set to true:
     3|sub blah {
     4|    my %args = @_;
 
-_
+MARKDOWN
             cmdline_aliases => {
                 b => {},
                 B => {
@@ -105,7 +108,7 @@ sub _linum_item {
 }
 
 1;
-# ABSTRACT: 
+# ABSTRACT:
 
 =head1 SYNOPSIS
 

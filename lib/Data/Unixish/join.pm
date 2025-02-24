@@ -1,9 +1,5 @@
 package Data::Unixish::join;
 
-# DATE
-# DIST
-# VERSION
-
 use 5.010001;
 use strict;
 use syntax 'each_on_array'; # to support perl < 5.12
@@ -12,14 +8,19 @@ use warnings;
 
 use Data::Unixish::Util qw(%common_args);
 
+# AUTHORITY
+# DATE
+# DIST
+# VERSION
+
 our %SPEC;
 
 $SPEC{join} = {
     v => 1.1,
     summary => 'Join elements of array into string',
-    description => <<'_',
+    description => <<'MARKDOWN',
 
-_
+MARKDOWN
     args => {
         %common_args,
         string => {

@@ -8,6 +8,9 @@ use warnings;
 
 use Data::Unixish::Util qw(%common_args);
 
+# AUTHORITY
+# DATE
+# DIST
 # VERSION
 
 our %SPEC;
@@ -15,9 +18,9 @@ our %SPEC;
 $SPEC{rtrim} = {
     v => 1.1,
     summary => 'Strip whitespace at the end of each line of text',
-    description => <<'_',
+    description => <<'MARKDOWN',
 
-_
+MARKDOWN
     args => {
         %common_args,
         strip_newline => {
@@ -50,7 +53,7 @@ sub _rtrim_item {
 }
 
 1;
-# ABSTRACT: 
+# ABSTRACT:
 
 =head1 SYNOPSIS
 

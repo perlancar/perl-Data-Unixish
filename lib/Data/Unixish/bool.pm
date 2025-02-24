@@ -1,3 +1,4 @@
+## no critic: Subroutines::ProhibitExplicitReturnUndef
 package Data::Unixish::bool;
 
 use 5.010;
@@ -9,6 +10,9 @@ use warnings;
 
 use Data::Unixish::Util qw(%common_args);
 
+# AUTHORITY
+# DATE
+# DIST
 # VERSION
 
 our %SPEC;
@@ -63,9 +67,9 @@ my %styles = (
 $SPEC{bool} = {
     v => 1.1,
     summary => 'Format boolean',
-    description => <<'_',
+    description => <<'MARKDOWN',
 
-_
+MARKDOWN
     args => {
         %common_args,
         style => {
@@ -87,7 +91,7 @@ _
         notion => {
             summary => 'What notion to use to determine true/false',
             schema => [str => in=>[qw/perl n1 n1+en n1+id n1+en_id/], default => 'perl'],
-            description => <<'_',
+            description => <<'MARKDOWN',
 
 `perl` uses Perl notion.
 
@@ -104,7 +108,7 @@ empty hash is considered false.
 
 TODO: add Ruby, Python, PHP, JavaScript, etc notion.
 
-_
+MARKDOWN
         },
         # XXX: flag to ignore references
     },

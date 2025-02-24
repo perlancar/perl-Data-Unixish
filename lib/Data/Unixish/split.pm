@@ -1,9 +1,5 @@
 package Data::Unixish::split;
 
-# DATE
-# DIST
-# VERSION
-
 use 5.010001;
 use strict;
 use syntax 'each_on_array'; # to support perl < 5.12
@@ -11,6 +7,11 @@ use warnings;
 #use Log::Any '$log';
 
 use Data::Unixish::Util qw(%common_args);
+
+# AUTHORITY
+# DATE
+# DIST
+# VERSION
 
 our %SPEC;
 
@@ -32,9 +33,9 @@ sub _pattern_to_re {
 $SPEC{split} = {
     v => 1.1,
     summary => 'Split string into array',
-    description => <<'_',
+    description => <<'MARKDOWN',
 
-_
+MARKDOWN
     args => {
         %common_args,
         pattern => {

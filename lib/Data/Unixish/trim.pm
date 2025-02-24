@@ -6,18 +6,21 @@ use syntax 'each_on_array'; # to support perl < 5.12
 use warnings;
 #use Log::Any '$log';
 
-# VERSION
-
 use Data::Unixish::Util qw(%common_args);
+
+# AUTHORITY
+# DATE
+# DIST
+# VERSION
 
 our %SPEC;
 
 $SPEC{trim} = {
     v => 1.1,
     summary => 'Strip whitespace at the beginning and end of each line of text',
-    description => <<'_',
+    description => <<'MARKDOWN',
 
-_
+MARKDOWN
     args => {
         %common_args,
         strip_newline => {
@@ -53,7 +56,7 @@ sub _trim_item {
 }
 
 1;
-# ABSTRACT: 
+# ABSTRACT:
 
 =head1 SYNOPSIS
 

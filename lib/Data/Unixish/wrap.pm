@@ -1,8 +1,5 @@
 package Data::Unixish::wrap;
 
-# DATE
-# VERSION
-
 use 5.010;
 use strict;
 use syntax 'each_on_array'; # to support perl < 5.12
@@ -13,6 +10,11 @@ use Data::Unixish::Util qw(%common_args);
 use Text::ANSI::Util qw(ta_wrap);
 use Text::ANSI::WideUtil qw(ta_mbwrap);
 use Text::WideChar::Util qw(mbwrap);
+
+# AUTHORITY
+# DATE
+# DIST
+# VERSION
 
 our %SPEC;
 

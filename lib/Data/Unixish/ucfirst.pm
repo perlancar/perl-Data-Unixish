@@ -8,6 +8,9 @@ use warnings;
 
 use Data::Unixish::Util qw(%common_args);
 
+# AUTHORITY
+# DATE
+# DIST
 # VERSION
 
 our %SPEC;
@@ -15,9 +18,9 @@ our %SPEC;
 $SPEC{ucfirst} = {
     v => 1.1,
     summary => 'Convert first character of text to uppercase',
-    description => <<'_',
+    description => <<'MARKDOWN',
 
-_
+MARKDOWN
     args => {
         %common_args,
     },
@@ -43,7 +46,7 @@ sub _ucfirst_item {
 }
 
 1;
-# ABSTRACT: 
+# ABSTRACT:
 
 =head1 SYNOPSIS
 

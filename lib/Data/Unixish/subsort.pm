@@ -1,8 +1,5 @@
 package Data::Unixish::subsort;
 
-# DATE
-# VERSION
-
 use 5.010;
 use strict;
 use syntax 'each_on_array'; # to support perl < 5.12
@@ -10,6 +7,11 @@ use warnings;
 #use Log::Any '$log';
 
 use Data::Unixish::Util qw(%common_args);
+
+# AUTHORITY
+# DATE
+# DIST
+# VERSION
 
 our %SPEC;
 
@@ -51,7 +53,7 @@ sub subsort {
     my $ci      = $args{ci};
 
     no warnings;
-    no strict 'refs';
+    no strict 'refs'; ## no critic: TestingAndDebugging::ProhibitNoStrict
     my @buf;
 
     # special case
@@ -59,7 +61,7 @@ sub subsort {
         push @buf, $item;
     }
 
-    require "Sort/Sub/$routine.pm";
+    require "Sort/Sub/$routine.pm"; ## no critic: Modules::RequireBarewordIncludes
     my $gen_sorter = \&{"Sort::Sub::$routine\::gen_sorter"};
     my $sorter = $gen_sorter->($reverse, $ci, $routine_args);
 

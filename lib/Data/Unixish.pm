@@ -1,17 +1,18 @@
 package Data::Unixish;
 
-# DATE
-# VERSION
-
 use 5.010001;
 use strict;
 use warnings;
 
+use Exporter qw(import);
 use Module::Load;
 use Package::Util::Lite qw(package_exists);
 
-require Exporter;
-our @ISA       = qw(Exporter);
+# AUTHORITY
+# DATE
+# DIST
+# VERSION
+
 our @EXPORT_OK =
     qw(
           aduxa cduxa fduxa lduxa
@@ -126,7 +127,7 @@ sub _dux {
     }
 
     unless ($pid) {
-        no strict 'refs';
+        no strict 'refs'; ## no critic: TestingAndDebugging::ProhibitNoStrict
         my $res = $funcname->(%args);
         die "Dux function $funcname failed: $res->[0] - $res->[1]"
             unless $res->[0] == 200;
@@ -207,7 +208,7 @@ sub _idux {
 
     my @res;
     {
-        no strict 'refs';
+        no strict 'refs'; ## no critic: TestingAndDebugging::ProhibitNoStrict
         my @bres; @bres = $funcname_b->(\%args) if defined &$funcname_b;
         for (@items) {
             push @res, $funcname_i->($_, \%args);

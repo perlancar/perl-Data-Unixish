@@ -1,9 +1,5 @@
 package Data::Unixish::count;
 
-# DATE
-# DIST
-# VERSION
-
 use 5.010001;
 use locale;
 use strict;
@@ -12,6 +8,11 @@ use warnings;
 use Log::ger;
 
 use Data::Unixish::Util qw(%common_args);
+
+# AUTHORITY
+# DATE
+# DIST
+# VERSION
 
 our %SPEC;
 
@@ -33,9 +34,9 @@ sub _pattern_to_re {
 $SPEC{count} = {
     v => 1.1,
     summary => 'Count substrings (or regex pattern matches) in a string',
-    description => <<'_',
+    description => <<'MARKDOWN',
 
-_
+MARKDOWN
     args => {
         %common_args,
         pattern => {

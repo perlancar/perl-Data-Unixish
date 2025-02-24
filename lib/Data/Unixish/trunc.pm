@@ -1,8 +1,5 @@
 package Data::Unixish::trunc;
 
-# DATE
-# VERSION
-
 use 5.010;
 use locale;
 use strict;
@@ -15,12 +12,17 @@ use Text::ANSI::Util qw(ta_trunc);
 use Text::ANSI::WideUtil qw(ta_mbtrunc);
 use Text::WideChar::Util qw(mbtrunc);
 
+# AUTHORITY
+# DATE
+# DIST
+# VERSION
+
 our %SPEC;
 
 $SPEC{trunc} = {
     v => 1.1,
     summary => 'Truncate string to a certain column width',
-    description => <<'_',
+    description => <<'MARKDOWN',
 
 This function can handle text containing wide characters and ANSI escape codes.
 
@@ -28,7 +30,7 @@ Note: to truncate by character instead of column width (note that wide
 characters like Chinese can have width of more than 1 column in terminal), you
 can turn of `mb` option even when your text contains wide characters.
 
-_
+MARKDOWN
     args => {
         %common_args,
         width => {

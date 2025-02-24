@@ -9,6 +9,9 @@ use warnings;
 use Data::Unixish::Util qw(%common_args);
 use List::Util qw(shuffle);
 
+# AUTHORITY
+# DATE
+# DIST
 # VERSION
 
 our %SPEC;
@@ -35,7 +38,7 @@ sub shuf {
 }
 
 1;
-# ABSTRACT: 
+# ABSTRACT:
 
 =head1 SYNOPSIS
 

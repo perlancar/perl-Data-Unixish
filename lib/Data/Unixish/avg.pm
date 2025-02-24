@@ -9,6 +9,9 @@ use warnings;
 use Data::Unixish::Util qw(%common_args);
 use Scalar::Util 'looks_like_number';
 
+# AUTHORITY
+# DATE
+# DIST
 # VERSION
 
 our %SPEC;

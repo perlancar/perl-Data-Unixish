@@ -2,14 +2,12 @@
 
 package Test::Data::Unixish;
 
-# DATE
-# VERSION
-
 use 5.010001;
 use strict;
 use warnings;
 
 use Data::Unixish qw(aiduxa);
+use Exporter qw(import);
 use File::Which qw(which);
 use IPC::Cmd qw(run_forked);
 use JSON::MaybeXS;
@@ -17,9 +15,13 @@ use Module::Load;
 use String::ShellQuote;
 use Test::More 0.96;
 
-require Exporter;
-our @ISA = qw(Exporter);
 our @EXPORT = qw(test_dux_func);
+
+# AUTHORITY
+# DATE
+# DIST
+# VERSION
+
 
 my $json = JSON::MaybeXS->new->allow_nonref;
 

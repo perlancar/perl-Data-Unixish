@@ -7,6 +7,10 @@ use warnings;
 #use Log::Any '$log';
 
 use Data::Unixish::Util qw(%common_args);
+
+# AUTHORITY
+# DATE
+# DIST
 # VERSION
 
 our %SPEC;
@@ -14,9 +18,9 @@ our %SPEC;
 $SPEC{uc} = {
     v => 1.1,
     summary => 'Convert text to uppercase',
-    description => <<'_',
+    description => <<'MARKDOWN',
 
-_
+MARKDOWN
     args => {
         %common_args,
     },
@@ -44,7 +48,7 @@ sub _uc_item {
 }
 
 1;
-# ABSTRACT: 
+# ABSTRACT:
 
 =head1 SYNOPSIS
 

@@ -1,8 +1,5 @@
 package Data::Unixish::num;
 
-# DATE
-# VERSION
-
 use 5.010;
 use locale;
 use strict;
@@ -15,6 +12,11 @@ use Number::Format;
 use Number::Format::Metric qw(format_metric);
 use POSIX qw(locale_h);
 use Scalar::Util 'looks_like_number';
+
+# AUTHORITY
+# DATE
+# DIST
+# VERSION
 
 our %SPEC;
 
@@ -36,13 +38,13 @@ my %styles = (
 $SPEC{num} = {
     v => 1.1,
     summary => 'Format number',
-    description => <<'_',
+    description => <<'MARKDOWN',
 
 Observe locale environment variable settings.
 
 Undef and non-numbers are ignored.
 
-_
+MARKDOWN
     args => {
         %common_args,
         style => {
@@ -58,13 +60,13 @@ _
         },
         thousands_sep => {
             summary => 'Use a custom thousand separator character',
-            description => <<'_',
+            description => <<'MARKDOWN',
 
 Default is from locale (e.g. dot "." for en_US, etc).
 
 Use empty string "" if you want to disable printing thousands separator.
 
-_
+MARKDOWN
             schema => ['str*'],
         },
         prefix => {
@@ -160,7 +162,7 @@ sub _num_end {
 }
 
 1;
-# ABSTRACT: 
+# ABSTRACT:
 
 =head1 SYNOPSIS
 

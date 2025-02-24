@@ -6,6 +6,9 @@ use syntax 'each_on_array'; # to support perl < 5.12
 use warnings;
 #use Log::Any '$log';
 
+# AUTHORITY
+# DATE
+# DIST
 # VERSION
 
 use Data::Unixish::Util qw(%common_args);
@@ -46,7 +49,7 @@ sub tail {
 }
 
 1;
-# ABSTRACT: 
+# ABSTRACT:
 
 =head1 SYNOPSIS
 

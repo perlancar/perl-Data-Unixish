@@ -10,6 +10,9 @@ use Scalar::Util qw(looks_like_number blessed);
 
 use Data::Unixish::Util qw(%common_args);
 
+# AUTHORITY
+# DATE
+# DIST
 # VERSION
 
 our %SPEC;
@@ -17,9 +20,9 @@ our %SPEC;
 $SPEC{date} = {
     v => 1.1,
     summary => 'Format date',
-    description => <<'_',
+    description => <<'MARKDOWN',
 
-_
+MARKDOWN
     args => {
         %common_args,
         format => {

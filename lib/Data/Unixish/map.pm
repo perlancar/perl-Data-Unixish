@@ -9,6 +9,9 @@ use warnings;
 
 use Data::Unixish::Util qw(%common_args);
 
+# AUTHORITY
+# DATE
+# DIST
 # VERSION
 
 our %SPEC;
@@ -16,11 +19,11 @@ our %SPEC;
 $SPEC{map} = {
     v => 1.1,
     summary => 'Perl map',
-    description => <<'_',
+    description => <<'MARKDOWN',
 
 Process each item through a callback.
 
-_
+MARKDOWN
     args => {
         %common_args,
         callback => {
@@ -50,7 +53,7 @@ sub _map_begin {
 
     if (ref($args->{callback}) ne 'CODE') {
         if ($args->{-cmdline}) {
-            $args->{callback} = eval "no strict; no warnings; sub { $args->{callback} }";
+            $args->{callback} = eval "no strict; no warnings; sub { $args->{callback} }"; ## no critic: BuiltinFunctions::ProhibitStringyEval
             die "invalid Perl code for map: $@" if $@;
         } else {
             die "Please supply coderef for 'callback'";
@@ -65,7 +68,7 @@ sub _map_item {
 }
 
 1;
-# ABSTRACT: 
+# ABSTRACT:
 
 =head1 SYNOPSIS
 

@@ -8,6 +8,9 @@ use warnings;
 
 use Data::Unixish::Util qw(%common_args);
 
+# AUTHORITY
+# DATE
+# DIST
 # VERSION
 
 our %SPEC;
@@ -15,12 +18,12 @@ our %SPEC;
 $SPEC{rins} = {
     v => 1.1,
     summary => 'Add some text at the end of each line of text',
-    description => <<'_',
+    description => <<'MARKDOWN',
 
 This is sort of a counterpart for rtrim, which removes whitespace at the end
 (right) of each line of text.
 
-_
+MARKDOWN
     args => {
         %common_args,
         text => {
@@ -52,7 +55,7 @@ sub _rins_item {
 }
 
 1;
-# ABSTRACT: 
+# ABSTRACT:
 
 =head1 SYNOPSIS
 

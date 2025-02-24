@@ -10,6 +10,9 @@ use warnings;
 require Data::Unixish; # for siduxs
 use Data::Unixish::Util qw(%common_args);
 
+# AUTHORITY
+# DATE
+# DIST
 # VERSION
 
 our %SPEC;
@@ -17,14 +20,14 @@ our %SPEC;
 $SPEC{cond} = {
     v => 1.1,
     summary => 'Apply dux function conditionally',
-    description => <<'_',
+    description => <<'MARKDOWN',
 
 This dux function takes a condition (a Perl code/expression) and one or two
 other dux functions (A and B). Condition will be evaluated for each item (where
 `$_` will be set to the current item). If condition evaluates to true, then A is
 applied to the item, else B. All the dux functions must be itemfunc.
 
-_
+MARKDOWN
     args => {
         %common_args,
         if => {
@@ -67,7 +70,7 @@ sub _cond_begin {
 
     if (ref($args->{if}) ne 'CODE') {
         if ($args->{-cmdline}) {
-            $args->{if} = eval "no strict; no warnings; sub { $args->{if} }";
+            $args->{if} = eval "no strict; no warnings; sub { $args->{if} }"; ## no critic: BuiltinFunctions::ProhibitStringyEval
             die "invalid Perl code for if: $@" if $@;
         } else {
             die "Please supply coderef for 'if'";

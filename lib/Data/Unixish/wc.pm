@@ -8,6 +8,9 @@ use warnings;
 
 use Data::Unixish::Util qw(%common_args);
 
+# AUTHORITY
+# DATE
+# DIST
 # VERSION
 
 our %SPEC;
@@ -15,13 +18,13 @@ our %SPEC;
 $SPEC{wc} = {
     v => 1.1,
     summary => 'Print newline, word, and byte counts',
-    description => <<'_',
+    description => <<'MARKDOWN',
 
 Behavior mimics that of the Unix <prog:wc> utility. The order of the counts
 which is returned is always: newline, word, character, byte, maximum line
 length.
 
-_
+MARKDOWN
     args => {
         %common_args,
         bytes => {

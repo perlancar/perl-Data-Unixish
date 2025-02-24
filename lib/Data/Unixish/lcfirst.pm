@@ -8,6 +8,9 @@ use warnings;
 
 use Data::Unixish::Util qw(%common_args);
 
+# AUTHORITY
+# DATE
+# DIST
 # VERSION
 
 our %SPEC;
@@ -15,9 +18,9 @@ our %SPEC;
 $SPEC{lcfirst} = {
     v => 1.1,
     summary => 'Convert first character of text to lowercase',
-    description => <<'_',
+    description => <<'MARKDOWN',
 
-_
+MARKDOWN
     args => {
         %common_args,
     },

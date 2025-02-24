@@ -8,6 +8,9 @@ use warnings;
 
 use Data::Unixish::Util qw(%common_args);
 
+# AUTHORITY
+# DATE
+# DIST
 # VERSION
 
 our %SPEC;
@@ -15,12 +18,12 @@ our %SPEC;
 $SPEC{lins} = {
     v => 1.1,
     summary => 'Add some text at the beginning of each line of text',
-    description => <<'_',
+    description => <<'MARKDOWN',
 
 This is sort of a counterpart for ltrim, which removes whitespace at the
 beginning (left) of each line of text.
 
-_
+MARKDOWN
     args => {
         %common_args,
         text => {
@@ -53,7 +56,7 @@ sub _lins_item {
 }
 
 1;
-# ABSTRACT: 
+# ABSTRACT:
 
 =head1 SYNOPSIS
 

@@ -8,6 +8,9 @@ use warnings;
 
 use Data::Unixish::Util qw(%common_args);
 
+# AUTHORITY
+# DATE
+# DIST
 # VERSION
 
 our %SPEC;
@@ -15,12 +18,12 @@ our %SPEC;
 $SPEC{sort} = {
     v => 1.1,
     summary => 'Sort items',
-    description => <<'_',
+    description => <<'MARKDOWN',
 
 By default sort ascibetically, unless `numeric` is set to true to sort
 numerically.
 
-_
+MARKDOWN
     args => {
         %common_args,
         numeric => {
@@ -47,13 +50,13 @@ _
         key_element => {
             summary => 'Sort using an array element',
             schema => 'uint*',
-            description => <<'_',
+            description => <<'MARKDOWN',
 
 If specified, `sort` will assume the item is an array and will sort using the
 <key_element>'th element (zero-based) as key. If an item turns out to not be an
 array, the item itself is used as key.
 
-_
+MARKDOWN
         },
     },
     tags => [qw/ordering/],

@@ -12,6 +12,9 @@ use POSIX qw(locale_h);
 use Scalar::Util 'looks_like_number';
 use Text::sprintfn ();
 
+# AUTHORITY
+# DATE
+# DIST
 # VERSION
 
 our %SPEC;
@@ -19,11 +22,11 @@ our %SPEC;
 $SPEC{sprintfn} = {
     v => 1.1,
     summary => 'Like sprintf, but use sprintfn() from Text::sprintfn',
-    description => <<'_',
+    description => <<'MARKDOWN',
 
 Unlike in *sprintf*, with this function, hash will also be processed.
 
-_
+MARKDOWN
     args => {
         %common_args,
         format => {
@@ -104,7 +107,7 @@ sub _sprintfn_end {
 }
 
 1;
-# ABSTRACT: 
+# ABSTRACT:
 
 =head1 SYNOPSIS
 

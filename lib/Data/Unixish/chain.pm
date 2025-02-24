@@ -9,6 +9,9 @@ use warnings;
 
 use Data::Unixish::Util qw(%common_args);
 
+# AUTHORITY
+# DATE
+# DIST
 # VERSION
 
 our %SPEC;
@@ -16,13 +19,13 @@ our %SPEC;
 $SPEC{chain} = {
     v => 1.1,
     summary => 'Chain several dux functions together',
-    description => <<'_',
+    description => <<'MARKDOWN',
 
 Currently works for itemfunc only.
 
 See also the <pm:Data::Unixish::Apply> function, which is related.
 
-_
+MARKDOWN
     args => {
         %common_args,
         functions => {
@@ -31,12 +34,12 @@ _
                 'str*',
                 ['array*', min_len=>1, elems=>['str*','hash*']],
             ]]],
-            description => <<'_',
+            description => <<'MARKDOWN',
 
 Each element must either be function name (like `date`) or a 2-element array
 containing the function name and its arguments (like `[bool, {style: dot}]`).
 
-_
+MARKDOWN
             req     => 1,
             pos     => 0,
             greedy  => 1,
@@ -59,7 +62,7 @@ sub chain {
 }
 
 sub _chain_begin {
-    no strict 'refs';
+    no strict 'refs'; ## no critic: TestingAndDebugging::ProhibitNoStrict
 
     my $args = shift;
     my $ff = [];
@@ -77,7 +80,7 @@ sub _chain_begin {
             die "Invalid function name $fn, please use letter+alphanums only";
         }
         my $mod = "Data::Unixish::$fn";
-        unless (eval "require $mod") {
+        unless (eval "require $mod") { ## no critic: BuiltinFunctions::ProhibitStringyEval
             die "Can't load dux function $fn: $@";
         }
         my $fnleaf = $fn; $fnleaf =~ s/.+:://;
@@ -101,7 +104,7 @@ sub _chain_item {
 }
 
 sub _chain_end {
-    no strict 'refs';
+    no strict 'refs'; ## no critic: TestingAndDebugging::ProhibitNoStrict
 
     my $args = shift;
     for my $f (@{ $args->{-functions} }) {

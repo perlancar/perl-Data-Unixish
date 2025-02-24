@@ -9,6 +9,9 @@ use warnings;
 
 use Data::Unixish::Util qw(%common_args);
 
+# AUTHORITY
+# DATE
+# DIST
 # VERSION
 
 our %SPEC;
@@ -16,11 +19,11 @@ our %SPEC;
 $SPEC{grep} = {
     v => 1.1,
     summary => 'Perl grep',
-    description => <<'_',
+    description => <<'MARKDOWN',
 
 Filter each item through a callback.
 
-_
+MARKDOWN
     args => {
         %common_args,
         callback => {
@@ -41,7 +44,7 @@ sub grep {
         $callback = sub { $_ =~ $re };
     } elsif (ref($callback) ne 'CODE') {
         if ($args{-cmdline}) {
-            $callback = eval "no strict; no warnings; sub { $callback }";
+            $callback = eval "no strict; no warnings; sub { $callback }"; ## no critic: BuiltinFunctions::ProhibitStringyEval
             die "invalid code for grep: $@" if $@;
         } else {
             die "Please supply coderef (or regex) for 'callback'";
