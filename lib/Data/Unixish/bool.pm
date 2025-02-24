@@ -16,11 +16,27 @@ our %SPEC;
 sub _is_true {
     my ($val, $notion) = @_;
 
-    if ($notion eq 'n1') {
+    if ($notion =~ /^n1/) {
         return undef unless defined($val);
         return 0 if ref($val) eq 'ARRAY' && !@$val;
         return 0 if ref($val) eq 'HASH'  && !keys(%$val);
-        return $val ? 1:0;
+        if ($notion eq 'n1+en_id') {
+            return undef if $val =~ /^(undef|undefined|null|)$/i;
+            return 0 if $val =~ /^(no|n|false|f|tidak|tdk|t|salah|s|bukan)$/i;
+            return 1;
+        } elsif ($notion eq 'n1+en') {
+            return undef if $val =~ /^(undef|undefined|null|)$/i;
+            return 0 if $val =~ /^(no|n|false|f)$/i;
+            return 1;
+        } elsif ($notion eq 'n1+en_id') {
+            return undef if $val =~ /^(undef|undefined|null|kosong|)$/i;
+            return 0 if $val =~ /^(tidak|tdk|t|salah|s|bukan)$/i;
+            return 1;
+        } elsif ($notion eq 'n1') {
+            return $val ? 1:0;
+        } else {
+            die "Unknown notion '$notion'";
+        }
     } else {
         # perl
         return undef unless defined($val);
@@ -70,13 +86,21 @@ _
         },
         notion => {
             summary => 'What notion to use to determine true/false',
-            schema => [str => in=>[qw/perl n1/], default => 'perl'],
+            schema => [str => in=>[qw/perl n1 n1+en n1+id n1+en_id/], default => 'perl'],
             description => <<'_',
 
 `perl` uses Perl notion.
 
 `n1` (for lack of better name) is just like Perl notion, but empty array and
 empty hash is considered false.
+
+`n1+en` is like `n1` but also handle 'Yes', 'No', 'true', 'false', etc
+(English).
+
+`n1+id` is like `n1` but also handle 'ya', 'tidak', etc (Indonesian).
+
+`n1+en_id` is like `n1` but also handle 'Yes', 'No', 'true', 'false', etc
+(English) and 'ya', 'tidak', etc (Indonesian).
 
 TODO: add Ruby, Python, PHP, JavaScript, etc notion.
 
